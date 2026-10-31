@@ -4,6 +4,7 @@ A mobile-first training app with guided setup, flexible programs, in-app exercis
 
 ## What you can do
 
+- Switch between Light, Dark and Use device setting in Settings, or use the quick theme button in the header. Your appearance preference is saved separately on this device.
 - Set an optional gender and body-weight profile, then choose your goals, experience, available days and equipment.
 - Get an explained starting-plan suggestion or choose Beginner, Intermediate, Advanced or Custom in Training plans.
 - Choose gym plans for 2–5 days or dumbbell-and-bench plans for 2–3 days. Keep using the original Forge routine if preferred.
@@ -36,7 +37,7 @@ Open http://127.0.0.1:8080. On a deployed HTTPS site, install with the browser i
 
 ## Deploy
 
-Host the repository root as a static HTTPS site, for example GitHub Pages from main / root. Deploy index.html, styles.css, data.js, model.js, app.js, sw.js, the manifest and both PNG icons together. A code review or draft pull request does not deploy the update.
+Host the repository root as a static HTTPS site, for example GitHub Pages from main / root. Deploy index.html, theme.js, styles.css, data.js, model.js, app.js, sw.js, the manifest and both PNG icons together. A code review or draft pull request does not deploy the update.
 
 ## Validate
 

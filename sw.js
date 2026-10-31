@@ -1,6 +1,6 @@
 "use strict";
-const CACHE_NAME='forge-tracker-v4-20261031-r2';
-const APP_FILES=['./','./index.html','./styles.css','./data.js','./model.js','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const CACHE_NAME='forge-tracker-v4-20261031-r3';
+const APP_FILES=['./','./index.html','./theme.js','./styles.css','./data.js','./model.js','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 const OWN_CACHE_PREFIX='forge-tracker-';
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_FILES)).then(()=>self.skipWaiting()));

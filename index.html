@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -8,6 +8,7 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon-192.png">
   <link rel="apple-touch-icon" href="./icon-192.png">
+  <script src="./theme.js"></script>
   <link rel="stylesheet" href="./styles.css">
   <title>THE FORGE · Your training, your way</title>
   <script src="./data.js" defer></script>
@@ -18,7 +19,10 @@
   <a class="skip-link" href="#main">Skip to workout</a>
   <header class="app-header shell">
     <a class="brand" href="#workout" aria-label="The Forge home"><span class="brand-mark" aria-hidden="true">F</span><span>THE FORGE<small>BUILD YOUR EVERYDAY</small></span></a>
-    <button class="button subtle" id="settingsBtn">Settings & backup</button>
+    <div class="header-actions">
+      <button class="button subtle theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="themeIcon" aria-hidden="true">☀</span><span class="theme-label" id="themeLabel">Light mode</span></button>
+      <button class="button subtle" id="settingsBtn" title="Settings and backup">Settings</button>
+    </div>
   </header>
   <main class="shell" id="main" tabindex="-1">
     <div class="welcome"><div><div class="eyebrow">YOUR SPACE TO GET STRONGER</div><h1>Make today count<span>.</span></h1><p>Your training, your pace. Let’s put in the work.</p></div><span class="local-label"><i></i> Saved on this device</span></div>
