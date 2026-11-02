@@ -14,3 +14,13 @@
 :root[data-theme="light"]{color-scheme:light;--bg:#f6f8f2;--surface:#ffffff;--raised:#edf1e5;--line:#c7d0bd;--ink:#202a1a;--muted:#54614c;--accent:#486500;--orange:#8b4c16;--good:#387142;--danger:#a93325;--action-bg:#d6ec6b;--action-ink:#233008;--button-hover:#718362;--accent-soft:#e7efd4;--success-border:#6b8a52;--accent-panel:#e9f1d9;--done-color:#66755d;--progress-track-bg:#dbe2d2;--custom-glow:#e8f0d5;--accent-border:#9eb56b;--empty-border:#8e9e80;--notice-border:#b18132;--notice-bg:#fff3d7;--notice-ink:#6b470b;--recommendation-border:#afc18a;--recommendation-bg:#eef4e1;--choice-bg:#e8f0d8}
 .header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}.theme-toggle{gap:8px;white-space:nowrap}#themeIcon{font-size:20px;line-height:1}.theme-label{font-size:12px}.settings-grid .form-label{margin:0;max-width:320px}
 @media(max-width:650px){.header-actions{gap:6px}.app-header{gap:8px}.app-header .theme-toggle{width:44px;min-width:44px;min-height:44px;padding:8px}.theme-label{display:none}.app-header #settingsBtn{padding-inline:10px}}
+
+/* Location and home equipment choices in setup step 3. */
+.location-choices{grid-template-columns:1fr}
+.location-choices .choice{align-items:flex-start}
+.location-choices .choice input{flex-shrink:0;margin-top:5px}
+.location-choices .choice span{min-width:0}
+.location-choices .choice strong{display:block;margin-bottom:6px}
+.location-choices .choice small{display:block;line-height:1.6;color:var(--muted)}
+#homeEquipmentFollowup[hidden]{display:none}
+.equipment-help{grid-column:1/-1;margin:0}
