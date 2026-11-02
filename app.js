@@ -51,7 +51,7 @@ function edited(){M.activeSession(state).completedAt=null;save();updateProgress(
 function renderPlans(){
  const level=state.profile?.level||'beginner',goal=state.profile?.goal||'muscle',rec=state.profile?M.recommend(state.profile):null;
  $('#viewPlans').innerHTML=`<div class="section-top"><div><div class="eyebrow">FIND YOUR RHYTHM</div><h2>A plan that fits your life.</h2><p>Choose a starting point, then make it yours.</p></div><button class="button subtle small" data-action="setup">Update profile</button></div>
- ${rec?`<div class="recommendation"><span class="pill">SUGGESTED FOR YOU</span><h3>${esc(rec.plan.name)}</h3><p>${esc(rec.reason)} ${esc(rec.adjustment)}</p><button class="button primary" data-action="use-recommended">Use suggested plan</button></div>`:''}
+ ${rec?`<div class="recommendation"><span class="pill">SUGGESTED FOR YOU</span><h3>${esc(rec.plan?.name||'No matching program yet')} </h3><p>${esc(rec.reason)} ${esc(rec.adjustment)}</p>${rec.plan?'<button class="button primary" data-action="use-recommended">Use suggested plan</button>':'<button class="button" data-action="setup">Update profile</button>'}</div>`:''}
  <div class="toolbar"><label>Experience<select id="planLevel">${M.levels.map(l=>`<option value="${l}" ${level===l?'selected':''}>${pretty(l)}</option>`).join('')}<option value="custom">Custom</option></select></label><label>Goal<select id="planGoal">${M.goals.map(g=>`<option value="${g}" ${goal===g?'selected':''}>${pretty(g)}</option>`).join('')}</select></label><label>Equipment<select id="planEquipment"><option value="all">All equipment</option><option>Gym</option><option>Dumbbells</option></select></label><label>Days<select id="planDays"><option value="all">Any schedule</option>${[2,3,4,5].map(n=>`<option value="${n}">${n} days</option>`).join('')}</select></label></div>
  <div class="plan-grid" id="planGrid"></div><details class="help"><summary>Why these plans? Research and training guidance</summary>${researchHTML()}</details>`;renderPlanGrid();
 }
@@ -69,20 +69,29 @@ videoModal.addEventListener('close',()=>{videoModal.innerHTML='';});
 
 function startSetup(){builder=null;library=null;setup=M.profileOf(state.onboardingAnswers||state.profile||{});setupStep=0;renderSetup();}
 function renderSetup(){
- const names=['A little about you','Your starting point','Make it fit your life','Your suggested starting plan'];
+ const names=['A little about you','Your starting point','Where will you train?','Your suggested starting plan'];
  let body='';if(setupStep===0)body=`<p>Let’s create a training profile. You can change it any time.</p><fieldset class="choice-grid"><legend>How do you describe your gender?</legend>${[['woman','Woman'],['man','Man'],['nonbinary','Non-binary'],['prefer-not','Prefer not to say']].map(([v,l])=>`<label class="choice"><input type="radio" name="gender" value="${v}" ${setup.gender===v?'checked':''}>${l}</label>`).join('')}</fieldset><p class="privacy-note">Optional. Your profile stays in this browser. We don’t infer your training ability from gender.</p>`;
  if(setupStep===1)body=`<p>What is your current body weight?</p><label class="form-label weight-label">Body weight in kilograms<input id="profileWeight" type="number" min="20" max="500" step="0.1" inputmode="decimal" placeholder="e.g. 75" value="${esc(setup.weight)}"></label><p class="privacy-note">You can leave this blank. Body weight is a profile reference, not a formula for the weights you should lift.</p>`;
- if(setupStep===2)body=`<label class="form-label">What would you like to achieve?<select id="profileGoal">${[['muscle','Build muscle'],['strength','Get stronger'],['fitness','Build general fitness'],['fat-loss','Improve body composition']].map(([v,l])=>`<option value="${v}" ${setup.goal===v?'selected':''}>${l}</option>`).join('')}</select></label><label class="form-label">Your resistance-training experience<select id="profileLevel">${[['beginner','Beginner · learning or returning'],['intermediate','Intermediate · training consistently'],['advanced','Advanced · experienced with structured training']].map(([v,l])=>`<option value="${v}" ${setup.level===v?'selected':''}>${l}</option>`).join('')}</select></label><label class="form-label">How many days can you train each week?<select id="profileDays">${[2,3,4,5].map(n=>`<option value="${n}" ${setup.days===n?'selected':''}>${n} days</option>`).join('')}</select></label><label class="form-label">What equipment can you use?<select id="profileEquipment"><option ${setup.equipment==='Gym'?'selected':''}>Gym</option><option ${setup.equipment==='Dumbbells'?'selected':''}>Dumbbells</option></select></label><p class="privacy-note">Dumbbell plans also use a bench. Start with manageable loads while you learn the movements.</p>`;
- if(setupStep===3){const r=M.recommend(setup);body=`<span class="pill">${pretty(setup.level)} · ${pretty(setup.goal)}</span><h3 class="preview-title">${esc(r.plan.name)}</h3><p>${esc(r.reason)}</p>${r.adjustment?`<p class="help">${esc(r.adjustment)}</p>`:''}<div class="plan-days">${r.plan.workouts.map(w=>esc(w.title)).join('<br>')}</div><details class="help"><summary>Why this plan? See the research</summary>${researchHTML()}</details>`;}
- openModal(modalHead(names[setupStep],`SETUP · ${setupStep+1} OF 4`)+`<div class="modal-body onboarding">${body}<p id="setupError" class="error-text" role="alert"></p></div><div class="modal-footer"><button class="button subtle" data-action="setup-back">${setupStep?'Back':'Keep current plan'}</button><button class="button primary" data-action="setup-next">${setupStep===3?'Use this plan':'Continue →'}</button></div><div class="setup-custom"><button class="text-button" data-action="setup-custom">I’d like to build my own program</button></div>`);
+ if(setupStep===2)body=`<label class="form-label">What would you like to achieve?<select id="profileGoal">${[['muscle','Build muscle'],['strength','Get stronger'],['fitness','Build general fitness'],['fat-loss','Improve body composition']].map(([v,l])=>`<option value="${v}" ${setup.goal===v?'selected':''}>${l}</option>`).join('')}</select></label><label class="form-label">Your resistance-training experience<select id="profileLevel">${[['beginner','Beginner · learning or returning'],['intermediate','Intermediate · training consistently'],['advanced','Advanced · experienced with structured training']].map(([v,l])=>`<option value="${v}" ${setup.level===v?'selected':''}>${l}</option>`).join('')}</select></label><label class="form-label">How many days can you train each week?<select id="profileDays">${[2,3,4,5].map(n=>`<option value="${n}" ${setup.days===n?'selected':''}>${n} days</option>`).join('')}</select></label><fieldset class="choice-grid location-choices"><legend>Where will you train?</legend>${[
+ ['gym','GYM','All gym equipment: barbells, dumbbells, free weights, kettlebells, cable machines, plate-loaded and selectorized machines, benches, racks, and pull-up bars.'],
+ ['home','HOME','Train with bodyweight or the equipment you select below.'],
+ ['outdoor','OUTDOOR','Bodyweight, park bars, benches, stairs, and running.']
+].map(([value,label,description])=>`<label class="choice"><input type="radio" name="profileLocation" value="${value}" ${setup.location===value?'checked':''} aria-controls="homeEquipmentFollowup"><span><strong>${label}</strong><small>${description}</small></span></label>`).join('')}</fieldset>
+<fieldset id="homeEquipmentFollowup" class="choice-grid" ${setup.location==='home'?'':'hidden'}><legend>What do you have at home?</legend><p class="privacy-note equipment-help">Select all that apply. Choose no equipment for bodyweight only.</p>${[
+ ['bodyweight','No equipment (bodyweight only)'],['dumbbells','Dumbbells'],['resistance-bands','Resistance bands'],['pull-up-bar','Pull-up bar'],['kettlebell','Kettlebell']
+].map(([value,label])=>`<label class="choice"><input type="checkbox" name="homeEquipment" value="${value}" ${value==='bodyweight'?!setup.homeEquipment.length?'checked':'':setup.homeEquipment.includes(value)?'checked':''}>${label}</label>`).join('')}</fieldset>`;
+ const recommendation=setupStep===3?M.recommend(setup):null;
+ if(recommendation){const r=recommendation;body=`<span class="pill">${pretty(setup.level)} · ${pretty(setup.goal)} · ${pretty(setup.location)}</span><h3 class="preview-title">${esc(r.plan?.name||'No matching program yet')}</h3><p>${esc(r.reason)}</p>${r.adjustment?`<p class="help">${esc(r.adjustment)}</p>`:''}${r.plan?`<div class="plan-days">${r.plan.workouts.map(w=>esc(w.title)).join('<br>')}</div><details class="help"><summary>Why this plan? See the research</summary>${researchHTML()}</details>`:''}`;}
+
+ openModal(modalHead(names[setupStep],`SETUP · ${setupStep+1} OF 4`)+`<div class="modal-body onboarding">${body}<p id="setupError" class="error-text" role="alert"></p></div><div class="modal-footer"><button class="button subtle" data-action="setup-back">${setupStep?'Back':'Keep current plan'}</button><button class="button primary" data-action="setup-next">${setupStep===3?recommendation.plan?'Use this plan':'Save profile':'Continue →'}</button></div><div class="setup-custom"><button class="text-button" data-action="setup-custom">I’d like to build my own program</button></div>`);
 }
 function captureSetup(){
  if(setupStep===0)setup.gender=$('input[name=gender]:checked').value;
  if(setupStep===1){const input=$('#profileWeight');if(!input.validity.valid)throw Error('Enter a weight from 20 to 500 kg, or leave this blank.');setup.weight=input.value===''?'':M.validNumber(input.value,20,500);}
- if(setupStep===2){setup.goal=$('#profileGoal').value;setup.level=$('#profileLevel').value;setup.days=Number($('#profileDays').value);setup.equipment=$('#profileEquipment').value;}
+ if(setupStep===2){setup.goal=$('#profileGoal').value;setup.level=$('#profileLevel').value;setup.days=Number($('#profileDays').value);setup.location=$('input[name=profileLocation]:checked').value;setup.homeEquipment=Array.from(document.querySelectorAll('input[name=homeEquipment]:checked')).map(input=>input.value).filter(value=>value!=='bodyweight');setup.equipment=setup.location==='home'?'Dumbbells':'Gym';}
  state.onboardingAnswers=M.profileOf(setup);save('Onboarding answers saved on this device.');
 }
-function setupNext(){try{captureSetup();if(setupStep===3){state.profile=M.profileOf(setup);selectPlan(M.recommend(setup).plan);return;}setupStep++;renderSetup();}catch(e){$('#setupError').textContent=e.message;}}
+function setupNext(){try{captureSetup();if(setupStep===3){state.profile=M.profileOf(setup);const r=M.recommend(setup);if(r.plan){selectPlan(r.plan);}else{state.onboarded=true;save();closeModal();setView('plans');toast('Profile saved. No matching program is available yet.');}return;}setupStep++;renderSetup();}catch(e){$('#setupError').textContent=e.message;}}
 
 function startBuilder(plan=null){builder=plan?M.clone(plan):{id:'custom-'+uid(),name:'My training program',workouts:[{id:'day-'+uid(),title:'Workout A',short:'Workout A',exercises:[]}]};if(!builder.id.startsWith('custom-'))builder.id='custom-'+uid();builder.active=0;library=null;renderBuilder();}
 function captureBuilder(){if(!builder||!$('#builderName'))return;builder.name=$('#builderName').value.trim();const w=builder.workouts[builder.active];w.title=$('#builderDayName').value.trim();w.short=w.title;document.querySelectorAll('[data-builder-field]').forEach(input=>{w.exercises[Number(input.dataset.ex)][input.dataset.builderField]=Number(input.value);});}
@@ -109,7 +118,18 @@ document.addEventListener('input',event=>{
  const e=M.activeSession(state).exercises[Number(input.dataset.ex)],set=e.sets[Number(input.dataset.set)];set[input.dataset.field]=input.value;if(input.dataset.field==='reps')set.done=Number(input.value)>0;
  $(`[data-action="toggle-set"][data-ex="${input.dataset.ex}"][data-set="${input.dataset.set}"]`).setAttribute('aria-pressed',set.done);edited();
 });
-document.addEventListener('change',event=>{const input=event.target;if(input.id==='appearanceTheme')setTheme(input.value);if(input.id==='sessionDate'){if(!M.dateOK(input.value)){input.value=state.selectedDate;return;}state.selectedDate=input.value;state.sessionId=null;save();renderWorkout();}if(['planLevel','planGoal','planEquipment','planDays'].includes(input.id))renderPlanGrid();if(['libraryGroup','libraryEquipment'].includes(input.id))renderLibraryList();if(input.id==='builderDay'){const next=Number(input.value);captureBuilder();builder.active=next;renderBuilder();}if(input.id==='importFile'&&input.files[0])importBackup(input.files[0]);});
+document.addEventListener('change',event=>{const input=event.target;
+ if(setup&&setupStep===2&&(input.name==='profileLocation'||input.name==='homeEquipment'||['profileGoal','profileLevel','profileDays'].includes(input.id))){
+   if(input.name==='homeEquipment'){
+     const none=$('input[name=homeEquipment][value=bodyweight]');
+     if(input===none&&none.checked)document.querySelectorAll('input[name=homeEquipment]').forEach(box=>{if(box!==none)box.checked=false;});
+     else if(input!==none&&input.checked)none.checked=false;
+     if(!document.querySelector('input[name=homeEquipment]:checked'))none.checked=true;
+   }
+   $('#homeEquipmentFollowup').hidden=$('input[name=profileLocation]:checked').value!=='home';
+   try{captureSetup();$('#setupError').textContent='';}catch(e){$('#setupError').textContent=e.message;}
+ }
+ if(input.id==='appearanceTheme')setTheme(input.value);if(input.id==='sessionDate'){if(!M.dateOK(input.value)){input.value=state.selectedDate;return;}state.selectedDate=input.value;state.sessionId=null;save();renderWorkout();}if(['planLevel','planGoal','planEquipment','planDays'].includes(input.id))renderPlanGrid();if(['libraryGroup','libraryEquipment'].includes(input.id))renderLibraryList();if(input.id==='builderDay'){const next=Number(input.value);captureBuilder();builder.active=next;renderBuilder();}if(input.id==='importFile'&&input.files[0])importBackup(input.files[0]);});
 document.addEventListener('click',async event=>{
  const b=event.target.closest('button,a.brand');if(!b)return;if(b.matches('.brand')){event.preventDefault();setView('workout');return;}if(b.dataset.view){setView(b.dataset.view);return;}if(b.id==='themeToggle'){setTheme(ForgeTheme.getResolved()==='dark'?'light':'dark');return;}if(b.id==='settingsBtn'){settings();return;}const action=b.dataset.action;if(!action)return;const id=b.dataset.id,i=Number(b.dataset.ex),s=view==='workout'?M.activeSession(state):null;
  if(action==='close-modal'){builder=null;closeModal();}
@@ -118,11 +138,11 @@ document.addEventListener('click',async event=>{
  if(action==='choose-plan')selectPlan(M.planById(state,id));
  if(action==='choose-custom')selectPlan(state.customPlans.find(p=>p.id===id));
  if(action==='preview-plan')previewPlan(id);
- if(action==='use-recommended'&&state.profile)selectPlan(M.recommend(state.profile).plan);
+ if(action==='use-recommended'&&state.profile){const r=M.recommend(state.profile);if(r.plan)selectPlan(r.plan);}
  if(action==='video')showVideo(id);
  if(action==='setup')startSetup();
  if(action==='setup-next')setupNext();
- if(action==='setup-back'){if(setupStep){setupStep--;renderSetup();}else{state.onboarded=true;save();closeModal();}}
+ if(action==='setup-back'){if(setupStep){try{captureSetup();setupStep--;renderSetup();}catch(e){$('#setupError').textContent=e.message;}}else{state.onboarded=true;save();closeModal();}}
  if(action==='setup-custom'){try{captureSetup();state.profile=M.profileOf(setup);state.onboarded=true;save();startBuilder();}catch(e){$('#setupError').textContent=e.message;}}
  if(action==='builder')startBuilder();
  if(action==='edit-custom')startBuilder(state.customPlans.find(p=>p.id===id));
