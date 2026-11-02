@@ -17,7 +17,7 @@ test('malformed backup, invalid values, prototype keys and invalid dates are rej
 test('custom program edits cannot change logged session snapshots',()=>{const state=M.empty();state.customPlans=[{id:'custom-example',name:'My plan',workouts:[{id:'a',title:'My day',short:'My day',exercises:[{exerciseId:'goblet',sets:2,min:8,max:12}]}]}];state.activePlan='custom-example';state.activeWorkout='a';const active=M.activeSession(state);state.customPlans[0].workouts[0].exercises[0].exerciseId='squat';assert.equal(active.exercises[0].exerciseId,'goblet');assert.equal(M.validate(state).sessions[active.id].exercises[0].exerciseId,'goblet');});
 test('custom program targets validate across every day',()=>{const state=M.empty();state.customPlans=[{id:'custom-example',name:'My plan',workouts:[{id:'a',title:'Day A',exercises:[{exerciseId:'goblet',sets:2,min:12,max:8}]}]}];assert.throws(()=>M.validate(state));state.customPlans[0].workouts[0].exercises[0].min=8;assert.equal(M.validate(state).customPlans.length,1);});
 test('selection keys keep old and new workouts separate on the same date',()=>{const state=M.empty();const original=M.activeSession(state);const plan=M.makePlan('full2');state.activePlan=plan.id;state.activeWorkout='a';const next=M.activeSession(state);assert.notEqual(original.id,next.id);assert.equal(Object.keys(state.sessions).length,2);assert.equal(M.validate(state).activePlan,plan.id);});
-test('offline worker caches the complete shell and leaves unrelated caches and requests alone',async()=>{const handlers={},removed=[],cacheNames=[],cachedFiles=[],responses=[];const cache={addAll:async files=>cachedFiles.push(...files),match:async()=>({cached:true})};const context={URL,self:{location:new URL('https://example.com/forge/sw.js'),addEventListener:(name,fn)=>handlers[name]=fn,skipWaiting:async()=>{},clients:{claim:async()=>{}}},caches:{open:async name=>{cacheNames.push(name);return cache;},keys:async()=>['forge-tracker-v1','unrelated-app-cache'],delete:async name=>removed.push(name)},fetch:async()=>{throw Error('offline');}};vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);let pending;handlers.install({waitUntil:p=>pending=p});await pending;for(const file of ['app.js','model.js','data.js','styles.css','theme.js'])assert(cachedFiles.includes('./'+file));handlers.activate({waitUntil:p=>pending=p});await pending;assert.deepEqual(removed,['forge-tracker-v1']);for(const url of ['https://www.youtube-nocookie.com/embed/example','https://example.com/other.js'])handlers.fetch({request:{method:'GET',url},respondWith:p=>responses.push(p)});assert.equal(responses.length,0);handlers.fetch({request:{method:'GET',url:'https://example.com/forge/app.js'},respondWith:p=>responses.push(p)});assert.equal((await responses[0]).cached,true);});
+test('offline worker caches the complete shell and leaves unrelated caches and requests alone',async()=>{const handlers={},removed=[],cacheNames=[],cachedFiles=[],responses=[];const cache={addAll:async files=>cachedFiles.push(...files),match:async()=>({cached:true})};const context={URL,self:{location:new URL('https://example.com/forge/sw.js'),addEventListener:(name,fn)=>handlers[name]=fn,skipWaiting:async()=>{},clients:{claim:async()=>{}}},caches:{open:async name=>{cacheNames.push(name);return cache;},keys:async()=>['forge-tracker-v1','unrelated-app-cache'],delete:async name=>removed.push(name)},fetch:async()=>{throw Error('offline');}};vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);let pending;handlers.install({waitUntil:p=>pending=p});await pending;for(const file of ['app.js','model.js','data.js','exercises.js','styles.css','theme.js'])assert(cachedFiles.includes('./'+file));handlers.activate({waitUntil:p=>pending=p});await pending;assert.deepEqual(removed,['forge-tracker-v1']);for(const url of ['https://www.youtube-nocookie.com/embed/example','https://example.com/other.js'])handlers.fetch({request:{method:'GET',url},respondWith:p=>responses.push(p)});assert.equal(responses.length,0);handlers.fetch({request:{method:'GET',url:'https://example.com/forge/app.js'},respondWith:p=>responses.push(p)});assert.equal((await responses[0]).cached,true);});
 
 test('all home equipment combinations exclude unselected items and other locations',()=>{
  const equipment=M.homeEquipmentIds;
@@ -62,4 +62,71 @@ test('a defined program catalog never falls back to an incompatible gym plan',()
   D.programs=[];
   assert.equal(M.recommend({...profile,location:'gym'}).plan,null);
  }finally{if(previous===undefined)delete D.programs;else D.programs=previous;}
+});
+
+test('central exercise records are complete and video IDs await user selection',()=>{
+ const exercises=D.exercises;
+ assert.equal(exercises.length,113);
+ assert.equal(new Set(exercises.map(e=>e.id)).size,exercises.length);
+ assert.equal(new Set(exercises.map(e=>e.name.toLowerCase())).size,exercises.length);
+ const equipment=new Set(['bodyweight','barbell','rack','bench','dumbbells','free-weights','resistance-bands','pull-up-bar','kettlebell','cable-machine','plate-loaded-machine','selectorized-machine','park-equipment','running','dip-bars','ab-wheel']);
+ for(const e of exercises){
+  assert.match(e.id,/^[a-z0-9-]+$/);
+  assert(e.primaryMuscles.length>0);assert(Array.isArray(e.secondaryMuscles));
+  assert(e.equipment.length>0);assert(e.equipment.every(item=>equipment.has(item)));
+  assert(M.levels.includes(e.difficulty));
+  assert(e.instructions.length>=3&&e.instructions.every(step=>typeof step==='string'&&step.length>15));
+  assert(e.commonMistakes.length>=2&&e.commonMistakes.every(step=>typeof step==='string'&&step.length>10));
+  assert.equal(e.youtubeVideoId,'');
+  assert(e.youtubeSearchQuery.includes(e.name));assert(e.youtubeSearchQuery.includes('tutorial'));
+  assert(['reps','seconds','metres'].includes(e.trackingUnit));
+  for(const alt of [e.homeAlternativeId,e.outdoorAlternativeId]){
+   assert(alt===null||(M.exerciseLibrary[alt]&&alt!==e.id),'Invalid alternative for '+e.id);
+  }
+  assert.equal(M.exerciseLibrary[e.id],e);
+ }
+});
+test('legacy catalog is derived from the central library and preserves all existing routine references',()=>{
+ assert.equal(D.catalog.length,42);
+ for(const e of D.catalog){
+  const source=M.exerciseLibrary[e.id];assert(source);
+  assert.equal(e.name,source.name);assert.equal(e.video,source.legacyVideo);
+  assert.equal(e.instructions,source.instructions);
+  assert.equal(e.equipment,source.equipmentLabel);
+ }
+ for(const plan of D.base)for(const day of plan.workouts)for(const target of day.exercises){
+  assert(M.exerciseLibrary[target.exerciseId]);assert(M.catalog[target.exerciseId]);
+ }
+});
+test('all 30 planned programs and warm-ups resolve to complete central exercise records',()=>{
+ const coverage=D.programExerciseCoverage;
+ assert.deepEqual(coverage.map(p=>p.programNumber),Array.from({length:30},(_,i)=>i+1));
+ assert.equal(new Set(coverage.map(p=>p.programId)).size,30);
+ const used=new Set();
+ for(const p of coverage){
+  assert(p.exerciseIds.length>0);assert(p.warmupExerciseIds.length>0);
+  assert.equal(new Set(p.exerciseIds).size,p.exerciseIds.length);
+  for(const id of [...p.exerciseIds,...p.warmupExerciseIds]){assert(M.exerciseLibrary[id]);used.add(id);}
+ }
+ assert.equal(used.size,D.exercises.length);
+});
+test('planned home equipment inventories contain no hidden bench, rack, or anchor requirements',()=>{
+ const limits={
+  16:['bodyweight'],17:['bodyweight','dumbbells'],18:['bodyweight','resistance-bands'],
+  19:['bodyweight'],20:['bodyweight','pull-up-bar'],21:['bodyweight'],
+  22:['bodyweight','kettlebell'],23:['bodyweight'],24:['bodyweight'],29:['bodyweight'],30:['bodyweight']
+ };
+ for(const [number,equipment] of Object.entries(limits)){
+  const p=D.programExerciseCoverage.find(p=>p.programNumber===Number(number));
+  for(const id of [...p.exerciseIds,...p.warmupExerciseIds]){
+   assert(M.exerciseLibrary[id].equipment.every(item=>equipment.includes(item)),p.programId+' needs unexpected equipment for '+id);
+  }
+ }
+});
+test('gym and outdoor availability support the equipment in their planned inventories',()=>{
+ for(const p of D.programExerciseCoverage.filter(p=>p.programNumber<=15||p.programNumber>=25&&p.programNumber<=28)){
+  const location=p.programNumber<=15?'gym':'outdoor';
+  const requiredEquipment=[...new Set([...p.exerciseIds,...p.warmupExerciseIds].flatMap(id=>M.exerciseLibrary[id].equipment))];
+  assert.equal(M.eligiblePrograms({...profile,location},[{id:p.programId,location,requiredEquipment}]).length,1,p.programId);
+ }
 });
