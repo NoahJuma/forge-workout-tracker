@@ -23,34 +23,60 @@
  * @property {string|null} outdoorAlternativeId
  *
  * @typedef {Object} ProgramExercise
- * @property {string} exerciseId References the central exercise catalog.
+ * @property {string} exerciseId References the central library.
  * @property {number} sets
- * @property {number} min
- * @property {number} max
- * @property {number} [restSeconds]
- * @property {number} [rir]
+ * @property {number|null} min Minimum repetitions; null for time/distance work.
+ * @property {number|null} max Maximum repetitions; null for time/distance work.
+ * @property {number|null} durationSeconds
+ * @property {number|null} distanceMetres
+ * @property {number} restSeconds
+ * @property {number|null} rir Null when RIR is not meaningful, such as holds/cardio.
+ * @property {boolean} perSide
+ * @property {boolean} hardSet False for warm-ups and conditioning.
+ * @property {string} [intensityNote]
+ * @property {number} [loadFactor] Fraction of the latest successful heavy load.
+ * @property {number[]} [loadPercentagesOfWorkingWeight] Non-fatiguing ramp-up only.
  *
  * @typedef {Object} ProgramDay
  * @property {string} id
+ * @property {number} weekday ISO weekday: Monday=1 through Sunday=7.
  * @property {string} title
+ * @property {'training'|'rest'} kind
+ * @property {number} sessionLengthMinutes Estimated upper end of session duration.
+ * @property {ProgramExercise[]} warmup
+ * @property {ProgramExercise[]} rampUpSets
  * @property {ProgramExercise[]} exercises
+ * @property {string} notes
+ *
+ * @typedef {Object} ProgramReference
+ * @property {string} id
+ * @property {string} title
+ * @property {string} url
  *
  * @typedef {Object} Program
+ * @property {number} programNumber
  * @property {string} id
  * @property {string} name
  * @property {string} description
  * @property {TrainingGoal} goal
  * @property {TrainingLevel} level
  * @property {TrainingLocation} location
- * @property {EquipmentId[]} requiredEquipment
+ * @property {EquipmentId[]} requiredEquipment Includes warm-up equipment.
  * @property {number} daysPerWeek
- * @property {number} sessionLengthMinutes
+ * @property {number} sessionLengthMinutes Longest scheduled session estimate.
  * @property {number} durationWeeks
- * @property {ProgramDay[]} schedule
+ * @property {string} method
+ * @property {string[]} focusMuscles
+ * @property {ProgramDay[]} schedule All seven days, including rest.
  * @property {string} progressionRule
  * @property {string} deloadRule
+ * @property {number[]} deloadWeeks
  * @property {string} whyThisWorks
- * @property {string[]} references
+ * @property {string} volumeNotes
+ * @property {ProgramReference[]} references
+ * @property {string} [coreMessage]
+ * @property {string[]} [nutritionGuidance]
+ * @property {string[]} [executionNotes]
  *
  * @typedef {Object} UserProfile
  * @property {string} gender
