@@ -4,7 +4,7 @@
  * @typedef {'strength'|'hypertrophy'|'fat-loss'|'endurance'|'mobility'|'skill'} TrainingGoal
  * @typedef {'beginner'|'intermediate'|'advanced'} TrainingLevel
  * @typedef {'gym'|'home'|'outdoor'|'any'} TrainingLocation
- * @typedef {'bodyweight'|'dumbbells'|'resistance-bands'|'pull-up-bar'|'kettlebell'|'gym-equipment'|'park-equipment'|'running'} EquipmentId
+ * @typedef {'bodyweight'|'barbell'|'dumbbells'|'free-weights'|'resistance-bands'|'pull-up-bar'|'kettlebell'|'cable-machine'|'plate-loaded-machine'|'selectorized-machine'|'bench'|'rack'|'gym-equipment'|'park-equipment'|'running'} EquipmentId
  *
  * @typedef {Object} Exercise
  * @property {string} id
@@ -78,16 +78,17 @@
   const oneOf=(v,options,fallback)=>options.includes(v)?v:fallback;
   const levels=['beginner','intermediate','advanced'];
   const goals=['muscle','strength','fitness','fat-loss'];
-  const locations=['gym','home','outdoor','any'];
-  const equipmentIds=['bodyweight','dumbbells','resistance-bands','pull-up-bar','kettlebell','gym-equipment','park-equipment','running'];
+  const locations=['gym','home','outdoor'];
+  const homeEquipmentIds=['dumbbells','resistance-bands','pull-up-bar','kettlebell'];
+  const gymEquipmentIds=['bodyweight','gym-equipment','barbell','dumbbells','free-weights','kettlebell','resistance-bands','cable-machine','plate-loaded-machine','selectorized-machine','bench','rack','pull-up-bar','running'];
   const profileOf=p=>({
     gender:oneOf(p?.gender,['woman','man','nonbinary','prefer-not'],'prefer-not'),
     weight:p?.weight===''||p?.weight==null?'':validNumber(p.weight,20,500),
     goal:oneOf(p?.goal,goals,'muscle'),level:oneOf(p?.level,levels,'beginner'),
     days:oneOf(Number(p?.days),[2,3,4,5],3),
     equipment:oneOf(p?.equipment,['Gym','Dumbbells'],'Gym'),
-    location:oneOf(p?.location,locations,'gym'),
-    homeEquipment:Array.isArray(p?.homeEquipment)?[...new Set(p.homeEquipment.filter(x=>equipmentIds.includes(x)))]:[]
+    location:oneOf(p?.location,locations,p?.equipment==='Dumbbells'?'home':'gym'),
+    homeEquipment:Array.isArray(p?.homeEquipment)?[...new Set(p.homeEquipment.filter(x=>homeEquipmentIds.includes(x)))]:p?.equipment==='Dumbbells'?['dumbbells']:[]
   });
   function validNumber(value,min,max,integer=false){const n=Number(value);if(!Number.isFinite(n)||n<min||n>max||(integer&&!Number.isInteger(n)))throw Error('Invalid number');return n;}
   function setOf(s){if(!s||typeof s!=='object')throw Error('Invalid set');return {kg:s.kg===''||s.kg==null?'':String(validNumber(s.kg,0,2000)),reps:s.reps===''||s.reps==null?'':String(validNumber(s.reps,0,1000,true)),done:!!s.done&&Number(s.reps)>0};}
@@ -119,23 +120,30 @@
    */
   function eligiblePrograms(profile,programs=D.programs||[]){
     const p=profileOf(profile);
-    const available=p.location==='gym'?new Set(['gym-equipment','bodyweight','running'])
+    const available=p.location==='gym'?new Set(gymEquipmentIds)
       :p.location==='outdoor'?new Set(['bodyweight','park-equipment','running'])
       :new Set(['bodyweight',...(p.location==='home'?p.homeEquipment:[])]);
     return programs.filter(program=>{
       const locationOK=program.location==='any'||program.location===p.location;
-      return locationOK&&(program.requiredEquipment||[]).every(item=>available.has(item));
+      return locationOK&&Array.isArray(program.requiredEquipment)&&program.requiredEquipment.every(item=>available.has(item));
     });
   }
   function recommend(p){
     p=profileOf(p);
-    const programMatches=eligiblePrograms(p);
-    if(programMatches.length){
-      const match=programMatches.find(program=>program.goal===p.goal)||programMatches[0];
+    const matches=eligiblePrograms(p);
+    if(matches.length){
+      const goal={muscle:'hypertrophy',fitness:'endurance'}[p.goal]||p.goal;
+      const score=program=>(program.goal===goal?4:0)+(program.level===p.level?2:0)+(program.daysPerWeek<=p.days?1:0);
+      const match=[...matches].sort((a,b)=>score(b)-score(a)||a.id.localeCompare(b.id))[0];
       return {program:match,plan:match,reason:`Matches your ${p.location} location and selected equipment.`,adjustment:''};
-    }const days=p.equipment==='Dumbbells'?Math.min(p.days,3):p.days;
-    const id=p.equipment==='Dumbbells'?`home${days}`:days===2?'full2':days===3?'full3':`split${days}`;
-    return {plan:makePlan(id,p.level,p.goal),reason:`${p.equipment==='Dumbbells'?'Dumbbells and a bench':'Gym equipment'}, ${days} sessions per week, with ${p.level==='beginner'?'two working sets per exercise to start':p.level==='advanced'&&p.goal==='muscle'?'extra sets on the main movements':'a moderate starting workload'}. ${p.goal==='strength'?'Main lifts use a lower rep range to emphasize strength.':p.goal==='fat-loss'?'Resistance training supports strength and muscle retention; this routine does not predict weight loss.':'Build gradually as your technique and recovery allow.'}`,adjustment:p.equipment==='Dumbbells'&&p.days>3?'The dumbbell plan uses three sessions. Use the extra days for recovery or activities you enjoy.':''};
+    }
+    // The existing home templates also require a bench. Never substitute
+    // one of those, or a gym template, for the new home/outdoor choices.
+    if(p.location!=='gym'||Array.isArray(D.programs)){
+      return {plan:null,reason:'No program in the current catalog matches your location and equipment. Your choices are saved; you can create your own program or update your profile.',adjustment:''};
+    }
+    const days=p.days,id=days===2?'full2':days===3?'full3':`split${days}`;
+    return {plan:makePlan(id,p.level,p.goal),reason:`Gym equipment, ${days} sessions per week, with ${p.level==='beginner'?'two working sets per exercise to start':p.level==='advanced'&&p.goal==='muscle'?'extra sets on the main movements':'a moderate starting workload'}. ${p.goal==='strength'?'Main lifts use a lower rep range to emphasize strength.':p.goal==='fat-loss'?'Resistance training supports strength and muscle retention; this routine does not predict weight loss.':'Build gradually as your technique and recovery allow.'}`,adjustment:''};
   }
   function planById(state,id=state.activePlan){if(id==='forge5')return makePlan(id);const custom=state.customPlans.find(p=>p.id===id);if(custom)return custom;for(const base of D.base.filter(p=>!p.legacy))for(const level of levels)for(const goal of goals){if(`${base.id}-${level}-${goal}`===id)return makePlan(base.id,level,goal);}return makePlan('forge5');}
   const sessionKey=(plan,workout,date)=>plan.id==='forge5'?`${date}::D${workout.n}`:`${date}::${plan.id}::${workout.id}`;
@@ -177,6 +185,6 @@
     }
     s.activePlan=planById(s,raw.activePlan).id;s.activeWorkout=planById(s).workouts.some(w=>w.id===raw.activeWorkout)?raw.activeWorkout:planById(s).workouts[0].id;s.sessionId=raw.sessionId&&s.sessions[raw.sessionId]?raw.sessionId:null;return s;
   }
-  const api={catalog,levels,goals,clone,dateOK,today,validNumber,profileOf,empty,makePlan,recommend,eligiblePrograms,planById,sessionKey,previousExercise,newEntry,newSession,activeSession,totals,guidance,migrate,validate};
+  const api={catalog,levels,goals,clone,dateOK,today,validNumber,profileOf,locations,homeEquipmentIds,empty,makePlan,recommend,eligiblePrograms,planById,sessionKey,previousExercise,newEntry,newSession,activeSession,totals,guidance,migrate,validate};
   globalThis.ForgeModel=api;if(typeof module!=='undefined')module.exports=api;
 })();
