@@ -99,6 +99,7 @@
  * @property {ExerciseProgression[]} [exerciseProgressions]
  * @property {string[]} [setupRequirements]
  * @property {SkillStage[]} [skillStages]
+ * @property {string[]} [requiredCapabilities] Equipment setup checks.
  *
  * @typedef {Object} UserProfile
  * @property {string} gender
@@ -108,6 +109,8 @@
  * @property {number} days
  * @property {TrainingLocation} [location]
  * @property {EquipmentId[]} [homeEquipment]
+ * @property {boolean} [longBands]
+ * @property {boolean} [barSupportsFootAssistance]
  * @property {string} [equipment] Legacy profile field retained for existing plans.
  *
  * @typedef {Object} Bookmark
@@ -135,17 +138,23 @@
   const profileOf=p=>({
     gender:oneOf(p?.gender,['woman','man','nonbinary','prefer-not'],'prefer-not'),
     weight:p?.weight===''||p?.weight==null?'':validNumber(p.weight,20,500),
-    goal:oneOf(p?.goal,goals,'muscle'),level:oneOf(p?.level,levels,'beginner'),
-    days:oneOf(Number(p?.days),[2,3,4,5],3),
+    goal:({muscle:'hypertrophy',fitness:'endurance'}[p?.goal]||oneOf(p?.goal,['hypertrophy','strength','fat-loss','endurance','mobility','skill'],'hypertrophy')),level:oneOf(p?.level,levels,'beginner'),
+    days:oneOf(Number(p?.days),[2,3,4,5,6],3),
     equipment:oneOf(p?.equipment,['Gym','Dumbbells'],'Gym'),
     location:oneOf(p?.location,locations,p?.equipment==='Dumbbells'?'home':'gym'),
-    homeEquipment:Array.isArray(p?.homeEquipment)?[...new Set(p.homeEquipment.filter(x=>homeEquipmentIds.includes(x)))]:p?.equipment==='Dumbbells'?['dumbbells']:[]
+    homeEquipment:Array.isArray(p?.homeEquipment)?[...new Set(p.homeEquipment.filter(x=>homeEquipmentIds.includes(x)))]:p?.equipment==='Dumbbells'?['dumbbells']:[],
+    longBands:p?.longBands===true,barSupportsFootAssistance:p?.barSupportsFootAssistance===true
   });
   function validNumber(value,min,max,integer=false){const n=Number(value);if(!Number.isFinite(n)||n<min||n>max||(integer&&!Number.isInteger(n)))throw Error('Invalid number');return n;}
-  function setOf(s){if(!s||typeof s!=='object')throw Error('Invalid set');return {kg:s.kg===''||s.kg==null?'':String(validNumber(s.kg,0,2000)),reps:s.reps===''||s.reps==null?'':String(validNumber(s.reps,0,1000,true)),done:!!s.done&&Number(s.reps)>0};}
-  function targetOf(e){if(!catalog[e?.exerciseId])throw Error('Unknown exercise');return {exerciseId:e.exerciseId,sets:validNumber(e.sets,1,10,true),min:validNumber(e.min,1,100,true),max:validNumber(e.max,1,100,true),rir:cleanText(e.rir,60),perLeg:!!e.perLeg};}
-  function exerciseOf(e){const target=targetOf({...e,sets:Array.isArray(e.sets)?e.sets.length:e.sets});if(target.min>target.max)throw Error('Invalid rep range');if(!Array.isArray(e.sets))return target;return {...target,name:cleanText(e.name)||catalog[e.exerciseId].name,sets:e.sets.map(setOf)};}
-  function empty(){return {version:4,activePlan:'forge5',activeWorkout:'d1',selectedDate:today(),sessionId:null,profile:null,onboardingAnswers:null,bookmarks:[],activePrograms:[],onboarded:false,sessions:{},customPlans:[],restSeconds:90};}
+  function setOf(s){if(!s||typeof s!=='object')throw Error('Invalid set');return {kg:s.kg===''||s.kg==null?'':String(validNumber(s.kg,0,2000)),reps:s.reps===''||s.reps==null?'':String(validNumber(s.reps,0,100000,true)),done:!!s.done&&Number(s.reps)>0};}
+  function targetOf(e){
+    if(!catalog[e?.exerciseId])throw Error('Unknown exercise');
+    const unit=e.unit||'reps';if(!['reps','seconds','metres'].includes(unit))throw Error('Invalid tracking unit');
+    const limit=unit==='reps'?100:unit==='seconds'?7200:100000;
+    return {exerciseId:e.exerciseId,sets:validNumber(e.sets,1,10,true),min:validNumber(e.min,1,limit,true),max:validNumber(e.max,1,limit,true),unit,rir:cleanText(String(e.rir??''),120),perLeg:!!e.perLeg,restSeconds:e.restSeconds==null?90:validNumber(e.restSeconds,0,600,true),hardSet:e.hardSet!==false,intensityNote:cleanText(e.intensityNote,600)};
+  }
+  function exerciseOf(e){const target=targetOf({...e,sets:Array.isArray(e.sets)?e.sets.length:e.sets});if(target.min>target.max)throw Error('Invalid target range');if(!Array.isArray(e.sets))return target;const sets=e.sets.map(setOf);for(const item of sets)if(item.reps!=='')validNumber(item.reps,0,target.unit==='seconds'?7200:target.unit==='metres'?100000:1000,true);return {...target,name:cleanText(e.name)||catalog[e.exerciseId].name,sets};}
+  function empty(){return {version:4,catalogVersion:1,activePlan:'forge5',activeWorkout:'d1',selectedDate:today(),sessionId:null,profile:null,onboardingAnswers:null,bookmarks:[],activePrograms:[],programSettings:{},videoOverrides:{},videoHealth:{},onboarded:false,sessions:{},customPlans:[],restSeconds:90};}
   function makePlan(baseId,level='beginner',goal='muscle'){
     const base=D.base.find(p=>p.id===baseId);if(!base)throw Error('Unknown plan');
     const p=clone(base);p.baseId=baseId;p.level=oneOf(level,levels,'beginner');p.goal=oneOf(goal,goals,'muscle');
@@ -176,40 +185,25 @@
       :new Set(['bodyweight',...(p.location==='home'?p.homeEquipment:[])]);
     return programs.filter(program=>{
       const locationOK=program.location==='any'||program.location===p.location;
-      return locationOK&&Array.isArray(program.requiredEquipment)&&program.requiredEquipment.every(item=>available.has(item));
+      const capabilitiesOK=(program.requiredCapabilities||[]).every(cap=>cap==='long-bands'?p.longBands:cap==='low-pull-up-bar'?p.barSupportsFootAssistance:false);
+      return locationOK&&capabilitiesOK&&Array.isArray(program.requiredEquipment)&&program.requiredEquipment.every(item=>available.has(item));
     });
   }
-  function recommend(p){
-    p=profileOf(p);
-    const matches=eligiblePrograms(p);
-    if(matches.length){
-      const goal={muscle:'hypertrophy',fitness:'endurance'}[p.goal]||p.goal;
-      const score=program=>(program.goal===goal?4:0)+(program.level===p.level?2:0)+(program.daysPerWeek<=p.days?1:0);
-      const match=[...matches].sort((a,b)=>score(b)-score(a)||a.id.localeCompare(b.id))[0];
-      return {program:match,plan:match,reason:`Matches your ${p.location} location and selected equipment.`,adjustment:''};
-    }
-    // The existing home templates also require a bench. Never substitute
-    // one of those, or a gym template, for the new home/outdoor choices.
-    if(p.location!=='gym'||Array.isArray(D.programs)){
-      return {plan:null,reason:'No program in the current catalog matches your location and equipment. Your choices are saved; you can create your own program or update your profile.',adjustment:''};
-    }
-    const days=p.days,id=days===2?'full2':days===3?'full3':`split${days}`;
-    return {plan:makePlan(id,p.level,p.goal),reason:`Gym equipment, ${days} sessions per week, with ${p.level==='beginner'?'two working sets per exercise to start':p.level==='advanced'&&p.goal==='muscle'?'extra sets on the main movements':'a moderate starting workload'}. ${p.goal==='strength'?'Main lifts use a lower rep range to emphasize strength.':p.goal==='fat-loss'?'Resistance training supports strength and muscle retention; this routine does not predict weight loss.':'Build gradually as your technique and recovery allow.'}`,adjustment:''};
-  }
-  function planById(state,id=state.activePlan){if(id==='forge5')return makePlan(id);const custom=state.customPlans.find(p=>p.id===id);if(custom)return custom;for(const base of D.base.filter(p=>!p.legacy))for(const level of levels)for(const goal of goals){if(`${base.id}-${level}-${goal}`===id)return makePlan(base.id,level,goal);}return makePlan('forge5');}
+  function recommend(p){return api.recommendProgram(p);}
+  function planById(state,id=state.activePlan){const native=D.programs?.find(p=>p.id===id);if(native)return api.programPlan(native,state,state.selectedDate);if(id==='forge5')return makePlan(id);const custom=state.customPlans.find(p=>p.id===id);if(custom)return custom;for(const base of D.base.filter(p=>!p.legacy))for(const level of levels)for(const goal of goals){if(`${base.id}-${level}-${goal}`===id)return makePlan(base.id,level,goal);}return makePlan('forge5');}
   const sessionKey=(plan,workout,date)=>plan.id==='forge5'?`${date}::D${workout.n}`:`${date}::${plan.id}::${workout.id}`;
-  function previousExercise(state,exerciseId,date,exclude=''){
+  function previousExercise(state,exerciseId,date,exclude='',unit=null){
     const sessions=Object.values(state.sessions).filter(s=>s.id!==exclude&&s.completedAt&&s.date<date).sort((a,b)=>b.date.localeCompare(a.date)||String(b.completedAt).localeCompare(String(a.completedAt)));
-    for(const s of sessions){const e=s.exercises.find(e=>e.exerciseId===exerciseId&&e.name===catalog[exerciseId].name&&e.sets.some(s=>s.done&&Number(s.reps)>0));if(e)return e;}return null;
+    for(const s of sessions){const e=s.exercises.find(e=>e.exerciseId===exerciseId&&e.name===catalog[exerciseId].name&&(!unit||(e.unit||'reps')===unit)&&e.sets.some(s=>s.done&&Number(s.reps)>0));if(e)return e;}return null;
   }
   function newEntry(state,target,date,exclude=''){
-    const previous=previousExercise(state,target.exerciseId,date,exclude);
+    const previous=previousExercise(state,target.exerciseId,date,exclude,target.unit||'reps');
     return {...clone(target),name:catalog[target.exerciseId].name,sets:Array.from({length:target.sets},(_,i)=>({kg:previous?.sets[i]?.kg??'',reps:'',done:false}))};
   }
-  function newSession(state,plan,workout,date){return {id:sessionKey(plan,workout,date),planId:plan.id,workoutId:workout.id,title:workout.title,date,createdAt:new Date().toISOString(),completedAt:null,exercises:workout.exercises.map(e=>newEntry(state,e,date))};}
+  function newSession(state,plan,workout,date){return {id:sessionKey(plan,workout,date),planId:plan.id,workoutId:workout.id,title:workout.title,date,createdAt:new Date().toISOString(),completedAt:null,warmup:clone(workout.warmup||[]),rampUpSets:clone(workout.rampUpSets||[]),notes:cleanText(workout.notes,3000),week:workout.week||1,stage:workout.stage||'',exercises:workout.exercises.map(e=>newEntry(state,e,date))};}
   function activeSession(state){if(state.sessionId&&state.sessions[state.sessionId])return state.sessions[state.sessionId];const p=planById(state),w=p.workouts.find(w=>w.id===state.activeWorkout)||p.workouts[0];state.activeWorkout=w.id;const key=sessionKey(p,w,state.selectedDate);if(!state.sessions[key])state.sessions[key]=newSession(state,p,w,state.selectedDate);return state.sessions[key];}
-  function totals(s){const all=s.exercises.flatMap(e=>e.sets),logged=all.filter(s=>s.done&&Number(s.reps)>0);return {total:all.length,done:logged.length,volume:logged.reduce((sum,s)=>sum+(Number(s.kg)||0)*Number(s.reps),0)};}
-  function guidance(e){const logged=e.sets.filter(s=>s.done&&Number(s.reps)>0);if(logged.length===e.sets.length&&logged.every(s=>Number(s.reps)>=e.max))return 'Top of your range reached. If form felt controlled and you had reps in reserve, try the smallest available increase next time.';return logged.length?'Keep the load until all sets reach the top of the range with controlled form.':'Start with a manageable load. Keep your reps controlled.';}
+  function totals(s){const all=s.exercises.flatMap(e=>e.sets),logged=all.filter(s=>s.done&&Number(s.reps)>0);return {total:all.length,done:logged.length,volume:s.exercises.reduce((sum,e)=>sum+((e.unit||'reps')==='reps'?e.sets.filter(x=>x.done&&Number(x.reps)>0).reduce((n,x)=>n+(Number(x.kg)||0)*Number(x.reps),0):0),0)};}
+  function guidance(e){if(e.unit==='seconds')return 'Log the seconds completed in each interval or hold. Follow the effort and progression notes.';if(e.unit==='metres')return 'Log the metres completed with controlled technique. Follow the program progression.';const logged=e.sets.filter(s=>s.done&&Number(s.reps)>0);return logged.length===e.sets.length&&logged.every(s=>Number(s.reps)>=e.max)?'Target reached with controlled reps. Use your program progression rule before changing load or difficulty.':logged.length?'Keep the current difficulty until all sets are controlled within the target range.':'Start at a manageable difficulty and keep the prescribed reps in reserve.';}
   function migrate(v3){
     if(v3?.version!==3||!v3.sessions||typeof v3.sessions!=='object'||Array.isArray(v3.sessions))throw Error('Unsupported backup');
     const result=empty();result.selectedDate=dateOK(v3.selectedDate)?v3.selectedDate:today();result.activeWorkout=`d${D.legacy.some(w=>w.n===v3.activeDay)?v3.activeDay:1}`;
@@ -223,7 +217,7 @@
   function validate(raw){
     if(raw?.version===3)return migrate(raw);
     if(raw?.version!==4||!raw.sessions||typeof raw.sessions!=='object'||Array.isArray(raw.sessions)||!Array.isArray(raw.customPlans))throw Error('Unsupported backup');
-    const s=empty();s.profile=raw.profile?profileOf(raw.profile):null;s.onboardingAnswers=raw.onboardingAnswers&&typeof raw.onboardingAnswers==='object'?profileOf(raw.onboardingAnswers):null;s.bookmarks=Array.isArray(raw.bookmarks)?raw.bookmarks.filter(b=>b&&typeof b.programId==='string').map(b=>({programId:cleanText(b.programId,100),active:!!b.active,updatedAt:cleanText(b.updatedAt,40)})):[];s.activePrograms=Array.isArray(raw.activePrograms)?[...new Set(raw.activePrograms.filter(id=>typeof id==='string').map(id=>cleanText(id,100)))]:[];s.onboarded=!!raw.onboarded;s.selectedDate=dateOK(raw.selectedDate)?raw.selectedDate:today();s.restSeconds=oneOf(raw.restSeconds,[60,90,120,180],90);
+    const s=empty();s.profile=raw.profile?profileOf(raw.profile):null;s.onboardingAnswers=raw.onboardingAnswers&&typeof raw.onboardingAnswers==='object'?profileOf(raw.onboardingAnswers):null;s.bookmarks=Array.isArray(raw.bookmarks)?raw.bookmarks.filter(b=>b&&typeof b.programId==='string').map(b=>({programId:cleanText(b.programId,100),active:!!b.active,updatedAt:cleanText(b.updatedAt,40)})):[];s.activePrograms=Array.isArray(raw.activePrograms)?[...new Set(raw.activePrograms.filter(id=>typeof id==='string').map(id=>cleanText(id,100)))]:[];s.onboarded=!!raw.onboarded;s.selectedDate=dateOK(raw.selectedDate)?raw.selectedDate:today();s.restSeconds=oneOf(raw.restSeconds,[30,45,60,75,90,120,150,180,240,300],90);
     if(raw.customPlans.length>100)throw Error('Too many custom plans');
     s.customPlans=raw.customPlans.map(p=>{
       if(!/^custom-[a-zA-Z0-9-]+$/.test(p.id)||!Array.isArray(p.workouts)||p.workouts.length<1||p.workouts.length>7||!cleanText(p.name))throw Error('Invalid custom plan');
@@ -234,8 +228,9 @@
       if(['__proto__','constructor','prototype'].includes(key)||session.id!==key||!dateOK(session.date)||typeof session.planId!=='string'||typeof session.workoutId!=='string'||!Array.isArray(session.exercises)||session.exercises.length<1||session.exercises.length>30)throw Error('Invalid session');
       s.sessions[key]={id:key,planId:cleanText(session.planId),workoutId:cleanText(session.workoutId),title:cleanText(session.title)||'Workout',date:session.date,createdAt:cleanText(session.createdAt),completedAt:session.completedAt?cleanText(session.completedAt):null,exercises:session.exercises.map(exerciseOf)};
     }
-    s.activePlan=planById(s,raw.activePlan).id;s.activeWorkout=planById(s).workouts.some(w=>w.id===raw.activeWorkout)?raw.activeWorkout:planById(s).workouts[0].id;s.sessionId=raw.sessionId&&s.sessions[raw.sessionId]?raw.sessionId:null;return s;
+    s.activePlan=planById(s,raw.activePlan).id;s.activeWorkout=planById(s).workouts.some(w=>w.id===raw.activeWorkout)?raw.activeWorkout:planById(s).workouts[0].id;s.sessionId=raw.sessionId&&s.sessions[raw.sessionId]?raw.sessionId:null;return api.validateProgramState(s,raw);
   }
   const api={catalog,exerciseLibrary,levels,goals,clone,dateOK,today,validNumber,profileOf,locations,homeEquipmentIds,empty,makePlan,recommend,eligiblePrograms,planById,sessionKey,previousExercise,newEntry,newSession,activeSession,totals,guidance,migrate,validate};
+  Object.assign(api,(globalThis.ForgeProgramFeatures || require('./program-model.js'))(api,D));
   globalThis.ForgeModel=api;if(typeof module!=='undefined')module.exports=api;
 })();

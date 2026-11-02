@@ -15,7 +15,7 @@ The machine-readable batch is [programs-11-20.json](programs-11-20.json). It con
 - Program 20 requires a secure low bar suitable for foot assistance and a top start reached from the floor. A high doorway bar alone is insufficient. Its `skillStages` omissions, set cap and substitutions must be applied before displaying or logging that stage's session. These stages are chosen by ability, not by week number.
 - Program 14 budgets the whole session at 30 minutes, including its compact warm-up. Waiting for equipment or needing more recovery can extend the visit; controlled technique takes priority.
 - Program 19 is conditioning and activity, not a promise of spot reduction or a fixed calorie burn. It uses hard but repeatable effort rather than all-out sprints.
-- This is the Phase 5 data delivery. The app's incomplete twenty-program catalog is not registered in recommendations yet.
+- All 30 programs are now registered in the app. This file documents the second source batch; runtime tests check the complete shipped catalog.
 
 ## Overview
 

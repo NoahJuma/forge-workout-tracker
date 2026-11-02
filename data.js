@@ -1713,10 +1713,10 @@ globalThis.ForgeData = {
   if(!source)throw Error('Load exercises.js before data.js.');
   globalThis.ForgeData.exercises=source.exercises;
   globalThis.ForgeData.programExerciseCoverage=source.programExerciseCoverage;
-  // Preserve the current 42 selectable exercises and their player metadata
-  // until Phase 8 connects the expanded library to the player and logger.
-  globalThis.ForgeData.catalog=source.exercises.filter(e=>e.legacyVideo).map(e=>({
-    ...e,equipment:e.equipmentLabel,video:e.legacyVideo
+  globalThis.ForgeData.programs=globalThis.ForgePrograms || require('./programs.js');
+  // One authored library; this view keeps the established logger's labels.
+  globalThis.ForgeData.catalog=source.exercises.map(e=>({
+    sets:3,min:8,max:12,...e,equipment:e.equipmentLabel,video:e.legacyVideo
   }));
 })();
 if(typeof module !== "undefined") module.exports=globalThis.ForgeData;

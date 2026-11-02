@@ -7,7 +7,8 @@ const D=require('../data.js');
 const M=require('../model.js');
 const batchOne=JSON.parse(fs.readFileSync(path.join(__dirname,'../programs-01-10.json'),'utf8'));
 const batchTwo=JSON.parse(fs.readFileSync(path.join(__dirname,'../programs-11-20.json'),'utf8'));
-const programs=[...batchOne,...batchTwo];
+const batchThree=JSON.parse(fs.readFileSync(path.join(__dirname,'../programs-21-30.json'),'utf8'));
+const programs=[...batchOne,...batchTwo,...batchThree];
 const names=['Shortcut to Strength','Shortcut to Six-Pack','Shoulder Killer','Abs Killer','Chest Builder','Arm Blaster','Quad Crusher','Glute Builder','V-Taper Back','Push / Pull / Legs'];
 const referenceUrls=new Set([
 'https://acsm.org/resistance-training-guidelines-update-2026/',
@@ -18,7 +19,11 @@ const referenceUrls=new Set([
 'https://pubmed.ncbi.nlm.nih.gov/28642676/',
 'https://pubmed.ncbi.nlm.nih.gov/28630601/',
 'https://pubmed.ncbi.nlm.nih.gov/30815258/',
-'https://pmc.ncbi.nlm.nih.gov/articles/PMC4213388/'
+'https://pmc.ncbi.nlm.nih.gov/articles/PMC4213388/',
+'https://pubmed.ncbi.nlm.nih.gov/21694556/',
+'https://www.acefitness.org/resources/everyone/exercise-library/',
+'https://www.nsca.com/education/articles/kinetic-select/two-arm-kettlebell-swing/',
+'https://www.nsca.com/education/articles/kinetic-select/plyometric-exercises/'
 ]);
 function prescriptions(p){return p.schedule.flatMap(d=>[...d.warmup,...d.rampUpSets,...d.exercises]);}
 function volume(p){
@@ -41,7 +46,7 @@ test('first batch contains exactly requested programs 1–10 with distinct sched
 test('metadata, weekly schedules, warm-ups, and planned recovery are complete',()=>{
  for(const p of programs){
   assert(['strength','hypertrophy','fat-loss','endurance','mobility','skill'].includes(p.goal));
-  assert(M.levels.includes(p.level));assert.equal(p.location,p.programNumber<=15?'gym':'home');
+  assert(M.levels.includes(p.level));assert.equal(p.location,p.programNumber<=15?'gym':p.programNumber<=24?'home':p.programNumber<=28?'outdoor':'any');
   assert(p.description.length>20);assert(p.description.split(/[.!?](?:\s|$)/).filter(Boolean).length<=2);
   assert.equal(p.schedule.length,7);
   assert.deepEqual(p.schedule.map(d=>d.weekday),[1,2,3,4,5,6,7]);
@@ -78,10 +83,10 @@ test('equipment requirements include every scheduled exercise and match the sele
   if(p.location==='gym'){
    assert.equal(M.eligiblePrograms({location:'gym'},[p]).length,1);
    assert.equal(M.eligiblePrograms({location:'home',homeEquipment:[]},[p]).length,0);
-  }else{
-   assert.equal(M.eligiblePrograms({location:'home',homeEquipment:p.requiredEquipment.filter(item=>item!=='bodyweight')},[p]).length,1);
+  }else if(p.location==='home'){
+   assert.equal(M.eligiblePrograms({location:'home',homeEquipment:p.requiredEquipment.filter(item=>item!=='bodyweight'),longBands:true,barSupportsFootAssistance:true},[p]).length,1);
    assert.equal(M.eligiblePrograms({location:'outdoor'},[p]).length,0);
-  }
+  }else if(p.location==='outdoor'){assert.equal(M.eligiblePrograms({location:'outdoor'},[p]).length,1);}else{for(const location of ['gym','home','outdoor'])assert.equal(M.eligiblePrograms({location,homeEquipment:[]},[p]).length,1);}
  }
 });
 test('hypertrophy focus muscles have 10–20 primary sets across at least two sessions',()=>{
@@ -128,7 +133,7 @@ test('ab programs explicitly reject spot reduction and distinguish nutrition fro
 test('session estimates allow prescribed upper-range reps, rests, warm-ups, and transitions',()=>{
  for(const p of programs)for(const d of p.schedule.filter(d=>d.kind==='training')){
   const all=[...d.warmup,...d.rampUpSets,...d.exercises];
-  const seconds=all.reduce((sum,e)=>sum+(e.durationSeconds?e.durationSeconds*e.sets*(e.perSide?2:1):(e.max||0)*(e.eccentricSeconds?e.eccentricSeconds+2:4)*e.sets*(e.perSide?2:1))+Math.max(0,e.sets-1)*e.restSeconds,0)+Math.max(0,all.length-1)*60;
+  const seconds=all.reduce((sum,e)=>sum+(e.durationSeconds?e.durationSeconds*e.sets*(e.perSide?2:1):(e.distanceMetres?Math.ceil(e.distanceMetres/3):(e.max||0)*(e.eccentricSeconds?e.eccentricSeconds+2:4))*e.sets*(e.perSide?2:1))+Math.max(0,e.sets-1)*e.restSeconds,0)+Math.max(0,all.length-1)*60;
   assert(seconds<=d.sessionLengthMinutes*60,p.id+' '+d.title+' needs at least '+Math.ceil(seconds/60)+' minutes');
  }
 });
@@ -143,8 +148,8 @@ test('second batch contains exactly requested programs 11–20 and all twenty sc
  assert.equal(batchTwo.length,10);
  assert.deepEqual(batchTwo.map(p=>p.programNumber),[11,12,13,14,15,16,17,18,19,20]);
  assert.deepEqual(batchTwo.map(p=>p.name),['Upper / Lower','Powerbuilding','Deadlift Specialist','30-Minute Express','Beginner Foundations','Home Bodyweight Basics','Home Dumbbell Builder','Resistance Band Total Body','Home HIIT Fat Burner','Pull-Up Mastery']);
- assert.equal(new Set(programs.map(p=>p.id)).size,20);
- assert.equal(new Set(programs.map(p=>JSON.stringify(p.schedule.map(d=>d.exercises)))).size,20);
+ assert.equal(new Set([...batchOne,...batchTwo].map(p=>p.id)).size,20);
+ assert.equal(new Set([...batchOne,...batchTwo].map(p=>JSON.stringify(p.schedule.map(d=>d.exercises)))).size,20);
  for(const p of batchTwo)assert.equal(p.id,D.programExerciseCoverage[p.programNumber-1].programId);
 });
 test('home plans require only the equipment selected, including every warm-up',()=>{
@@ -153,7 +158,7 @@ test('home plans require only the equipment selected, including every warm-up',(
   assert.deepEqual([...p.requiredEquipment].sort(),[...limits[p.programNumber]].sort());
   for(const e of prescriptions(p))assert(M.exerciseLibrary[e.exerciseId].equipment.every(item=>limits[p.programNumber].includes(item)));
  }
- const compatible=(homeEquipment)=>M.eligiblePrograms({location:'home',homeEquipment},batchTwo).map(p=>p.programNumber);
+ const compatible=(homeEquipment)=>M.eligiblePrograms({location:'home',homeEquipment,longBands:true,barSupportsFootAssistance:true},batchTwo).map(p=>p.programNumber);
  assert.deepEqual(compatible([]),[16,19]);
  assert.deepEqual(compatible(['dumbbells']),[16,17,19]);
  assert.deepEqual(compatible(['resistance-bands']),[16,18,19]);

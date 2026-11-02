@@ -5,9 +5,9 @@ const vm=require('node:vm');
 const M=require('../model.js'),D=require('../data.js');
 const profile={gender:'prefer-not',weight:'',goal:'muscle',level:'beginner',days:3,equipment:'Gym'};
 function historical(state,id,weight=20){const p=M.makePlan('full2','intermediate','muscle'),w={id:'a',title:'Example',exercises:[{exerciseId:id,sets:2,min:8,max:12}]};const s=M.newSession(state,p,w,'2026-10-01');s.completedAt='2026-10-01T12:00:00Z';s.exercises[0].sets=[{kg:String(weight),reps:'12',done:true},{kg:String(weight),reps:'10',done:true}];state.sessions[s.id]=s;return s;}
-test('every selectable exercise has a distinct verified YouTube demonstration',()=>{assert.equal(new Set(D.catalog.map(c=>c.id)).size,D.catalog.length);for(const c of D.catalog){assert.match(c.video.id,/^[a-zA-Z0-9_-]{11}$/);assert.match(c.video.source,/^https:\/\//);assert.equal(c.video.verifiedAt,'2026-10-31');}});
+test('all selectable exercises have instructions and existing demonstrations keep their original metadata',()=>{assert.equal(D.catalog.length,113);assert.equal(new Set(D.catalog.map(c=>c.id)).size,D.catalog.length);const old=D.catalog.filter(c=>c.video);assert.equal(old.length,42);for(const c of old){assert.match(c.video.id,/^[a-zA-Z0-9_-]{11}$/);assert.match(c.video.source,/^https:\/\//);assert.equal(c.video.verifiedAt,'2026-10-31');}for(const c of D.catalog)assert(c.instructions.length>=3);});
 test('every starter variation has valid exercises and workable targets',()=>{for(const base of D.base.filter(p=>!p.legacy))for(const level of M.levels)for(const goal of M.goals){const p=M.makePlan(base.id,level,goal);assert.equal(p.workouts.length,base.days);for(const w of p.workouts)for(const e of w.exercises){assert(M.catalog[e.exerciseId]);assert(e.sets>=2&&e.sets<=4);assert(e.min<=e.max);if(level==='beginner')assert.notEqual(e.exerciseId,'dips');}}});
-test('recommendation uses goal, experience, schedule and equipment',()=>{for(const days of [2,3,4,5])assert.equal(M.recommend({...profile,days}).plan.days,days);const r=M.recommend({...profile,days:5,equipment:'Dumbbells'});assert.equal(r.plan,null);assert.match(r.reason,/No program/);assert.equal(M.recommend({...profile,goal:'strength',level:'advanced'}).plan.workouts[0].exercises[0].min,4);});
+test('recommendation respects equipment, experience and maximum available days',()=>{for(const days of [2,3,4,5,6]){const r=M.recommend({...profile,days});assert(r.plan.days<=days);assert.equal(r.plan.level,'beginner');}assert.equal(M.recommend({...profile,level:'intermediate',days:4,goal:'hypertrophy'}).plan.id,'upper-lower');assert.equal(M.recommend({...profile,level:'intermediate',days:4,location:'home',homeEquipment:['dumbbells'],goal:'strength'}).plan.id,'home-dumbbell-builder');assert.equal(M.recommend({...profile,goal:'strength',level:'advanced',days:4}).plan.id,'shortcut-to-strength');});
 test('gender and body weight do not invent sex-based programs or starting loads',()=>{assert.deepEqual(M.recommend({...profile,gender:'woman',weight:55}).plan,M.recommend({...profile,gender:'man',weight:95}).plan);const s=M.newSession(M.empty(),M.recommend(profile).plan,M.recommend(profile).plan.workouts[0],'2026-10-31');assert(s.exercises.every(e=>e.sets.every(s=>s.kg==='')));});
 test('previous loads match the exact exercise and do not copy repetitions',()=>{const state=M.empty();historical(state,'bench',25);const entry=M.newEntry(state,{exerciseId:'bench',sets:3,min:8,max:12},'2026-10-31');assert.deepEqual(entry.sets.map(s=>s.kg),['25','25','']);assert(entry.sets.every(s=>s.reps===''&&!s.done));assert.equal(M.previousExercise(state,'incline','2026-10-31'),null);});
 test('ambiguous legacy barbell/dumbbell entries do not carry loads into a specific variation',()=>{const s=M.empty(),h=historical(s,'incline',80);h.exercises[0].name='Incline BB / DB Press';assert.equal(M.previousExercise(s,'incline','2026-10-31'),null);});
@@ -50,15 +50,15 @@ test('profile migration and saved onboarding choices survive validation without 
  const restored=M.validate(JSON.parse(JSON.stringify(state)));
  assert.deepEqual(restored.onboardingAnswers,state.onboardingAnswers);
  assert.deepEqual(restored.profile.homeEquipment,[]);
- assert.equal(M.recommend(restored.profile).plan,null);
- assert.equal(M.recommend({...profile,location:'outdoor'}).plan,null);
+ assert.equal(M.recommend(restored.profile).plan.id,'home-bodyweight-basics');
+ assert(M.eligiblePrograms({...profile,location:'outdoor'},[M.recommend({...profile,location:'outdoor'}).program]).length);
 });
 test('a defined program catalog never falls back to an incompatible gym plan',()=>{
  const previous=D.programs;
  try{
-  D.programs=[{id:'gym-only',location:'gym',requiredEquipment:['barbell'],goal:'strength',level:'beginner',daysPerWeek:3}];
+  D.programs=[M.nativeById['shortcut-to-strength']];
   assert.equal(M.recommend({...profile,location:'home',homeEquipment:[]}).plan,null);
-  assert.equal(M.recommend({...profile,location:'gym',goal:'strength'}).plan.id,'gym-only');
+  assert.equal(M.recommend({...profile,location:'gym',goal:'strength',level:'intermediate',days:4}).plan.id,'shortcut-to-strength');
   D.programs=[];
   assert.equal(M.recommend({...profile,location:'gym'}).plan,null);
  }finally{if(previous===undefined)delete D.programs;else D.programs=previous;}
@@ -86,8 +86,8 @@ test('central exercise records are complete and video IDs await user selection',
   assert.equal(M.exerciseLibrary[e.id],e);
  }
 });
-test('legacy catalog is derived from the central library and preserves all existing routine references',()=>{
- assert.equal(D.catalog.length,42);
+test('logger catalog is derived from the central library and preserves all existing routine references',()=>{
+ assert.equal(D.catalog.length,113);
  for(const e of D.catalog){
   const source=M.exerciseLibrary[e.id];assert(source);
   assert.equal(e.name,source.name);assert.equal(e.video,source.legacyVideo);

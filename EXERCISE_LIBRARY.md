@@ -1,16 +1,16 @@
 # Central exercise library
 
-Phase 3 defines **113 exercises** in [exercises.js](exercises.js), including the original 42 exercise IDs and 71 additions.
+The app defines **113 exercises** in [exercises.js](exercises.js), including the original 42 exercise IDs and 71 additions.
 
 ## Runtime and compatibility
 
 Load exercises.js before data.js. No packages or build step are required.
 
 - `ForgeData.exercises` is the canonical array. `ForgeModel.exerciseLibrary[id]` provides lookup by ID.
-- `ForgeData.catalog` and `ForgeModel.catalog` remain derived views of the original 42 exercises for the current logger and player. Exercise definitions are authored once.
+- `ForgeData.catalog` and `ForgeModel.catalog` are derived views of all 113 exercises for the logger and player. Exercise definitions are authored once.
 - Existing exercise names and IDs are retained so past workout snapshots and load history still match.
 - `programExerciseCoverage` is an inventory for the 30 requested programs, including their warm-up movements. It is not a schedule or a training prescription. Schedules, volume, progression, and deloads are authored in Phases 4–6.
-- Phase 8 will expose the expanded library through the existing player and exercise picker. This phase prepares the data.
+- All 113 exercises are available through the existing exercise picker and technique dialog. Instructions are always visible; the official YouTube player is attached when a video is selected.
 
 ## Exercise fields
 
@@ -18,7 +18,7 @@ Each exercise has an ID, name, primary and secondary muscles, equipment IDs, dif
 
 Additional fields support the existing app: group, movement pattern, readable equipment label, and a tracking unit (reps, seconds, or metres). Original exercises retain their default set/rep values and existing video metadata under `legacyVideo`.
 
-Muscle identifiers distinguish areas such as lateral deltoids, quadriceps, lats, and obliques. These labels describe exercise emphasis; they do not count sets or promise a particular adaptation. Volume accounting is handled when programs and overlap warnings are implemented.
+Muscle identifiers distinguish areas such as lateral deltoids, quadriceps, lats, and obliques. These labels describe exercise emphasis; they do not count sets or promise a particular adaptation. Volume accounting uses program working sets; the combined-week display shows primary sets plus a half-set estimate for indirect work.
 
 ## Equipment and alternatives
 
@@ -32,9 +32,9 @@ An alternative ID is a different option for a similar movement or training role,
 
 ## Video handling
 
-All 113 canonical `youtubeVideoId` values are empty. Every record has a precise `youtubeSearchQuery`. No new video ID or video URL was invented.
+All 113 canonical `youtubeVideoId` values are empty. Every record has a precise `youtubeSearchQuery`. No new video ID was invented. The app can store user-selected IDs or YouTube links on the device.
 
-The original 42 demonstrations retain their original metadata in `legacyVideo` so the current player keeps working until Phase 8. Their old verification dates are historical repository metadata; these links were not reverified in Phase 3. New search results should be selected for clear technique instruction from qualified coaches or established fitness channels before IDs are entered.
+The original 42 demonstrations retain their original metadata in `legacyVideo` so the current player can retain those demonstrations. Their old verification dates are historical repository metadata; these links were not reverified in Phase 3. New search results should be selected for clear technique instruction from qualified coaches or established fitness channels before IDs are entered.
 
 ## Technique resources
 

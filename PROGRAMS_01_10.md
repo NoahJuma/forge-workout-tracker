@@ -11,7 +11,7 @@ The machine-readable delivery is [programs-01-10.json](programs-01-10.json): exa
 - Program session length is the longest day estimate; each day also has its own estimate. It includes warm-up and rest and can vary with setup or recovery. Conditioning progression may extend its initial duration within the provided estimate.
 - Primary muscle set totals are a planning audit, not a precise measure of stimulus. Secondary muscles also work during compounds; the JSON does not assign every secondary set the same value as an isolation set. Specialization targets receive roughly 10–20 primary sets; supporting areas receive compound work and, where specified, lower direct volume.
 - These are original templates, not individually validated study routines. Load increments, deload timing, exact exercise order and set distribution are app design choices informed by general training principles.
-- This phase delivers JSON for review. It does not yet register an incomplete ten-program catalog in the live recommendation engine. The remaining twenty programs follow in Phases 5–6.
+- All 30 programs are now registered in the app. These ten are the first JSON source batch; the runtime and data tests verify the shipped catalog matches all three batches.
 
 ## Overview
 

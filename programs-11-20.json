@@ -5132,6 +5132,9 @@
       "Long bands suitable for the listed ranges are assumed; inspect them and follow their stretch limits. No door anchor, pull-up bar or dumbbell is required.",
       "A short mini-loop alone cannot perform every listed movement; use the described long band setup.",
       "Keep bands secured under the feet or around the back as specified in the central instructions."
+    ],
+    "requiredCapabilities": [
+      "long-bands"
     ]
   },
   {
@@ -6137,6 +6140,9 @@
       "Skill-stage entry criteria override the calendar: a beginner does not start negative pull-ups merely because it is Wednesday.",
       "An eccentric rep ends when the slow descent is no longer controlled; the listed RIR means additional equally controlled descents, not extra drops.",
       "The first strict pull-up may arrive before or after this block. Do not test to failure at every session."
+    ],
+    "requiredCapabilities": [
+      "low-pull-up-bar"
     ]
   }
 ]

@@ -1,0 +1,4973 @@
+[
+  {
+    "programNumber": 21,
+    "id": "push-up-progression",
+    "name": "Push-Up Progression",
+    "description": "Three weekly practice sessions build from wall and knee push-ups toward controlled full and advanced variations. Progress follows demonstrated technique rather than automatic weekly difficulty jumps.",
+    "goal": "skill",
+    "level": "beginner",
+    "location": "home",
+    "requiredEquipment": [
+      "bodyweight"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 35,
+    "durationWeeks": 8,
+    "method": "Ability-gated push-up practice with controlled eccentric and lever progressions",
+    "focusMuscles": [
+      "pectorals",
+      "triceps"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Push practice A",
+        "kind": "training",
+        "sessionLengthMinutes": 30,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "scapular-pushup",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "front-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": true,
+            "intensityNote": "Keep the trunk aligned and breathe normally; stop before sagging."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Push practice B",
+        "kind": "training",
+        "sessionLengthMinutes": 35,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "eccentric-pushup",
+            "sets": 2,
+            "min": 2,
+            "max": 3,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true,
+            "eccentricSeconds": 4,
+            "intensityNote": "Use only after the knee/eccentric stage entry criteria; put knees down to reset."
+          },
+          {
+            "exerciseId": "scapular-pushup",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Push practice C",
+        "kind": "training",
+        "sessionLengthMinutes": 35,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "eccentric-pushup",
+            "sets": 2,
+            "min": 2,
+            "max": 3,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true,
+            "eccentricSeconds": 4,
+            "intensityNote": "Lower only as slowly as you can control; reset from the knees."
+          },
+          {
+            "exerciseId": "deadbug",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "Begin in the wall stage and add controlled reps while keeping 3 RIR. After two sessions of 15 well-controlled wall reps per set, increase the lean or move to the knee/eccentric stage at 6–12 knee reps. Introduce the short eccentric sets only when you can lower without the hips sagging. Move to the full stage after two sessions of 12 controlled knee reps and three controlled full push-ups; keep at least 2 RIR while building 4–10 full reps. Use the advanced archer stage only after two sessions of 12 controlled full reps; start at 3–6 reps per side without twisting and return to the full variation if control declines. Add 5 seconds to planks up to 35 seconds before choosing a more demanding trunk position.",
+    "deloadRule": "Weeks 4 and 8: halve working sets, rounding up, omit eccentric sets and use an easier push-up variation while keeping at least 4 RIR. Halve plank duration. Retain easy scapular practice and return to the last controlled stage after the deload; ability criteria still apply.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "A repeatable starting variation allows consistent practice while the trunk stays controlled. Small eccentric doses are introduced only after basic pushing ability is present. Later stages replace the easier movement instead of adding a second complete push-up workout.",
+    "volumeNotes": "This is skill practice, not an instruction to reach failure or maximize chest volume. The wall baseline has nine primary pushing sets plus small eccentric doses in the later introductory stage. Stage substitutions keep the weekly set count controlled.",
+    "references": [
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      },
+      {
+        "id": "acsm-2009",
+        "title": "American College of Sports Medicine position stand. Progression models in resistance training for healthy adults (2009)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19204579/"
+      }
+    ],
+    "skillStages": [
+      {
+        "id": "wall",
+        "entryCriteria": "Start here until wall reps are controlled at the stated range and reserve.",
+        "maxWorkingSetsPerExercise": null,
+        "omitExerciseIds": [
+          "eccentric-pushup"
+        ],
+        "prescriptionOverrides": []
+      },
+      {
+        "id": "knee-eccentric",
+        "entryCriteria": "Two sessions of 15 controlled wall reps per set and the ability to lower a knee or full push-up without hip sag.",
+        "maxWorkingSetsPerExercise": null,
+        "omitExerciseIds": [],
+        "prescriptionOverrides": [
+          {
+            "fromExerciseId": "wall-pushup",
+            "toPrescription": {
+              "exerciseId": "knee-pushup",
+              "sets": 3,
+              "min": 6,
+              "max": 12,
+              "durationSeconds": null,
+              "distanceMetres": null,
+              "restSeconds": 90,
+              "rir": 3,
+              "perSide": false,
+              "hardSet": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "full",
+        "entryCriteria": "Two sessions of 12 controlled knee reps and three controlled full push-ups.",
+        "maxWorkingSetsPerExercise": null,
+        "omitExerciseIds": [
+          "eccentric-pushup"
+        ],
+        "prescriptionOverrides": [
+          {
+            "fromExerciseId": "wall-pushup",
+            "toPrescription": {
+              "exerciseId": "pushup",
+              "sets": 3,
+              "min": 4,
+              "max": 10,
+              "durationSeconds": null,
+              "distanceMetres": null,
+              "restSeconds": 120,
+              "rir": 2,
+              "perSide": false,
+              "hardSet": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "advanced",
+        "entryCriteria": "Two sessions of 12 controlled full push-ups without sagging or shoulder discomfort.",
+        "maxWorkingSetsPerExercise": null,
+        "omitExerciseIds": [
+          "eccentric-pushup"
+        ],
+        "prescriptionOverrides": [
+          {
+            "fromExerciseId": "wall-pushup",
+            "toPrescription": {
+              "exerciseId": "archer-pushup",
+              "sets": 3,
+              "min": 3,
+              "max": 6,
+              "durationSeconds": null,
+              "distanceMetres": null,
+              "restSeconds": 120,
+              "rir": 2,
+              "perSide": true,
+              "hardSet": true
+            }
+          }
+        ]
+      }
+    ],
+    "executionNotes": [
+      "A solid wall and clear floor are sufficient. No bench or elevated furniture is assumed.",
+      "Apply stage omissions and substitutions before the baseline session. Changing stage is a deliberate ability-based choice."
+    ]
+  },
+  {
+    "programNumber": 22,
+    "id": "kettlebell-conditioning",
+    "name": "Kettlebell Conditioning",
+    "description": "One kettlebell supports hinge, squat, lunge and carry work across three sessions. Swing sets use crisp technique and recovery instead of training to exhaustion.",
+    "goal": "endurance",
+    "level": "intermediate",
+    "location": "home",
+    "requiredEquipment": [
+      "bodyweight",
+      "kettlebell"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 55,
+    "durationWeeks": 8,
+    "method": "Single-kettlebell conditioning with separate ballistic and controlled work",
+    "focusMuscles": [
+      "glutes",
+      "hamstrings"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Bell A · hinge and carry",
+        "kind": "training",
+        "sessionLengthMinutes": 55,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "kb-deadlift",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "kb-deadlift",
+            "sets": 3,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-swing",
+            "sets": 6,
+            "min": 10,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Keep every swing crisp; stop early if the hinge or float changes."
+          },
+          {
+            "exerciseId": "kb-goblet",
+            "sets": 3,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-suitcase-carry",
+            "sets": 3,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 20,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "Walk with a level torso and enough grip to set the bell down safely; distance is per side."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Bell B · controlled strength endurance",
+        "kind": "training",
+        "sessionLengthMinutes": 55,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "kb-goblet",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "kb-goblet",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-deadlift",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-reverse-lunge",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-suitcase-carry",
+            "sets": 3,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 20,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "Use short controlled steps; turns are slow and the route is clear."
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "Keep hips and shoulders aligned; stop before the hold deteriorates."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Bell C · repeatable swing practice",
+        "kind": "training",
+        "sessionLengthMinutes": 50,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "kb-swing",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "kb-swing",
+            "sets": 6,
+            "min": 10,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Use only after a controlled deadlift and hinge are established; finish before technique slows."
+          },
+          {
+            "exerciseId": "kb-goblet",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-deadlift",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "kb-suitcase-carry",
+            "sets": 3,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 20,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "Retain a tall, steady torso and controlled grip on each side."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "Use a bell that is manageable for the most demanding listed movement. Add controlled reps in the squat, deadlift and lunge ranges before using a heavier bell if available. For swings, add one rep to at most two sets per build week, up to 15 per set, only while every rep remains crisp; never shorten rest and add reps in the same week. Carries add 5 metres per side per build week up to 30 metres on a clear route. With one fixed bell, keep the set ceiling and progress reps or distance rather than inventing load increases. Use the kb-deadlift entry instead of swings until the hinge is controlled.",
+    "deloadRule": "Weeks 4 and 8: halve working and swing sets, rounding up, reduce carry distance by half, and keep rep work at least 4 RIR. Use an easier bell if available; otherwise use the low end of the rep range and omit swings if hinge control is not fresh. Retain easy warm-up and full recovery between short sets.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Controlled lifts and carries provide work with a single load while swing practice adds repeated hip extension. The sessions separate crisp ballistic sets from grinding strength efforts. Rest intervals and a fixed set ceiling make conditioning progression easier to monitor.",
+    "volumeNotes": "Swing and carry sets are conditioning or technical work with hardSet false; they are not counted as full hypertrophy sets. The plan does not promise balanced upper-body muscle growth from one kettlebell.",
+    "references": [
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      },
+      {
+        "id": "nsca-kettlebell-swing",
+        "title": "NSCA: Two-Arm Kettlebell Swing",
+        "url": "https://www.nsca.com/education/articles/kinetic-select/two-arm-kettlebell-swing/"
+      },
+      {
+        "id": "acsm-exercise-2011",
+        "title": "ACSM position stand: Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness in apparently healthy adults (2011)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/"
+      }
+    ],
+    "setupRequirements": [
+      "One suitable kettlebell and a clear floor or short walking route are required.",
+      "Swings require an established hinge; substitute the existing kettlebell deadlift record until ready."
+    ]
+  },
+  {
+    "programNumber": 23,
+    "id": "core-stability-back-health",
+    "name": "Core Stability & Back Health",
+    "description": "Gentle trunk-control and hip exercises emphasize steady positions and comfortable ranges. This is general training, with no promise to diagnose or cure back pain.",
+    "goal": "skill",
+    "level": "beginner",
+    "location": "home",
+    "requiredEquipment": [
+      "bodyweight"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 40,
+    "durationWeeks": 8,
+    "method": "Low-fatigue anti-movement practice with easy walking",
+    "focusMuscles": [
+      "abdominals",
+      "obliques"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Control A",
+        "kind": "training",
+        "sessionLengthMinutes": 40,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "deadbug",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bird-dog",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 15,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "Use bent knees if needed and stop before the trunk rotates."
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 480,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy comfortable walking; it can be broken into short lengths."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Control B",
+        "kind": "training",
+        "sessionLengthMinutes": 35,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "deadbug",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "front-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 15,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": true,
+            "intensityNote": "Keep a comfortable trunk position and stop before sagging."
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 480,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy conversational pace, without forcing stride length."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Control C",
+        "kind": "training",
+        "sessionLengthMinutes": 40,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "bird-dog",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 15,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "Breathe normally and end before alignment changes."
+          },
+          {
+            "exerciseId": "deadbug",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 480,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy walking with relaxed breathing."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "Add one slow, controlled rep per set in a build week up to the upper bound while preserving the stated reserve and steady trunk position. Add 5 seconds to holds only when breathing and alignment remain easy, up to 30 seconds. Then make a small lever change already described in the central instructions, such as a longer leg reach, rather than adding external weight. Add 1 minute of easy walking per build week up to 12 minutes and allow extra session time. Do not increase rep range or hold duration through pain or loss of control.",
+    "deloadRule": "Weeks 4 and 8: halve working sets, rounding up, halve holds, and use the easier lever or comfortable movement range while keeping at least 5 RIR on rep practice. Keep walking easy for 5–8 minutes. Reduce earlier if movements stop being comfortable; the program is not a treatment plan.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "The sessions use repeatable trunk positions instead of heavy loading or rapid end-range movement. Small doses across three days allow practice without deliberately seeking fatigue. Comfortable movement control is the aim, not a claim that one exercise is universally safe for every back condition.",
+    "volumeNotes": "Core practice is intentionally below a high-volume hypertrophy prescription. Holds use technical control rather than RIR, and hinge practice and easy walking are not hypertrophy hard sets.",
+    "references": [
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      },
+      {
+        "id": "ace-exercise-library",
+        "title": "American Council on Exercise: Exercise Library",
+        "url": "https://www.acefitness.org/resources/everyone/exercise-library/"
+      }
+    ],
+    "executionNotes": [
+      "Low back friendly describes the controlled, adaptable intent; no movement is guaranteed pain-free for everyone.",
+      "Choose a comfortable variation or stop a movement that causes pain rather than forcing the listed range."
+    ]
+  },
+  {
+    "programNumber": 24,
+    "id": "mobility-posture-fix",
+    "name": "Mobility & Posture Fix",
+    "description": "Short sessions practice comfortable shoulder, hip, ankle and trunk movement around a desk-based day. The title does not promise a permanent posture correction or a medical treatment.",
+    "goal": "mobility",
+    "level": "beginner",
+    "location": "home",
+    "requiredEquipment": [
+      "bodyweight"
+    ],
+    "daysPerWeek": 5,
+    "sessionLengthMinutes": 25,
+    "durationWeeks": 8,
+    "method": "Frequent low-fatigue mobility practice with varied body regions",
+    "focusMuscles": [],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Desk reset A",
+        "kind": "training",
+        "sessionLengthMinutes": 25,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy movement to begin."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "chin-tuck",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "wall-slide",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 45,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hip-flexor-stretch",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": null,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "Mild, comfortable stretch with steady breathing; repeat on both sides."
+          },
+          {
+            "exerciseId": "open-book",
+            "sets": 1,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Desk reset B",
+        "kind": "training",
+        "sessionLengthMinutes": 25,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy movement to begin."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "ankle-rock",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "cat-camel",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "prone-w-raise",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 45,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Desk reset C",
+        "kind": "training",
+        "sessionLengthMinutes": 25,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy movement to begin."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "wall-slide",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 45,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "open-book",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hip-flexor-stretch",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": null,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "Mild front-of-hip stretch with the pelvis controlled; repeat both sides."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Desk reset D",
+        "kind": "training",
+        "sessionLengthMinutes": 25,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy movement to begin."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "chin-tuck",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "ankle-rock",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "cat-camel",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Desk reset E",
+        "kind": "training",
+        "sessionLengthMinutes": 25,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy movement to begin."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 5,
+            "max": 5,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "prone-w-raise",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 45,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "wall-slide",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 45,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "open-book",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "In build weeks, add one controlled repetition within the range only when the movement stays easy. Add 5 seconds to a stretch after a week of comfortable practice, up to 30 seconds per side, without forcing end range. Once the upper bound is easy, use a slightly smoother or more comfortable range rather than adding resistance. Keep the session low fatigue and add regular changes of sitting or standing position during the day.",
+    "deloadRule": "Weeks 4 and 8: use one set per movement, ordinary comfortable ranges and 15-second stretches while keeping every rep easy. Maintain the routine as a brief movement break rather than adding intensity. Return to the previous comfortable prescription afterward.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Frequent small sessions create opportunities to explore comfortable ranges after long periods in one position. Alternating body regions keeps each session manageable. The schedule supports movement variety rather than claiming there is one ideal posture to hold all day.",
+    "volumeNotes": "All movements have hardSet false. Numeric RIR on rep practice means deliberately staying far from fatigue; it is not a hypertrophy target. Repeated mobility days are gentle practice, not repeated hard strength sessions.",
+    "references": [
+      {
+        "id": "acsm-exercise-2011",
+        "title": "ACSM position stand: Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness in apparently healthy adults (2011)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/"
+      },
+      {
+        "id": "ace-exercise-library",
+        "title": "American Council on Exercise: Exercise Library",
+        "url": "https://www.acefitness.org/resources/everyone/exercise-library/"
+      }
+    ]
+  },
+  {
+    "programNumber": 25,
+    "id": "outdoor-calisthenics",
+    "name": "Outdoor Calisthenics",
+    "description": "Park bars, benches and bodyweight movements form a three-day full-body hypertrophy plan. Existing pulling skill and secure, suitable park equipment are required.",
+    "goal": "hypertrophy",
+    "level": "intermediate",
+    "location": "outdoor",
+    "requiredEquipment": [
+      "bodyweight",
+      "park-equipment",
+      "pull-up-bar"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 100,
+    "durationWeeks": 8,
+    "method": "Full-body park training with vertical pulls, rows and unilateral legs",
+    "focusMuscles": [
+      "pectorals",
+      "lats",
+      "quadriceps",
+      "hamstrings"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Park A · vertical pull and push",
+        "kind": "training",
+        "sessionLengthMinutes": 100,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "strict-pullup",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "strict-pullup",
+            "sets": 3,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 150,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-row",
+            "sets": 2,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-incline-pushup",
+            "sets": 4,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-stepup",
+            "sets": 3,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-split-squat",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hanging-knee-raise",
+            "sets": 2,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hamstring-walkout",
+            "sets": 3,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Park B · controlled full-body volume",
+        "kind": "training",
+        "sessionLengthMinutes": 100,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "strict-pullup",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "strict-pullup",
+            "sets": 3,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 150,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-row",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "pushup",
+            "sets": 3,
+            "min": 8,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-stepup",
+            "sets": 3,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-split-squat",
+            "sets": 2,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-calf-raise",
+            "sets": 3,
+            "min": 12,
+            "max": 20,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hamstring-walkout",
+            "sets": 3,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Park C · repeat and progress",
+        "kind": "training",
+        "sessionLengthMinutes": 100,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "strict-pullup",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "strict-pullup",
+            "sets": 3,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 150,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-row",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "pushup",
+            "sets": 3,
+            "min": 8,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "park-stepup",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-split-squat",
+            "sets": 2,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hanging-knee-raise",
+            "sets": 2,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-calf-raise",
+            "sets": 3,
+            "min": 12,
+            "max": 20,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hamstring-walkout",
+            "sets": 4,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "Add controlled reps inside each range while keeping 2 RIR. After all sets reach the upper bound for two exposures, make the row angle slightly harder or lower the incline of the park push-up using a secure existing support, then return to the lower bound. For strict pull-ups and leg work, use a 3-second lowering phase after the upper bound is controlled rather than adding unlisted weights. Do not increase step height beyond a stable, comfortable range. Keep the weekly set count fixed.",
+    "deloadRule": "Weeks 4 and 8: halve working sets, rounding up, use easier row and push-up angles and an ordinary controlled tempo, and keep at least 4 RIR. Keep the general warm-up. Reduce difficulty earlier if recovery or park conditions prevent stable technique.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Ten primary chest sets, fifteen lat sets, fourteen quad sets and ten hamstring sets are spread across three full-body sessions. Vertical pulls, low-bar rows and floor-based hamstring work provide different movement demands without extra weights. Body position and controlled rep progression supply overload options when external load is unavailable.",
+    "volumeNotes": "The listed sets are the full build-week prescription, not a requirement to start at maximum effort on day one. Use 3 RIR in week 1, then the listed RIR in later build weeks. Target muscles receive roughly 10–20 primary working sets each week across at least two sessions; other areas receive support work and indirect loading. Warm-up and ramp-up sets are excluded. Compound sets can involve more than one muscle, so do not add primary and secondary counts as if they were independent workload.",
+    "references": [
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      },
+      {
+        "id": "schoenfeld-volume-2017",
+        "title": "Schoenfeld, Ogborn and Krieger: Dose-response relationship between weekly resistance training volume and increases in muscle mass (2017)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27433992/"
+      },
+      {
+        "id": "schoenfeld-frequency-2019",
+        "title": "Schoenfeld, Grgic and Krieger: How many times per week should a muscle be trained to maximize muscle hypertrophy? (2019)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30558493/"
+      }
+    ],
+    "setupRequirements": [
+      "Use only fixed, dry, secure bars, a low bench or step, and a clear non-slip surface.",
+      "Already controlled pull-ups are needed for the baseline. Use the low-bar foot-assisted record only when a suitable low bar is available."
+    ]
+  },
+  {
+    "programNumber": 26,
+    "id": "run-strength-hybrid",
+    "name": "Run + Strength Hybrid",
+    "description": "Easy run/walk intervals are paired with short bodyweight strength sessions on three days. Running time grows gradually while strength work stays controlled.",
+    "goal": "endurance",
+    "level": "beginner",
+    "location": "outdoor",
+    "requiredEquipment": [
+      "bodyweight",
+      "running"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 50,
+    "durationWeeks": 8,
+    "method": "Run/walk progression with full-body bodyweight support",
+    "focusMuscles": [
+      "quadriceps",
+      "glutes"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Hybrid A · short run/walk",
+        "kind": "training",
+        "sessionLengthMinutes": 50,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "easy-run",
+            "sets": 6,
+            "min": null,
+            "max": null,
+            "durationSeconds": 30,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy conversational jogging; walk throughout each recovery minute."
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "front-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": true,
+            "intensityNote": "Maintain comfortable trunk alignment and breathing."
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 180,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Walk easily while your breathing settles."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Hybrid B · repeatable run/walk",
+        "kind": "training",
+        "sessionLengthMinutes": 50,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "easy-run",
+            "sets": 6,
+            "min": null,
+            "max": null,
+            "durationSeconds": 45,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Keep the jog easy enough for full sentences and walk during recovery."
+          },
+          {
+            "exerciseId": "reverse-lunge",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 3,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bird-dog",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 180,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy cooldown without abrupt stopping."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Hybrid C · consolidate",
+        "kind": "training",
+        "sessionLengthMinutes": 50,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "easy-run",
+            "sets": 6,
+            "min": null,
+            "max": null,
+            "durationSeconds": 30,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "A comfortable repeatable jog, not a sprint; walk each recovery."
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "deadbug",
+            "sets": 2,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "front-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": false,
+            "hardSet": true,
+            "intensityNote": "Finish before the hips sag or breathing is held."
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 180,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Walk easily while your breathing settles."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "After a build week in which all six intervals remain conversational, add 15 seconds to the run bouts in one session the next week, up to 90 seconds per bout, while preserving the full 60-second walking recovery. Do not increase pace at the same time. If conversation or technique breaks down, repeat or reduce the previous duration. Strength work adds reps within its range at 3 RIR; wall push-ups may progress to the knee-pushup library entry at 8–12 only after the current upper bound is controlled. Holds add 5 seconds per build week up to 35 seconds. Extra running time may bring the session toward its estimate; do not add more intervals.",
+    "deloadRule": "Weeks 4 and 8: use three or four run bouts instead of six at the original short duration, keep them easy and retain walking recovery. Halve strength sets, rounding up, halve hold duration and use at least 4 RIR. Keep the warm-up and cooldown; use this easier week early if recovery is poor.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Run/walk intervals make the initial running dose measurable instead of requiring continuous running immediately. Small bodyweight sessions retain basic pushing, leg and trunk work without another long training day. Nonconsecutive sessions provide recovery as running time increases.",
+    "volumeNotes": "The primary goal is endurance with basic strength support, not a 10–20-set hypertrophy target for every muscle. Running intervals have hardSet false and null RIR. Do not turn all three easy sessions into hard tempo runs.",
+    "references": [
+      {
+        "id": "acsm-exercise-2011",
+        "title": "ACSM position stand: Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness in apparently healthy adults (2011)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/"
+      },
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      }
+    ],
+    "executionNotes": [
+      "Use a clear, level route and leave safe space to slow down.",
+      "For a first week that feels too demanding, use walking for part or all of a run bout and build from that repeatable baseline."
+    ]
+  },
+  {
+    "programNumber": 27,
+    "id": "athletic-power",
+    "name": "Athletic Power",
+    "description": "Fast accelerations and low-repetition jumps prioritize speed and controlled landings. This advanced outdoor block uses full recovery rather than fatigue circuits.",
+    "goal": "skill",
+    "level": "advanced",
+    "location": "outdoor",
+    "requiredEquipment": [
+      "bodyweight",
+      "running"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 65,
+    "durationWeeks": 8,
+    "method": "Acceleration and plyometric quality with low-rep bodyweight support",
+    "focusMuscles": [
+      "glutes",
+      "quadriceps",
+      "hamstrings"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Power A · acceleration and broad jump",
+        "kind": "training",
+        "sessionLengthMinutes": 65,
+        "warmup": [
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Begin walking at an easy, comfortable pace."
+          },
+          {
+            "exerciseId": "easy-run",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 180,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Gradually warm up at a conversational pace."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "sprint",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 15,
+            "restSeconds": 90,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Two gradual, easy-to-moderate build-ups before the faster work; not maximal sprints."
+          },
+          {
+            "exerciseId": "squat-jump",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Two small practice jumps with controlled landings."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "sprint",
+            "sets": 4,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 20,
+            "restSeconds": 180,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Fast, smooth acceleration with a clear runoff; stop if speed or coordination declines."
+          },
+          {
+            "exerciseId": "broad-jump",
+            "sets": 3,
+            "min": 3,
+            "max": 3,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Reset fully between jumps and hold a quiet, balanced landing."
+          },
+          {
+            "exerciseId": "reverse-lunge",
+            "sets": 2,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "Steady alignment and normal breathing."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Power B · vertical jump and short sprint",
+        "kind": "training",
+        "sessionLengthMinutes": 65,
+        "warmup": [
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Begin walking at an easy, comfortable pace."
+          },
+          {
+            "exerciseId": "easy-run",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 180,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Gradually warm up at a conversational pace."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "sprint",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 15,
+            "restSeconds": 90,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Two gradual, easy-to-moderate build-ups before the faster work; not maximal sprints."
+          },
+          {
+            "exerciseId": "squat-jump",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Two small practice jumps with controlled landings."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "squat-jump",
+            "sets": 4,
+            "min": 3,
+            "max": 3,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Jump with intent and land under control; stop when quality declines."
+          },
+          {
+            "exerciseId": "sprint",
+            "sets": 3,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 30,
+            "restSeconds": 180,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Accelerate smoothly; do not force a maximal effort when fatigued."
+          },
+          {
+            "exerciseId": "body-calf-raise",
+            "sets": 3,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 20,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "Stop the hold before rotating or sagging."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Power C · repeat quality",
+        "kind": "training",
+        "sessionLengthMinutes": 65,
+        "warmup": [
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Begin walking at an easy, comfortable pace."
+          },
+          {
+            "exerciseId": "easy-run",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 180,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Gradually warm up at a conversational pace."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "sprint",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 15,
+            "restSeconds": 90,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Two gradual, easy-to-moderate build-ups before the faster work; not maximal sprints."
+          },
+          {
+            "exerciseId": "squat-jump",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Two small practice jumps with controlled landings."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "sprint",
+            "sets": 4,
+            "min": null,
+            "max": null,
+            "durationSeconds": null,
+            "distanceMetres": 20,
+            "restSeconds": 180,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Use full recovery and a clear slowdown area; keep the sprint smooth."
+          },
+          {
+            "exerciseId": "broad-jump",
+            "sets": 3,
+            "min": 3,
+            "max": 3,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Use a manageable distance and reset after each landing."
+          },
+          {
+            "exerciseId": "squat-jump",
+            "sets": 2,
+            "min": 3,
+            "max": 3,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Maintain jump and landing quality rather than chasing fatigue."
+          },
+          {
+            "exerciseId": "body-split-squat",
+            "sets": 2,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "Progress only after two sessions of stable landing control and repeatable acceleration. Add one sprint repetition to one session, up to six, or add 5 metres to a short sprint up to 30 metres; never increase both in the same week. Keep jump reps per set at three and add at most one set to one jump drill in a build week, up to five sets, only if landing and jump quality stay consistent. Keep the full recovery and stop a drill if speed, jump height or coordination clearly deteriorates. Bodyweight support work progresses through controlled range, not exhaustion.",
+    "deloadRule": "Weeks 4 and 8: halve sprint and jump sets, rounding up, and use controlled submaximal accelerations and smaller jumps with full recovery. Halve the support sets and holds while keeping rep work at least 5 RIR. Retain the complete gradual warm-up. Deload earlier if quality falls across two sessions.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Long recoveries keep the emphasis on fast, controlled efforts rather than endurance under fatigue. Low jump counts allow each landing to be reset and checked. The supporting strength work is modest so it does not crowd out the quality of the sprint and jump practice.",
+    "volumeNotes": "Sprint and jump sets are power-skill exposures with hardSet false, not hypertrophy set equivalents. The baseline uses low reps and long rests; RIR on support and jump reps means staying well away from fatigue, while distance work uses a quality cue.",
+    "references": [
+      {
+        "id": "nsca-plyometrics",
+        "title": "NSCA: Plyometric Exercises",
+        "url": "https://www.nsca.com/education/articles/kinetic-select/plyometric-exercises/"
+      },
+      {
+        "id": "acsm-2009",
+        "title": "American College of Sports Medicine position stand. Progression models in resistance training for healthy adults (2009)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19204579/"
+      },
+      {
+        "id": "acsm-exercise-2011",
+        "title": "ACSM position stand: Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness in apparently healthy adults (2011)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/"
+      }
+    ],
+    "setupRequirements": [
+      "Prior sprinting and jumping experience plus controlled landings are required.",
+      "Use a clear, dry, level surface, suitable footwear and enough unobstructed space to accelerate and slow down."
+    ]
+  },
+  {
+    "programNumber": 28,
+    "id": "stair-hill-conditioning",
+    "name": "Stair & Hill Conditioning",
+    "description": "Controlled stair climbs and repeatable uphill intervals build outdoor endurance and leg work. Recovery includes careful walking down, with no fast downhill efforts.",
+    "goal": "endurance",
+    "level": "intermediate",
+    "location": "outdoor",
+    "requiredEquipment": [
+      "bodyweight",
+      "park-equipment",
+      "running"
+    ],
+    "daysPerWeek": 3,
+    "sessionLengthMinutes": 55,
+    "durationWeeks": 8,
+    "method": "Alternating stair and hill intervals with controlled descents",
+    "focusMuscles": [
+      "quadriceps",
+      "calves",
+      "glutes"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Stairs A",
+        "kind": "training",
+        "sessionLengthMinutes": 45,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "park-stepup",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "stair-climb",
+            "sets": 4,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Climb at a repeatable effort around 6–7/10; walk down carefully during recovery."
+          },
+          {
+            "exerciseId": "park-stepup",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-calf-raise",
+            "sets": 2,
+            "min": 12,
+            "max": 20,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 300,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy cooldown on level ground."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Hill B",
+        "kind": "training",
+        "sessionLengthMinutes": 45,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "hill-run",
+            "sets": 4,
+            "min": null,
+            "max": null,
+            "durationSeconds": 30,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Short, repeatable uphill effort around 7/10; walk down carefully and recover fully."
+          },
+          {
+            "exerciseId": "reverse-lunge",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 600,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Comfortable level walking after the intervals."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Stairs and hill C",
+        "kind": "training",
+        "sessionLengthMinutes": 55,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [
+          {
+            "exerciseId": "park-stepup",
+            "sets": 1,
+            "min": 2,
+            "max": 2,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 5,
+            "perSide": true,
+            "hardSet": false,
+            "intensityNote": "A few easy technique reps before the working sets; use less band tension or an easier body position if applicable."
+          }
+        ],
+        "exercises": [
+          {
+            "exerciseId": "stair-climb",
+            "sets": 4,
+            "min": null,
+            "max": null,
+            "durationSeconds": 60,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Repeatable effort with a secure foot placement; use a rail if needed."
+          },
+          {
+            "exerciseId": "hill-run",
+            "sets": 3,
+            "min": null,
+            "max": null,
+            "durationSeconds": 30,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Keep the uphill run controlled and walk down; do not sprint downhill."
+          },
+          {
+            "exerciseId": "park-stepup",
+            "sets": 2,
+            "min": 8,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 300,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Walk easily while your breathing settles."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "During build weeks, add 10 seconds to one stair interval at a time, up to 90 seconds, or 5 seconds to one uphill bout up to 45 seconds. Do not increase both duration and pace that week. Retain at least the listed recovery and extend it if a safe descent takes longer. Step-ups and lunges add reps within range at 3 RIR; choose a comfortable low step rather than increasing height to chase fatigue. Keep the interval count fixed.",
+    "deloadRule": "Weeks 4 and 8: halve interval and support sets, rounding up, return to the shortest interval durations and keep effort easy to moderate. Walk all descents carefully and retain 5–10 minutes of easy level walking. Keep at least 4 RIR on rep work and take an easier week early if recovery declines.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Uphill and stair bouts provide a measurable endurance workload with built-in recovery. Alternating their emphasis changes the session demand without adding hard downhill running. Controlled descents and fixed interval counts keep progression focused on repeatable effort.",
+    "volumeNotes": "Intervals are conditioning, not hypertrophy hard sets. The modest step-up, lunge and calf work supports the endurance goal; this is not a high-volume leg specialization block.",
+    "references": [
+      {
+        "id": "acsm-exercise-2011",
+        "title": "ACSM position stand: Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness in apparently healthy adults (2011)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21694556/"
+      },
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      }
+    ],
+    "setupRequirements": [
+      "Dry, clear stairs and a moderate hill with a safe walking return route are required.",
+      "Walking down is part of recovery; never rush the descent to fit a timer."
+    ]
+  },
+  {
+    "programNumber": 29,
+    "id": "low-impact-strength",
+    "name": "Low-Impact Strength",
+    "description": "Two simple full-body sessions use comfortable bodyweight movements and conservative effort. The plan is designed as a gentle starting point after a break, without guaranteeing every movement suits every joint.",
+    "goal": "strength",
+    "level": "beginner",
+    "location": "any",
+    "requiredEquipment": [
+      "bodyweight"
+    ],
+    "daysPerWeek": 2,
+    "sessionLengthMinutes": 50,
+    "durationWeeks": 8,
+    "method": "Two-day full-body return to training with modest volume",
+    "focusMuscles": [
+      "quadriceps",
+      "pectorals",
+      "glutes"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Return A",
+        "kind": "training",
+        "sessionLengthMinutes": 45,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "body-squat",
+            "sets": 3,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 3,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bird-dog",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "body-calf-raise",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "deadbug",
+            "sets": 2,
+            "min": 6,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": true,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Return B",
+        "kind": "training",
+        "sessionLengthMinutes": 50,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "body-squat",
+            "sets": 3,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "wall-pushup",
+            "sets": 3,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "reverse-lunge",
+            "sets": 2,
+            "min": 6,
+            "max": 6,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 3,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 3,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "prone-w-raise",
+            "sets": 2,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": 4,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 600,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy, comfortable walking; shorten it if needed."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "In weeks 1–2, cap working exercises at two sets and keep at least 4 RIR; from week 3 use the baseline only if recovery and movement comfort remain stable. Increase range gradually within a comfortable movement before adding reps to accessories. Keep squat and wall-push-up sets at six reps; after two controlled exposures, increase the wall lean or use a 3-second squat descent while preserving 3 RIR, rather than adding an unlisted load. Walking adds 1 minute per build week up to 12 minutes, with extra session time if required. Do not progress through pain.",
+    "deloadRule": "Weeks 4 and 8: halve working sets, rounding up, use the easier movement range and keep at least 4 RIR. Keep easy walking at 5–8 minutes. Reuse the introductory stage after a longer break or if recovery is inconsistent rather than resuming at the hardest previous version.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Two separated sessions keep the initial commitment and fatigue modest. Conservative rep targets and reserve allow technique to be repeated without grinding. The plan supplies a starting framework that can be adjusted to comfortable movement capacity before increasing training frequency.",
+    "volumeNotes": "This is a modest-volume strength starting point, not a 10–20-set hypertrophy plan. Low impact means no mandatory jumping or running; it does not mean every exercise is automatically comfortable for every person.",
+    "references": [
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      },
+      {
+        "id": "acsm-2009",
+        "title": "American College of Sports Medicine position stand. Progression models in resistance training for healthy adults (2009)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19204579/"
+      }
+    ],
+    "introductoryWeeks": {
+      "weeks": [
+        1,
+        2
+      ],
+      "maxWorkingSetsPerExercise": 2,
+      "rir": 4
+    },
+    "executionNotes": [
+      "Use a comfortable squat depth and wall lean. If a movement causes pain, choose a comfortable existing alternative or stop that movement.",
+      "No weights, resistance bands, park equipment or pull-up bar are required."
+    ]
+  },
+  {
+    "programNumber": 30,
+    "id": "summer-shred",
+    "name": "Summer Shred",
+    "description": "An eight-week block pairs bodyweight strength practice with a separate conditioning day. Nutrition and repeatable resistance work support fat loss while retaining the strength qualities actually trained.",
+    "goal": "fat-loss",
+    "level": "intermediate",
+    "location": "any",
+    "requiredEquipment": [
+      "bodyweight"
+    ],
+    "daysPerWeek": 4,
+    "sessionLengthMinutes": 65,
+    "durationWeeks": 8,
+    "method": "Eight-week bodyweight strength-maintenance and activity block",
+    "focusMuscles": [
+      "pectorals",
+      "quadriceps",
+      "glutes"
+    ],
+    "schedule": [
+      {
+        "id": "day-1",
+        "weekday": 1,
+        "title": "Strength A",
+        "kind": "training",
+        "sessionLengthMinutes": 65,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "body-split-squat",
+            "sets": 3,
+            "min": 8,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "pushup",
+            "sets": 3,
+            "min": 6,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hamstring-walkout",
+            "sets": 3,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 12,
+            "max": 20,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "prone-w-raise",
+            "sets": 3,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 25,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "Keep alignment and breathe; stop before the hips rotate."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-2",
+        "weekday": 2,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-3",
+        "weekday": 3,
+        "title": "Strength B",
+        "kind": "training",
+        "sessionLengthMinutes": 60,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "body-squat",
+            "sets": 3,
+            "min": 12,
+            "max": 20,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "close-pushup",
+            "sets": 3,
+            "min": 6,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "reverse-lunge",
+            "sets": 3,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "prone-w-raise",
+            "sets": 3,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "reverse-crunch",
+            "sets": 2,
+            "min": 10,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-4",
+        "weekday": 4,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      },
+      {
+        "id": "day-5",
+        "weekday": 5,
+        "title": "Strength C",
+        "kind": "training",
+        "sessionLengthMinutes": 65,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "body-split-squat",
+            "sets": 3,
+            "min": 10,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": true,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "pushup",
+            "sets": 3,
+            "min": 6,
+            "max": 12,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 120,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "hamstring-walkout",
+            "sets": 3,
+            "min": 6,
+            "max": 10,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 90,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "bridge",
+            "sets": 2,
+            "min": 12,
+            "max": 20,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "prone-w-raise",
+            "sets": 3,
+            "min": 12,
+            "max": 15,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 75,
+            "rir": 2,
+            "perSide": false,
+            "hardSet": true
+          },
+          {
+            "exerciseId": "side-plank",
+            "sets": 2,
+            "min": null,
+            "max": null,
+            "durationSeconds": 25,
+            "distanceMetres": null,
+            "restSeconds": 60,
+            "rir": null,
+            "perSide": true,
+            "hardSet": true,
+            "intensityNote": "End the hold before technique changes."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-6",
+        "weekday": 6,
+        "title": "Activity day",
+        "kind": "training",
+        "sessionLengthMinutes": 50,
+        "warmup": [
+          {
+            "exerciseId": "march",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 120,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Easy pace; gradually raise breathing rate."
+          },
+          {
+            "exerciseId": "arm-circles",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": true,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "hinge-drill",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          },
+          {
+            "exerciseId": "body-squat",
+            "sets": 1,
+            "min": 8,
+            "max": 8,
+            "durationSeconds": null,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": 6,
+            "perSide": false,
+            "hardSet": false
+          }
+        ],
+        "rampUpSets": [],
+        "exercises": [
+          {
+            "exerciseId": "walk",
+            "sets": 1,
+            "min": null,
+            "max": null,
+            "durationSeconds": 1500,
+            "distanceMetres": null,
+            "restSeconds": 0,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Brisk, conversational walking on a clear route."
+          },
+          {
+            "exerciseId": "step-jack",
+            "sets": 6,
+            "min": null,
+            "max": null,
+            "durationSeconds": 30,
+            "distanceMetres": null,
+            "restSeconds": 30,
+            "rir": null,
+            "perSide": false,
+            "hardSet": false,
+            "intensityNote": "Moderate, repeatable effort around 6/10; keep one foot grounded."
+          }
+        ],
+        "notes": "Complete exercises in order. Rest is between sets; for unilateral work complete both sides before the rest interval. Reps are per side when perSide is true. Warm-up sets do not count as working sets."
+      },
+      {
+        "id": "day-7",
+        "weekday": 7,
+        "title": "Rest",
+        "kind": "rest",
+        "sessionLengthMinutes": 0,
+        "warmup": [],
+        "rampUpSets": [],
+        "exercises": [],
+        "notes": "Rest from planned training; easy everyday activity is optional."
+      }
+    ],
+    "progressionRule": "Weeks 1–3 and 5–7 are build weeks; weeks 4 and 8 reduce workload as described in the deload rule. Keep the listed sets and aim to retain the same controlled rep quality during a dietary deficit. Add one rep within range when 2 RIR remain; after the upper bound, use a 3-second descent and restart at the lower bound rather than adding endless sets. Holds add 5 seconds per build week up to 40 seconds. Add 2 minutes to the activity-day walk per build week up to 35 minutes, or add one step-jack interval up to eight, but change only one variable that week. If recovery declines, hold progression or reduce conditioning before cutting controlled strength work.",
+    "deloadRule": "Weeks 4 and 8: halve strength sets and step-jack intervals, rounding up, use easier bodyweight variations and keep at least 4 RIR. Halve hold duration and keep walking easy at 15–20 minutes. Keep the same rest days. At the end of week 8, review recovery and maintenance needs instead of automatically increasing the deficit or repeating a harder block.",
+    "deloadWeeks": [
+      4,
+      8
+    ],
+    "whyThisWorks": "Three resistance sessions keep the trained bodyweight patterns in the week while a separate activity day adds conditioning. Fixed set counts and reps in reserve help manage training demand during a dietary deficit. The block supports the specific strength tasks practiced; equipment-free work cannot fully replace heavy loaded pulling or maximal barbell practice.",
+    "volumeNotes": "This is a fat-loss block with strength maintenance of the practiced bodyweight patterns, not a maximal hypertrophy plan. Chest has nine primary pressing sets and lower-body work is moderate; conditioning does not count as resistance-training hard sets.",
+    "references": [
+      {
+        "id": "acsm-2026",
+        "title": "ACSM: Updated resistance training guidelines (2026)",
+        "url": "https://acsm.org/resistance-training-guidelines-update-2026/"
+      },
+      {
+        "id": "issn-diets-2017",
+        "title": "Aragon et al.: International society of sports nutrition position stand: diets and body composition (2017)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28630601/"
+      },
+      {
+        "id": "issn-protein-2017",
+        "title": "Jäger et al.: International Society of Sports Nutrition Position Stand: protein and exercise (2017)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28642676/"
+      }
+    ],
+    "coreMessage": "Spot reduction is a myth: ab exercises do not selectively remove belly fat. Visible abs depend on body fat, which is controlled mainly through diet and overall energy balance, as well as individual fat distribution. Ab training builds the muscle; nutrition reveals it. This program cannot guarantee visible abs.",
+    "nutritionGuidance": [
+      "Use a sustainable dietary energy deficit; no eight-week plan guarantees a particular amount of fat loss or visible abs.",
+      "Include protein regularly; roughly 1.4–2.0 g/kg/day is a general reference for most healthy exercising adults, not an automatically calculated personal target.",
+      "Choose meals with protein foods, fruit or vegetables and fiber-rich staples, and maintain adequate fluids.",
+      "If training performance and recovery keep declining, reconsider the deficit or total training demand rather than adding more exercise."
+    ],
+    "executionNotes": [
+      "Without pulling equipment, this block cannot fully maintain previously trained heavy pulling strength. Choose an equipment-based plan if that is the priority.",
+      "The title describes an eight-week training block, not a seasonal deadline or a guaranteed appearance."
+    ]
+  }
+]

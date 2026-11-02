@@ -1,50 +1,59 @@
 # THE FORGE Workout Tracker
 
-A mobile-first training app with guided setup, flexible programs, in-app exercise videos, and a custom program builder. It runs as a static site with no build step or account required.
+A mobile-first static training app with 30 original programs, 113 centrally defined exercises, multiple active programs and a combined weekly calendar. It runs directly as HTML/CSS/JavaScript with no packages or build step.
 
-## What you can do
+## Training features
 
-- Switch between Light, Dark and Use device setting in Settings, or use the quick theme button in the header. Your appearance preference is saved separately on this device.
-- Set an optional gender and body-weight profile, then choose your goals, experience, available days and equipment.
-- Get an explained starting-plan suggestion or choose Beginner, Intermediate, Advanced or Custom in Training plans.
-- Choose gym plans for 2–5 days or dumbbell-and-bench plans for 2–3 days. Keep using the original Forge routine if preferred.
-- Preview a complete plan and watch a YouTube technique demonstration for every exercise without leaving the app.
-- Build programs with up to seven named sessions. Choose from 42 exercises; change exercise order, sets and rep ranges. Edit a custom program or turn an existing session into your own plan.
-- Swap exercises, add/remove sets and track weights and reps with automatic saving, a rest timer, exercise-specific load history and progression guidance.
-- Export/import backups, including old version-3 Forge backups. Existing version-3 logs migrate automatically on the same browser and site address. Recorded sessions keep their own exercise snapshots.
+- Four-step onboarding with Gym, Home and Outdoor. Home supports bodyweight, dumbbells, resistance bands, a pull-up bar and a kettlebell; follow-up setup checks distinguish long bands and a low assistance bar.
+- Recommendations match equipment, location, experience and available days. Every program includes warm-ups, complete weekly prescriptions, progression, deloads, rationale and references.
+- Save any number of available programs and activate more than one. My week combines them, supports weekday shifts, and flags consecutive muscle exposure, over-about-25 weekly hard sets and no full rest day.
+- Program weeks, beginner set caps and ability stages change future unlogged targets. Existing workout snapshots stay intact. Completed blocks can be restarted deliberately.
+- Log reps, seconds or metres, with a rest timer including longer strength rests. Exact exercise load history is retained; time/distance work is not included in repetition tonnage.
+- Create custom programs, swap exercises, export/import backups and switch between light, dark and system appearance.
 
-## Evidence and scope
+## Exercises and YouTube
 
-See [RESEARCH.md](RESEARCH.md) for the sources, recommendation rules and limits, and [VIDEO_SOURCES.md](VIDEO_SOURCES.md) for every demonstration link. New starter templates apply the 2026 ACSM position stand and recent systematic reviews. The exact app routines are original starting templates, not individually validated clinical programs. Gender and body weight do not determine exercise ability or starting loads. Custom plans remain user-designed.
+All 113 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. New video IDs are blank. The original 42 demonstration IDs are retained as historical selections.
 
-## Storage and video privacy
+Open Technique & instructions to see written guidance, search YouTube and paste a chosen ID or link. The official player reports failures and the app keeps the written steps visible. Settings lists missing selections and failed checks, and can download all exercises and search queries. Videos are checked when opened, not through an unverified background availability claim.
 
-Data stays in this browser using localStorage. It does not sync automatically between devices. Backups include profile details; keep them private. The old version-3 storage entry is retained during migration. Delete all training data in Settings removes both versions.
+- [Video-selection CSV](EXERCISE_VIDEO_SELECTION.csv)
+- [Central exercise library](EXERCISE_LIBRARY.md)
+- [Original video source record](VIDEO_SOURCES.md)
 
-Videos load from youtube-nocookie.com only when opened and stop when closed. They need an internet connection. Creator, region or browser restrictions can prevent embedded playback; a direct YouTube fallback is available. No profile or workout values are sent in video URLs.
+## Storage and privacy
 
-The installed app caches its own files for offline logging after a successful online visit. Videos are not cached. Each release must use a new CACHE_NAME in sw.js so the entire app shell updates together.
+Onboarding answers, the current device profile, bookmarks, active programs, schedules, stages, logs and video selections/checks live in localStorage. Every storage access is guarded. When storage is unavailable, the app remains usable in memory and warns that changes may not survive reload. Export a backup before leaving.
+
+There are no accounts or automatic cross-device sync. Backups include profile information and program/video preferences; keep them private. Version-3 and previous version-4 logs are retained through validation/migration. A failed read preserves a recovery download rather than silently overwriting the original data.
+
+YouTube is contacted when a selected demonstration is opened. The privacy-enhanced embed includes no profile or workout values. Videos are never downloaded or cached.
+
+## Program data and evidence
+
+The three JSON batches are the readable program sources. programs.js is their ready-to-run shipped snapshot; tests check they agree. All program exercises reference the central library by ID.
+
+- [Programs 1–10](PROGRAMS_01_10.md) / [JSON](programs-01-10.json)
+- [Programs 11–20](PROGRAMS_11_20.md) / [JSON](programs-11-20.json)
+- [Programs 21–30](PROGRAMS_21_30.md) / [JSON](programs-21-30.json)
+- [Research and interpretation](RESEARCH.md)
 
 ## Run locally
 
-From the repository folder:
+From the repository folder, run:
 
-```sh
-python -m http.server 8080 --bind 127.0.0.1
-```
+    python -m http.server 8080 --bind 127.0.0.1
 
-Open http://127.0.0.1:8080. On a deployed HTTPS site, install with the browser install option or Safari Share → Add to Home Screen. Existing workout data only carries over automatically when the browser and site origin are the same.
+Open http://127.0.0.1:8080. The shipped app requires no compilation or installation.
 
-## Deploy
+## Check the app
 
-Host the repository root as a static HTTPS site, for example GitHub Pages from main / root. Deploy index.html, theme.js, styles.css, data.js, model.js, app.js, sw.js, the manifest and both PNG icons together. A code review or draft pull request does not deploy the update.
+With Node.js available:
 
-## Validate
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs
 
-No packages need to be installed. With Node.js available:
+For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 30 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
 
-```sh
-node --test tests/model.test.cjs
-```
+## Publish
 
-The tests cover every plan variation and video mapping, recommendations, legacy migration, malformed backups, exercise-specific loads, custom-session snapshots, bodyweight logs and scoped offline caching. Browser QA also checks setup, logging and reload, filtering, custom sessions, and embedded playback at mobile sizes.
+Serve the repository root on static HTTPS hosting, including all referenced runtime files and icons. GitHub Pages can use main / root when configured. The service worker caches the complete app shell and only this app’s files; each release uses a new CACHE_NAME so assets update together. Reload an installed app after a release to pick up the current shell.
