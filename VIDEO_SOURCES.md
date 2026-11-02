@@ -1,5 +1,7 @@
 # Exercise video sources
 
+The list below is the original 42-demonstration source record. The complete 113-exercise selection sheet is [EXERCISE_VIDEO_SELECTION.csv](EXERCISE_VIDEO_SELECTION.csv). New canonical video IDs are blank. Select an ID in the app's exercise dialog to save it locally; missing or failed videos show written instructions. Historical verification dates below were preserved, not rechecked for every video during this release.
+
 Catalog links checked on 31 October 2026 through the publisher exercise page or indexed YouTube title/description. This verifies the demonstration link and its named exercise, not guaranteed playback in every country or browser. Videos are third-party content and may change.
 
 - **Back Squat**: [YouTube](https://www.youtube.com/watch?v=R2dMsNhN3DE) · [Source](https://www.muscleandstrength.com/exercises/squat.html)

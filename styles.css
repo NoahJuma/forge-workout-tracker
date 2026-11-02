@@ -14,3 +14,61 @@
 :root[data-theme="light"]{color-scheme:light;--bg:#f6f8f2;--surface:#ffffff;--raised:#edf1e5;--line:#c7d0bd;--ink:#202a1a;--muted:#54614c;--accent:#486500;--orange:#8b4c16;--good:#387142;--danger:#a93325;--action-bg:#d6ec6b;--action-ink:#233008;--button-hover:#718362;--accent-soft:#e7efd4;--success-border:#6b8a52;--accent-panel:#e9f1d9;--done-color:#66755d;--progress-track-bg:#dbe2d2;--custom-glow:#e8f0d5;--accent-border:#9eb56b;--empty-border:#8e9e80;--notice-border:#b18132;--notice-bg:#fff3d7;--notice-ink:#6b470b;--recommendation-border:#afc18a;--recommendation-bg:#eef4e1;--choice-bg:#e8f0d8}
 .header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}.theme-toggle{gap:8px;white-space:nowrap}#themeIcon{font-size:20px;line-height:1}.theme-label{font-size:12px}.settings-grid .form-label{margin:0;max-width:320px}
 @media(max-width:650px){.header-actions{gap:6px}.app-header{gap:8px}.app-header .theme-toggle{width:44px;min-width:44px;min-height:44px;padding:8px}.theme-label{display:none}.app-header #settingsBtn{padding-inline:10px}}
+
+/* Location and home equipment choices in setup step 3. */
+.location-choices{grid-template-columns:1fr}
+.location-choices .choice{align-items:flex-start}
+.location-choices .choice input{flex-shrink:0;margin-top:5px}
+.location-choices .choice span{min-width:0}
+.location-choices .choice strong{display:block;margin-bottom:6px}
+.location-choices .choice small{display:block;line-height:1.6;color:var(--muted)}
+#homeEquipmentFollowup[hidden]{display:none}
+.equipment-help{grid-column:1/-1;margin:0}
+
+/* Program catalog, combined calendar, and accessible exercise details. */
+.catalog-toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0 12px}
+.catalog-toolbar label,.calendar-controls label,.program-controls label,.workout-program-picker label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:650;color:var(--muted);min-width:0}
+.catalog-toolbar input,.catalog-toolbar select,.program-controls input,.program-controls select,.calendar-controls input,.workout-program-picker select{width:100%;min-width:0}
+.filter-check{display:flex;align-items:center;gap:10px;min-height:44px;font-size:13px;line-height:1.6;margin-block:8px}
+.filter-check input[type=checkbox]{width:18px;height:18px;min-height:0;flex-shrink:0}
+.program-facts{font-weight:650}.mismatch{color:var(--orange)}
+.custom-plans{margin-block:36px}.custom-plans>.plan-grid{margin-top:20px}
+.calendar-controls{display:flex;align-items:end;gap:8px;flex-wrap:wrap}
+.calendar-controls label{max-width:180px}
+.weekly-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-block:22px}
+.calendar-day{min-width:0;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:12px 8px}
+.calendar-day.today{border-color:var(--accent)}
+.calendar-day h3{font-size:13px;margin:0}.calendar-day time{font-size:11px;color:var(--muted)}
+.calendar-rest{font-size:13px;color:var(--muted);padding:20px 0}
+.calendar-session{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;width:100%;min-height:70px;border:1px solid var(--line);border-radius:10px;background:var(--raised);color:var(--ink);padding:10px 8px;margin-top:12px;overflow-wrap:anywhere;white-space:normal}
+.calendar-session strong{font-size:12px}.calendar-session span,.calendar-session small{font-size:11px;color:var(--muted)}
+.calendar-session:hover{border-color:var(--accent)}
+.active-list{margin-top:28px}.active-row{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.active-row>strong,.active-row>div{flex:1;min-width:150px}.active-row small{display:block;color:var(--muted);margin-top:5px}
+.overlap-warning summary{cursor:pointer;font-weight:700;min-height:36px}
+.overlap-warning ul{padding-left:22px}.overlap-warning li{margin:10px 0}.overlap-warning p{font-size:12px;line-height:1.7}
+.volume-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.volume-grid>div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:8px;font-size:12px}
+.program-preview details{margin:18px 0;border-top:1px solid var(--line);padding-top:12px}
+.program-preview summary,.warmup-card summary{cursor:pointer;min-height:40px;display:flex;align-items:center;font-weight:700}
+.program-preview p,.program-preview li,.exercise-details p,.exercise-details li{font-size:14px;line-height:1.8;overflow-wrap:anywhere}
+.program-preview h4{margin:18px 0 8px}
+.program-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}
+.preview-day{margin:20px 0}.preview-day h3{font-size:17px}
+.prescription{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.prescription>div{min-width:0}.prescription strong{display:block;font-size:14px}
+.prescription small{display:block;font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
+.prescription p{font-size:12px;margin:6px 0;color:var(--muted)}
+.prescription button{flex-shrink:0}
+.warmup-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-block:20px}
+.workout-program-picker{display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-block:20px}
+.workout-program-picker label{flex:1;max-width:480px}
+.target-note{font-size:13px;color:var(--muted);line-height:1.7}.exercise-rest{margin:0 0 14px}
+.set-grid input:disabled{opacity:.35}
+.exercise-details h3{margin-top:24px}.exercise-details li{margin-block:7px}
+.exercise-details .video-frame{min-height:200px}
+.video-selection{margin-top:28px;border-top:1px solid var(--line);padding-top:14px}
+.video-selection summary{cursor:pointer;min-height:44px;font-weight:650}
+#videoInputError{color:var(--danger)}#videoStatus{font-size:13px}
+@media(max-width:900px){.weekly-calendar{grid-template-columns:repeat(2,minmax(0,1fr))}.calendar-day{padding:16px}.calendar-day h3{font-size:15px}.calendar-session strong{font-size:14px}.catalog-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.program-controls{grid-template-columns:1fr}}
+@media(max-width:560px){.weekly-calendar{grid-template-columns:1fr}.catalog-toolbar{grid-template-columns:1fr 1fr;gap:10px}.catalog-toolbar label:first-child{grid-column:1/-1}.volume-grid{grid-template-columns:1fr}.active-row{gap:8px}.warmup-card{padding:12px}.prescription{align-items:flex-start}.prescription button{font-size:12px}.calendar-controls{width:100%}.calendar-controls label{max-width:none;flex:1}.workout-program-picker label{width:100%;max-width:none}}

@@ -11,8 +11,12 @@
   <script src="./theme.js"></script>
   <link rel="stylesheet" href="./styles.css">
   <title>THE FORGE · Your training, your way</title>
+  <script src="./exercises.js" defer></script>
+  <script src="./programs.js" defer></script>
   <script src="./data.js" defer></script>
+  <script src="./program-model.js" defer></script>
   <script src="./model.js" defer></script>
+  <script src="./program-ui.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -29,12 +33,14 @@
     <nav class="main-nav" aria-label="Main navigation">
       <button data-view="workout" aria-current="page">Workout</button>
       <button data-view="plans">Training plans</button>
+      <button data-view="calendar">My week</button>
       <button data-view="history">History</button>
     </nav>
     <div id="storageAlert" class="notice" role="alert" hidden></div>
     <section id="viewWorkout" aria-label="Your workout"></section>
     <section id="viewPlans" aria-label="Training plans" hidden></section>
     <section id="viewHistory" aria-label="Workout history" hidden></section>
+    <section id="viewCalendar" aria-label="Combined weekly calendar" hidden></section>
     <p id="saveStatus" class="save-status" role="status">Your changes save automatically.</p>
     <footer>THE FORGE <span>Small steps. Stronger every session.</span></footer>
   </main>
