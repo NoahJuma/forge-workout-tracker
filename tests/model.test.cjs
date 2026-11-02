@@ -7,7 +7,7 @@ const profile={gender:'prefer-not',weight:'',goal:'muscle',level:'beginner',days
 function historical(state,id,weight=20){const p=M.makePlan('full2','intermediate','muscle'),w={id:'a',title:'Example',exercises:[{exerciseId:id,sets:2,min:8,max:12}]};const s=M.newSession(state,p,w,'2026-10-01');s.completedAt='2026-10-01T12:00:00Z';s.exercises[0].sets=[{kg:String(weight),reps:'12',done:true},{kg:String(weight),reps:'10',done:true}];state.sessions[s.id]=s;return s;}
 test('every selectable exercise has a distinct verified YouTube demonstration',()=>{assert.equal(new Set(D.catalog.map(c=>c.id)).size,D.catalog.length);for(const c of D.catalog){assert.match(c.video.id,/^[a-zA-Z0-9_-]{11}$/);assert.match(c.video.source,/^https:\/\//);assert.equal(c.video.verifiedAt,'2026-10-31');}});
 test('every starter variation has valid exercises and workable targets',()=>{for(const base of D.base.filter(p=>!p.legacy))for(const level of M.levels)for(const goal of M.goals){const p=M.makePlan(base.id,level,goal);assert.equal(p.workouts.length,base.days);for(const w of p.workouts)for(const e of w.exercises){assert(M.catalog[e.exerciseId]);assert(e.sets>=2&&e.sets<=4);assert(e.min<=e.max);if(level==='beginner')assert.notEqual(e.exerciseId,'dips');}}});
-test('recommendation uses goal, experience, schedule and equipment',()=>{for(const days of [2,3,4,5])assert.equal(M.recommend({...profile,days}).plan.days,days);const r=M.recommend({...profile,days:5,equipment:'Dumbbells'});assert.equal(r.plan.days,3);assert(r.adjustment);assert.equal(M.recommend({...profile,goal:'strength',level:'advanced'}).plan.workouts[0].exercises[0].min,4);});
+test('recommendation uses goal, experience, schedule and equipment',()=>{for(const days of [2,3,4,5])assert.equal(M.recommend({...profile,days}).plan.days,days);const r=M.recommend({...profile,days:5,equipment:'Dumbbells'});assert.equal(r.plan,null);assert.match(r.reason,/No program/);assert.equal(M.recommend({...profile,goal:'strength',level:'advanced'}).plan.workouts[0].exercises[0].min,4);});
 test('gender and body weight do not invent sex-based programs or starting loads',()=>{assert.deepEqual(M.recommend({...profile,gender:'woman',weight:55}).plan,M.recommend({...profile,gender:'man',weight:95}).plan);const s=M.newSession(M.empty(),M.recommend(profile).plan,M.recommend(profile).plan.workouts[0],'2026-10-31');assert(s.exercises.every(e=>e.sets.every(s=>s.kg==='')));});
 test('previous loads match the exact exercise and do not copy repetitions',()=>{const state=M.empty();historical(state,'bench',25);const entry=M.newEntry(state,{exerciseId:'bench',sets:3,min:8,max:12},'2026-10-31');assert.deepEqual(entry.sets.map(s=>s.kg),['25','25','']);assert(entry.sets.every(s=>s.reps===''&&!s.done));assert.equal(M.previousExercise(state,'incline','2026-10-31'),null);});
 test('ambiguous legacy barbell/dumbbell entries do not carry loads into a specific variation',()=>{const s=M.empty(),h=historical(s,'incline',80);h.exercises[0].name='Incline BB / DB Press';assert.equal(M.previousExercise(s,'incline','2026-10-31'),null);});
@@ -18,3 +18,48 @@ test('custom program edits cannot change logged session snapshots',()=>{const st
 test('custom program targets validate across every day',()=>{const state=M.empty();state.customPlans=[{id:'custom-example',name:'My plan',workouts:[{id:'a',title:'Day A',exercises:[{exerciseId:'goblet',sets:2,min:12,max:8}]}]}];assert.throws(()=>M.validate(state));state.customPlans[0].workouts[0].exercises[0].min=8;assert.equal(M.validate(state).customPlans.length,1);});
 test('selection keys keep old and new workouts separate on the same date',()=>{const state=M.empty();const original=M.activeSession(state);const plan=M.makePlan('full2');state.activePlan=plan.id;state.activeWorkout='a';const next=M.activeSession(state);assert.notEqual(original.id,next.id);assert.equal(Object.keys(state.sessions).length,2);assert.equal(M.validate(state).activePlan,plan.id);});
 test('offline worker caches the complete shell and leaves unrelated caches and requests alone',async()=>{const handlers={},removed=[],cacheNames=[],cachedFiles=[],responses=[];const cache={addAll:async files=>cachedFiles.push(...files),match:async()=>({cached:true})};const context={URL,self:{location:new URL('https://example.com/forge/sw.js'),addEventListener:(name,fn)=>handlers[name]=fn,skipWaiting:async()=>{},clients:{claim:async()=>{}}},caches:{open:async name=>{cacheNames.push(name);return cache;},keys:async()=>['forge-tracker-v1','unrelated-app-cache'],delete:async name=>removed.push(name)},fetch:async()=>{throw Error('offline');}};vm.runInNewContext(fs.readFileSync(require.resolve('../sw.js'),'utf8'),context);let pending;handlers.install({waitUntil:p=>pending=p});await pending;for(const file of ['app.js','model.js','data.js','styles.css','theme.js'])assert(cachedFiles.includes('./'+file));handlers.activate({waitUntil:p=>pending=p});await pending;assert.deepEqual(removed,['forge-tracker-v1']);for(const url of ['https://www.youtube-nocookie.com/embed/example','https://example.com/other.js'])handlers.fetch({request:{method:'GET',url},respondWith:p=>responses.push(p)});assert.equal(responses.length,0);handlers.fetch({request:{method:'GET',url:'https://example.com/forge/app.js'},respondWith:p=>responses.push(p)});assert.equal((await responses[0]).cached,true);});
+
+test('all home equipment combinations exclude unselected items and other locations',()=>{
+ const equipment=M.homeEquipmentIds;
+ const fixtures=[
+  {id:'bodyweight',location:'home',requiredEquipment:[]},
+  ...equipment.map(id=>({id,location:'home',requiredEquipment:[id]})),
+  {id:'bench-needed',location:'home',requiredEquipment:['dumbbells','bench']},
+  {id:'gym',location:'gym',requiredEquipment:[]},
+  {id:'park',location:'outdoor',requiredEquipment:['park-equipment']},
+  {id:'any',location:'any',requiredEquipment:['bodyweight']},
+  {id:'unknown',location:'any',requiredEquipment:['unknown-item']}
+ ];
+ for(let mask=0;mask<16;mask++){
+  const selected=equipment.filter((_,i)=>mask&(1<<i));
+  const actual=M.eligiblePrograms({...profile,location:'home',homeEquipment:selected},fixtures).map(p=>p.id).sort();
+  assert.deepEqual(actual,['bodyweight','any',...selected].sort());
+ }
+});
+test('gym includes free weights, machines, benches, racks, and bars; outdoor uses park equipment',()=>{
+ const fixtures=['barbell','dumbbells','kettlebell','cable-machine','plate-loaded-machine','selectorized-machine','bench','rack','pull-up-bar'].map(item=>({id:item,location:'gym',requiredEquipment:[item]}));
+ assert.equal(M.eligiblePrograms({...profile,location:'gym'},fixtures).length,fixtures.length);
+ assert.deepEqual(M.eligiblePrograms({...profile,location:'outdoor'},fixtures),[]);
+ assert.equal(M.eligiblePrograms({...profile,location:'outdoor'},[{location:'outdoor',requiredEquipment:['park-equipment','bodyweight','running']}]).length,1);
+});
+test('profile migration and saved onboarding choices survive validation without injecting gym equipment into home',()=>{
+ assert.equal(M.profileOf({...profile,equipment:'Dumbbells'}).location,'home');
+ assert.deepEqual(M.profileOf({...profile,location:'home',homeEquipment:['gym-equipment','bench','dumbbells','dumbbells']}).homeEquipment,['dumbbells']);
+ const state=M.empty();state.profile=M.profileOf({...profile,location:'home',homeEquipment:[]});
+ state.onboardingAnswers=M.profileOf({...profile,location:'home',homeEquipment:['resistance-bands','pull-up-bar']});
+ const restored=M.validate(JSON.parse(JSON.stringify(state)));
+ assert.deepEqual(restored.onboardingAnswers,state.onboardingAnswers);
+ assert.deepEqual(restored.profile.homeEquipment,[]);
+ assert.equal(M.recommend(restored.profile).plan,null);
+ assert.equal(M.recommend({...profile,location:'outdoor'}).plan,null);
+});
+test('a defined program catalog never falls back to an incompatible gym plan',()=>{
+ const previous=D.programs;
+ try{
+  D.programs=[{id:'gym-only',location:'gym',requiredEquipment:['barbell'],goal:'strength',level:'beginner',daysPerWeek:3}];
+  assert.equal(M.recommend({...profile,location:'home',homeEquipment:[]}).plan,null);
+  assert.equal(M.recommend({...profile,location:'gym',goal:'strength'}).plan.id,'gym-only');
+  D.programs=[];
+  assert.equal(M.recommend({...profile,location:'gym'}).plan,null);
+ }finally{if(previous===undefined)delete D.programs;else D.programs=previous;}
+});
