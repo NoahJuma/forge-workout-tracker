@@ -4,7 +4,7 @@
  * @typedef {'strength'|'hypertrophy'|'fat-loss'|'endurance'|'mobility'|'skill'} TrainingGoal
  * @typedef {'beginner'|'intermediate'|'advanced'} TrainingLevel
  * @typedef {'gym'|'home'|'outdoor'|'any'} TrainingLocation
- * @typedef {'bodyweight'|'barbell'|'dumbbells'|'free-weights'|'resistance-bands'|'pull-up-bar'|'kettlebell'|'cable-machine'|'plate-loaded-machine'|'selectorized-machine'|'bench'|'rack'|'gym-equipment'|'park-equipment'|'running'} EquipmentId
+ * @typedef {'bodyweight'|'barbell'|'dumbbells'|'free-weights'|'resistance-bands'|'pull-up-bar'|'kettlebell'|'cable-machine'|'plate-loaded-machine'|'selectorized-machine'|'bench'|'rack'|'gym-equipment'|'park-equipment'|'running'|'dip-bars'|'ab-wheel'} EquipmentId
  *
  * @typedef {Object} Exercise
  * @property {string} id
@@ -12,13 +12,15 @@
  * @property {string[]} primaryMuscles
  * @property {string[]} secondaryMuscles
  * @property {EquipmentId[]} equipment
+ * @property {string} equipmentLabel
+ * @property {'reps'|'seconds'|'metres'} trackingUnit
  * @property {TrainingLevel} difficulty
  * @property {string[]} instructions
  * @property {string[]} commonMistakes
  * @property {string} [youtubeVideoId]
  * @property {string} youtubeSearchQuery
- * @property {string} [homeAlternativeId]
- * @property {string} [outdoorAlternativeId]
+ * @property {string|null} homeAlternativeId
+ * @property {string|null} outdoorAlternativeId
  *
  * @typedef {Object} ProgramExercise
  * @property {string} exerciseId References the central exercise catalog.
@@ -71,6 +73,7 @@
 (() => {
   const D=globalThis.ForgeData || require('./data.js');
   const catalog=Object.fromEntries(D.catalog.map(e=>[e.id,e]));
+  const exerciseLibrary=Object.fromEntries(D.exercises.map(e=>[e.id,e]));
   const clone=value=>JSON.parse(JSON.stringify(value));
   const dateOK=value=>typeof value==='string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value+'T12:00:00')) && new Date(value+'T12:00:00Z').toISOString().slice(0,10)===value;
   const today=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10);};
@@ -80,7 +83,7 @@
   const goals=['muscle','strength','fitness','fat-loss'];
   const locations=['gym','home','outdoor'];
   const homeEquipmentIds=['dumbbells','resistance-bands','pull-up-bar','kettlebell'];
-  const gymEquipmentIds=['bodyweight','gym-equipment','barbell','dumbbells','free-weights','kettlebell','resistance-bands','cable-machine','plate-loaded-machine','selectorized-machine','bench','rack','pull-up-bar','running'];
+  const gymEquipmentIds=['bodyweight','gym-equipment','barbell','dumbbells','free-weights','kettlebell','resistance-bands','cable-machine','plate-loaded-machine','selectorized-machine','bench','rack','pull-up-bar','dip-bars','ab-wheel','running'];
   const profileOf=p=>({
     gender:oneOf(p?.gender,['woman','man','nonbinary','prefer-not'],'prefer-not'),
     weight:p?.weight===''||p?.weight==null?'':validNumber(p.weight,20,500),
@@ -121,7 +124,7 @@
   function eligiblePrograms(profile,programs=D.programs||[]){
     const p=profileOf(profile);
     const available=p.location==='gym'?new Set(gymEquipmentIds)
-      :p.location==='outdoor'?new Set(['bodyweight','park-equipment','running'])
+      :p.location==='outdoor'?new Set(['bodyweight','park-equipment','pull-up-bar','running'])
       :new Set(['bodyweight',...(p.location==='home'?p.homeEquipment:[])]);
     return programs.filter(program=>{
       const locationOK=program.location==='any'||program.location===p.location;
@@ -185,6 +188,6 @@
     }
     s.activePlan=planById(s,raw.activePlan).id;s.activeWorkout=planById(s).workouts.some(w=>w.id===raw.activeWorkout)?raw.activeWorkout:planById(s).workouts[0].id;s.sessionId=raw.sessionId&&s.sessions[raw.sessionId]?raw.sessionId:null;return s;
   }
-  const api={catalog,levels,goals,clone,dateOK,today,validNumber,profileOf,locations,homeEquipmentIds,empty,makePlan,recommend,eligiblePrograms,planById,sessionKey,previousExercise,newEntry,newSession,activeSession,totals,guidance,migrate,validate};
+  const api={catalog,exerciseLibrary,levels,goals,clone,dateOK,today,validNumber,profileOf,locations,homeEquipmentIds,empty,makePlan,recommend,eligiblePrograms,planById,sessionKey,previousExercise,newEntry,newSession,activeSession,totals,guidance,migrate,validate};
   globalThis.ForgeModel=api;if(typeof module!=='undefined')module.exports=api;
 })();
