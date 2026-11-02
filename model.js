@@ -34,6 +34,7 @@
  * @property {boolean} perSide
  * @property {boolean} hardSet False for warm-ups and conditioning.
  * @property {string} [intensityNote]
+ * @property {number} [eccentricSeconds] Controlled lowering duration per repetition.
  * @property {number} [loadFactor] Fraction of the latest successful heavy load.
  * @property {number[]} [loadPercentagesOfWorkingWeight] Non-fatiguing ramp-up only.
  *
@@ -52,6 +53,23 @@
  * @property {string} id
  * @property {string} title
  * @property {string} url
+ *
+ * @typedef {Object} IntroductoryWeeks
+ * @property {number[]} weeks
+ * @property {number} maxWorkingSetsPerExercise Cap applies before baseline sets.
+ * @property {number} rir Applies to rep-based working exercises only.
+ *
+ * @typedef {Object} ExerciseProgression
+ * @property {string} fromExerciseId
+ * @property {string[]} toExerciseIds
+ * @property {string} criteria
+ *
+ * @typedef {Object} SkillStage
+ * @property {string} id
+ * @property {string} entryCriteria Ability gate, not an automatic calendar change.
+ * @property {number|null} maxWorkingSetsPerExercise
+ * @property {string[]} omitExerciseIds
+ * @property {{fromExerciseId:string,toPrescription:ProgramExercise}[]} prescriptionOverrides
  *
  * @typedef {Object} Program
  * @property {number} programNumber
@@ -77,6 +95,10 @@
  * @property {string} [coreMessage]
  * @property {string[]} [nutritionGuidance]
  * @property {string[]} [executionNotes]
+ * @property {IntroductoryWeeks} [introductoryWeeks]
+ * @property {ExerciseProgression[]} [exerciseProgressions]
+ * @property {string[]} [setupRequirements]
+ * @property {SkillStage[]} [skillStages]
  *
  * @typedef {Object} UserProfile
  * @property {string} gender
