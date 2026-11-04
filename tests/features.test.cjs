@@ -70,8 +70,8 @@ test('bookmarks, active programs, schedule preferences, setup checks and video c
  s.restSeconds=300;s.profile.longBands=true;s.profile.barSupportsFootAssistance=true;s.onboardingAnswers=M.clone(s.profile);
  s.programSettings['push-up-progression'].dayShift=1;s.programSettings['push-up-progression'].stage='full';
  s.programSettings['home-bodyweight-basics'].exerciseChoices={'wall-pushup':'knee-pushup'};
- const video=M.exerciseLibrary.squat.legacyVideo.id;
- s.videoOverrides['barbell-bench']=video;s.videoHealth['barbell-bench']={videoId:video,status:'unavailable',code:100,checkedAt:'2026-11-16T12:00:00Z'};
+ const video=D.reviewedVideos.squat.id;
+ s.videoOverrides.squat=video;s.videoHealth.squat={videoId:video,status:'unavailable',code:100,checkedAt:'2026-11-16T12:00:00Z'};
  const restored=M.validate(JSON.parse(JSON.stringify(s)));
  for(const key of ['bookmarks','activePrograms','programSettings','profile','onboardingAnswers','videoOverrides','videoHealth','restSeconds'])assert.deepEqual(restored[key],s[key]);
 });
@@ -166,7 +166,7 @@ test('video ID parsing accepts actual existing selections and rejects arbitrary 
  for(const value of [id,'https://youtu.be/'+id,'https://www.youtube.com/watch?v='+id,'https://www.youtube.com/embed/'+id,'https://youtube.com/shorts/'+id])assert.equal(M.parseVideoId(value),id);
  for(const value of ['!invalid!','https://example.com/watch?v='+id,'javascript:alert(1)'])assert.equal(M.parseVideoId(value),null);
  assert.equal(M.parseVideoId(''),'');
- const s=M.empty();assert.equal(M.videoIdFor(s,'squat'),id);s.videoOverrides.squat='';assert.equal(M.videoIdFor(s,'squat'),'');
+ const s=M.empty();assert.equal(M.videoIdFor(s,'squat'),D.reviewedVideos.squat.id);s.videoOverrides.squat='';assert.equal(M.videoIdFor(s,'squat'),'');
 });
 test('offline shell includes every shipped runtime file and the video-selection list',()=>{
  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8');

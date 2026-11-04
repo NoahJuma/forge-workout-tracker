@@ -4,6 +4,10 @@ A mobile-first static training app with 195 structured programs, 131 centrally d
 
 ## Training features
 
+### Mobile workout controls
+
+Weight and reps entry comes before the rest timer on phones. A compact bottom session bar keeps progress and Finish workout within reach. Touch targets, 16px form text, safe-area spacing and sticky navigation support narrow screens; the desktop layout retains its sidebar. The technique guide fills the phone screen, keeps its close control visible and reserves a stable video aspect ratio. Reduced-motion preferences are respected.
+
 ### Program length and every-week preview
 
 Recommendations show the actual full program length, training days and session time. Expand **Explore all N weeks** to review the recommendation without leaving setup. The Workout screen shows **Week X of N** and a **Preview another week** selector. Plan details offer every numbered week plus previous/next navigation, with introductory and lighter/deload weeks labeled.
@@ -27,13 +31,13 @@ Profile setup also offers **Choose a program later** on the recommendation step,
 
 ## Exercises and YouTube
 
-All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. New video IDs are blank. The original 42 demonstration IDs are retained as historical selections.
+All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. There are 42 curated male-demonstrator videos, with all 42 previous slots retained and 24 IDs replaced. The other 89 exercises use written instructions. Sources, review scope and current IDs are documented in VIDEO_SOURCES.md and reviewed-videos.js.
 
-Open Technique & instructions to see written guidance, search YouTube and paste a chosen ID or link. The official player reports failures and the app keeps the written steps visible. Settings lists missing selections and failed checks, and can download all exercises and search queries. Videos are checked when opened, not through an unverified background availability claim.
+Open Technique & instructions to view the official privacy-enhanced YouTube player and written guidance. Video preference offers the curated demonstration or written steps only. Old custom video IDs remain in backups, but cannot bypass the reviewed library; existing written-only preferences still apply. Playback errors keep the written steps available, and closing the guide destroys the player. Settings lists missing selections and failed checks and exports the current exercise selections.
 
 - [Video-selection CSV](EXERCISE_VIDEO_SELECTION.csv)
 - [Central exercise library](EXERCISE_LIBRARY.md)
-- [Original video source record](VIDEO_SOURCES.md)
+- [Current video source record](VIDEO_SOURCES.md)
 
 ## Storage and privacy
 
@@ -64,7 +68,7 @@ Open http://127.0.0.1:8080. The shipped app requires no compilation or installat
 
 With Node.js available:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs tests/reviewed-videos.test.cjs
 
 For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 195 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
 
