@@ -6,7 +6,7 @@ The app defines **113 exercises** in [exercises.js](exercises.js), including the
 
 ## Runtime and compatibility
 
-Load exercises.js before data.js. No packages or build step are required.
+Load exercises.js, exercises-expanded.js and reviewed-videos.js before data.js. The 42 current playback selections use the curated male-demonstrator registry; legacyVideo is historical metadata only. No packages or build step are required.
 
 - `ForgeData.exercises` is the canonical array. `ForgeModel.exerciseLibrary[id]` provides lookup by ID.
 - `ForgeData.catalog` and `ForgeModel.catalog` are derived views of all 113 exercises for the logger and player. Exercise definitions are authored once.

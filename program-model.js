@@ -169,9 +169,10 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
     return e;
   }
   function videoIdFor(state,id){
-    const e=M.exerciseLibrary[id];if(!e)return '';
-    const idValue=own(state.videoOverrides,id)?state.videoOverrides[id]:e.youtubeVideoId||e.legacyVideo?.id||'';
-    return /^[A-Za-z0-9_-]{11}$/.test(idValue)?idValue:'';
+    // Keep old overrides in backups, but only play this exercise's curated demo.
+    if(!M.exerciseLibrary[id]||own(state.videoOverrides,id)&&state.videoOverrides[id]==='')return '';
+    const video=D.reviewedVideos[id];
+    return video?.demonstrator==='male'&&/^[A-Za-z0-9_-]{11}$/.test(video.id)?video.id:'';
   }
   function parseVideoId(value){
     value=String(value||'').trim();if(!value)return '';

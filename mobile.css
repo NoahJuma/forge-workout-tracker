@@ -1,0 +1,71 @@
+/* Shared technique guide: stable video sizing and readable, touchable controls. */
+html{scroll-padding-top:72px}
+body:has(dialog[open]){overflow:hidden}
+dialog{overscroll-behavior:contain;scrollbar-gutter:stable}
+.exercise-dialog{width:min(800px,calc(100% - 24px))}
+.exercise-dialog .modal-header{align-items:center}
+#closeVideo{width:48px;min-width:48px;min-height:48px;padding:0;font-size:18px}
+.exercise-details{line-height:1.65}
+.exercise-details .video-frame{min-height:0;border-radius:12px;overflow:hidden}
+.exercise-details h3{margin-top:24px;margin-bottom:12px;font-size:18px}
+.exercise-details ol,.exercise-details ul{padding-left:24px;margin-block:12px 20px}
+.exercise-details li{padding-left:4px;margin-bottom:12px}
+.demo-caption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;font-size:12px;color:var(--muted);margin-block:8px}
+.demo-caption a{display:inline-flex;align-items:center;min-height:44px;color:var(--accent)}
+#videoStatus{min-height:24px;margin-block:8px 16px;color:var(--muted);font-size:13px}
+.technique-muscles{font-size:13px;margin-block:24px}
+.video-preferences{display:flex;flex-wrap:wrap;gap:8px;margin-block:16px}
+.video-selection p{font-size:13px}
+.exercise-details>.button{margin:0 8px 8px 0;white-space:normal;text-align:left}
+.button,.done,.day-tab{transition:background-color .15s,border-color .15s,color .15s}
+@media(max-width:650px){
+  .shell{padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right))}
+  input,select,textarea,.date-control input,.toolbar select,.builder-targets input{font-size:16px}
+  button,.button.small,.exercise-tools .button,.timer-presets button{min-height:44px}
+  .main-nav{position:sticky;top:0;z-index:3;background:var(--bg);gap:0;justify-content:space-between;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+  .main-nav button{min-height:54px;padding-inline:5px;white-space:nowrap;font-size:12px}
+  .workout-layout{gap:20px}
+  .workout-aside{order:0}
+  .workout-aside .sticky-panel{display:block}
+  .workout-aside .session-progress{position:fixed;z-index:4;bottom:0;left:0;right:0;border-radius:18px 18px 0 0;margin:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 16px;padding:10px max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));box-shadow:0 -8px 28px #0002;background:var(--surface)}
+  .session-progress>.eyebrow,.session-progress>h3{display:none}
+  .workout-aside .session-progress .progress-count{grid-column:1;grid-row:1;line-height:1.2;margin:0}
+  .workout-aside .session-progress .progress-count strong{font-size:24px}
+  .workout-aside .session-progress .progress-count span{font-size:12px}
+  .workout-aside .session-progress .progress-track{grid-column:1;grid-row:2;margin:6px 0 0;height:4px}
+  .workout-aside .session-progress .button{grid-column:2;grid-row:1/3;width:auto;min-height:48px;margin:0;padding-inline:18px;font-size:13px}
+  body:has(#viewWorkout:not([hidden]) .session-progress) #main{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+  body:has(#viewWorkout:not([hidden]) .session-progress) .toast{bottom:calc(90px + env(safe-area-inset-bottom))}
+  .workout-aside .rest-card{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+  .workout-aside .rest-card h3{font-size:14px}
+  .workout-aside .rest-card .timer-value{font-size:30px;grid-column:1;grid-row:2/4}
+  .rest-card .timer-actions{grid-column:2;grid-row:1/4;align-items:center}
+  .rest-card .timer-actions .button{min-width:0;padding:10px;min-height:48px}
+  .workout-aside .timer-presets{display:flex;grid-column:1/-1;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .workout-aside .timer-presets button{min-width:40px;min-height:44px;font-size:12px}
+  .exercise{padding:16px;border-radius:16px;scroll-margin-top:70px;scroll-margin-bottom:110px}
+  .exercise-heading{flex-wrap:wrap;gap:8px}
+  .exercise-title{flex:1 1 150px}
+  .exercise h3{font-size:16px;line-height:1.35}
+  .exercise-tools .button{min-width:44px;font-size:12px}
+  .set-grid{grid-template-columns:24px minmax(0,1fr) minmax(0,1fr) 48px;gap:8px}
+  .set-grid input,.done{min-height:50px;height:50px;scroll-margin-block:90px 140px}
+  .set-grid input{padding-inline:4px;appearance:textfield}
+  .set-grid input::-webkit-inner-spin-button,.set-grid input::-webkit-outer-spin-button{appearance:none;margin:0}
+  .done{width:48px}
+  .day-tab{min-width:112px;min-height:72px;scroll-snap-align:start}
+  .day-tabs{scroll-snap-type:x proximity}
+  .date-control{max-width:155px}
+  .date-control input{font-size:16px;min-height:44px;width:100%;max-width:155px}
+  dialog{max-height:calc(100dvh - 24px);width:calc(100% - 16px);border-radius:18px}
+  .exercise-dialog{width:100%;max-width:none;height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0;padding-bottom:env(safe-area-inset-bottom)}
+  .exercise-dialog .modal-header{padding-top:calc(14px + env(safe-area-inset-top));padding-bottom:14px;gap:12px}
+  .exercise-dialog .modal-header h2{font-size:21px;overflow-wrap:anywhere}
+  .exercise-details{padding:16px;font-size:15px}
+  .demo-caption{font-size:12px}
+  .video-preferences .button{flex:1 1 140px;min-height:48px;font-size:13px}
+  .modal-footer{padding-bottom:calc(12px + env(safe-area-inset-bottom));flex-wrap:wrap}
+  .modal-footer .button{min-height:48px}
+  .catalog-toolbar input,.catalog-toolbar select,.program-controls select{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){.button,.done,.day-tab{transition:none}}

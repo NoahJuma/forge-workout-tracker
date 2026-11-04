@@ -177,17 +177,18 @@ globalThis.ForgeProgramUI=ctx=>{
     return apiPromise;
   }
   function cleanupVideo(){videoToken++;clearTimeout(videoTimer);try{player?.destroy();}catch{}player=null;shownExercise='';}
-  videoModal.addEventListener('close',()=>{cleanupVideo();videoModal.innerHTML='';});
+  videoModal.addEventListener('close',()=>{if(videoModal.open)return;cleanupVideo();videoModal.innerHTML='';});
   function recordHealth(id,videoId,status,code=0){state().videoHealth[id]={videoId,status,code,checkedAt:new Date().toISOString()};save();}
   function videoStatus(message,hide=false){const box=$('#videoStatus');if(box)box.textContent=message;const frame=$('#techniqueFrame');if(frame)frame.hidden=hide;}
   async function showVideo(id){
     const e=M.exerciseLibrary[id];if(!e)return;
-    cleanupVideo();shownExercise=id;const token=videoToken,videoId=M.videoIdFor(state(),id);
-    videoModal.innerHTML='<div class="modal-header"><div><div class="eyebrow">EXERCISE LIBRARY</div><h2 id="videoTitle">'+esc(e.name)+'</h2><p>'+esc(e.equipmentLabel)+'</p></div><button class="button small subtle" id="closeVideo" aria-label="Close technique">✕</button></div><div class="modal-body exercise-details"><p><strong>Primary muscles:</strong> '+esc(e.primaryMuscles.map(label).join(', '))+'</p><p><strong>Secondary muscles:</strong> '+esc(e.secondaryMuscles.map(label).join(', ')||'None listed')+'</p><p id="videoStatus" role="status">'+(videoId?'Loading the technique player…':'No video is selected yet. Follow the written instructions below.')+'</p>'+(videoId?'<div id="techniqueFrame" class="video-frame"><iframe id="forgeYT" title="'+esc(e.name)+' technique" src="https://www.youtube-nocookie.com/embed/'+videoId+'?enablejsapi=1&playsinline=1&rel=0'+(location.origin!=='null'?'&origin='+encodeURIComponent(location.origin):'')+'" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><p><a href="https://www.youtube.com/watch?v='+videoId+'" target="_blank" rel="noopener noreferrer">Open selected video on YouTube</a></p>':'')+
-      '<h3>How to do it</h3><ol>'+e.instructions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol><h3>Common mistakes</h3><ul>'+e.commonMistakes.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'+
+    cleanupVideo();shownExercise=id;const token=videoToken,videoId=M.videoIdFor(state(),id),demo=D.reviewedVideos[id];
+    videoModal.classList.add('exercise-dialog');
+    videoModal.innerHTML='<div class="modal-header"><div><div class="eyebrow">TECHNIQUE GUIDE</div><h2 id="videoTitle">'+esc(e.name)+'</h2><p>'+esc(e.equipmentLabel)+'</p></div><button class="button subtle" id="closeVideo" aria-label="Close technique">✕</button></div><div class="modal-body exercise-details">'+(videoId?'<div id="techniqueFrame" class="video-frame"><iframe id="forgeYT" title="'+esc(e.name)+' technique — '+esc(demo.channel)+'" src="https://www.youtube-nocookie.com/embed/'+videoId+'?enablejsapi=1&playsinline=1&rel=0'+(location.origin!=='null'?'&origin='+encodeURIComponent(location.origin):'')+'" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="demo-caption"><span>Male demonstration · '+esc(demo.channel)+'</span><a href="https://www.youtube.com/watch?v='+videoId+'" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div>':'')+'<p id="videoStatus" role="status">'+(videoId?'Loading the technique player…':demo?'Written instructions selected. You can turn the demonstration back on below.':'A video demonstration has not been selected for this exercise. Follow the written steps below.')+'</p>'+(demo?.variantNote&&videoId?'<p class="video-note">'+esc(demo.variantNote)+'</p>':'')+
+      '<h3>How to do it</h3><ol>'+e.instructions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol><h3>Common mistakes</h3><ul>'+e.commonMistakes.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul><p class="technique-muscles"><strong>Primary muscles:</strong> '+esc(e.primaryMuscles.map(label).join(', '))+'<br><strong>Secondary muscles:</strong> '+esc(e.secondaryMuscles.map(label).join(', ')||'None listed')+'</p>'+
       '<h3>Alternatives</h3>'+[e.homeAlternativeId,e.outdoorAlternativeId].filter((v,i,a)=>v&&a.indexOf(v)===i).map(alt=>'<button class="button subtle" data-action="video" data-id="'+alt+'">'+esc(M.exerciseLibrary[alt].name)+'</button>').join('')+
-      '<details class="video-selection"><summary>Select or update the video</summary><p><a href="https://www.youtube.com/results?search_query='+encodeURIComponent(e.youtubeSearchQuery)+'" target="_blank" rel="noopener noreferrer">Search: '+esc(e.youtubeSearchQuery)+'</a></p><p>Choose a clear demonstration from a qualified coach or an established fitness channel.</p><label class="form-label">YouTube video ID or link<input id="exerciseVideoId" value="'+esc(videoId)+'" autocomplete="off"></label><p id="videoInputError" role="alert"></p><button class="button" data-action="save-video" data-id="'+id+'">Save video for this device</button><button class="text-button" data-action="reset-video" data-id="'+id+'">Use original selection</button><p>Leave the field empty to use written instructions. Videos play through YouTube and are never downloaded.</p></details></div>';
-    if(!videoModal.open)videoModal.showModal();$('#closeVideo').onclick=()=>videoModal.close();
+      (demo?'<details class="video-selection"><summary>Video preference</summary><p>Demonstrations feature male instructors. Choose how to view this exercise on this device.</p><div class="video-preferences"><button class="button'+(videoId?' primary':'')+'" data-action="reset-video" data-id="'+id+'" aria-pressed="'+!!videoId+'">Use demonstration</button><button class="button'+(!videoId?' primary':'')+'" data-action="written-video" data-id="'+id+'" aria-pressed="'+!videoId+'">Written steps only</button></div><p>Videos stream through YouTube when this guide is open. Written steps work offline.</p></details>':'')+'</div>';
+    if(!videoModal.open)videoModal.showModal();videoModal.scrollTop=0;$('#closeVideo').focus({preventScroll:true});$('#closeVideo').onclick=()=>videoModal.close();
     if(!videoId)return;
     let knownFailure=false;
     const fail=(status,code=0)=>{if(token!==videoToken||!videoModal.open)return;if(status==='blocked'||status==='unavailable')knownFailure=true;clearTimeout(videoTimer);recordHealth(id,videoId,status,code);videoStatus(status==='blocked'?'This video cannot play here. Use the written steps or open it on YouTube.':status==='unavailable'?'This video is unavailable. Follow the written steps below.':'The player could not be checked. Written instructions remain available.',true);};
@@ -202,7 +203,7 @@ globalThis.ForgeProgramUI=ctx=>{
   }
   function exportVideoList(){
     const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';
-    const rows=[['id','name','youtubeSearchQuery','youtubeVideoId','existingDemoId'],...D.exercises.map(e=>[e.id,e.name,e.youtubeSearchQuery,Object.prototype.hasOwnProperty.call(state().videoOverrides,e.id)?state().videoOverrides[e.id]:e.youtubeVideoId,e.legacyVideo?.id||''])];
+    const rows=[['id','name','youtubeSearchQuery','reviewedVideoId','playbackVideoId','channel'],...D.exercises.map(e=>[e.id,e.name,e.youtubeSearchQuery,D.reviewedVideos[e.id]?.id||'',M.videoIdFor(state(),e.id),D.reviewedVideos[e.id]?.channel||''])];
     ctx.download(rows.map(r=>r.map(quote).join(',')).join('\r\n'),'forge-exercise-video-selection.csv','text/csv;charset=utf-8');
   }
   function videoChecks(){
@@ -246,12 +247,8 @@ globalThis.ForgeProgramUI=ctx=>{
     if(action==='workout-today'){s.selectedDate=M.today();s.sessionId=null;save();setView('workout');return true;}
     if(action==='video-checks'){videoChecks();return true;}
     if(action==='export-video-list'){exportVideoList();return true;}
-    if(action==='save-video'){
-      const parsed=M.parseVideoId($('#exerciseVideoId').value);
-      if(parsed===null){$('#videoInputError').textContent='Enter a valid 11-character YouTube ID or a YouTube link.';return true;}
-      s.videoOverrides[id]=parsed;delete s.videoHealth[id];save();showVideo(id);return true;
-    }
-    if(action==='reset-video'){delete s.videoOverrides[id];delete s.videoHealth[id];save();showVideo(id);return true;}
+    if(action==='written-video'&&M.exerciseLibrary[id]){s.videoOverrides[id]='';delete s.videoHealth[id];save();showVideo(id);const details=videoModal.querySelector('.video-selection');if(details)details.open=true;videoModal.querySelector('[data-action=written-video]')?.focus();return true;}
+    if(action==='reset-video'){delete s.videoOverrides[id];delete s.videoHealth[id];save();showVideo(id);const details=videoModal.querySelector('.video-selection');if(details)details.open=true;videoModal.querySelector('[data-action=reset-video]')?.focus();return true;}
     if(action==='exercise-rest'){ctx.startRest(Number(b.dataset.seconds));return true;}
     return false;
   }
