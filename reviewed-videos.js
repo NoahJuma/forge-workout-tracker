@@ -14,7 +14,250 @@
  * @property {string} [variantNote]
  */
 /** @type {Readonly<Record<string, Readonly<ReviewedExerciseVideo>>>} */
-globalThis.ForgeReviewedVideos=Object.freeze(Object.fromEntries(Object.entries({
+globalThis.ForgeReviewedVideos=Object.freeze(Object.fromEntries(Object.entries({...{
+  "band-squat": {
+    "id": "5l8bDoRIyxc",
+    "title": "Beginner Resistance Band Squats - How To Do Squats With A Resistance Band",
+    "channel": "Whats Up Dude",
+    "channelUrl": "https://www.youtube.com/@whatsupdude2778",
+    "source": "https://www.youtube.com/watch?v=5l8bDoRIyxc",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "band-neutral-curl": {
+    "id": "KIqRZEF_Aqg",
+    "title": "Standing Biceps Hammer Curl with Resistance Bands",
+    "channel": "Bodylastics",
+    "channelUrl": "https://www.youtube.com/@bodylastics",
+    "source": "https://www.youtube.com/watch?v=KIqRZEF_Aqg",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  }
+},...{
+  "weighted-crunch": {
+    "id": "GnOtkztXWQs",
+    "title": "How To Do: Dumbbell Crunch - Floor | Ab Workout Exercise",
+    "channel": "Fitway - Workout Trainer",
+    "channelUrl": "https://www.youtube.com/@fitway-workouttrainer8449",
+    "source": "https://www.youtube.com/watch?v=GnOtkztXWQs",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "chin-tuck": {
+    "id": "O-LZpYSYwRQ",
+    "title": "Instant Neck Pain Relief Using Chin Retraction Exercise - Dr Mandell",
+    "channel": "motivationaldoc",
+    "channelUrl": "https://www.youtube.com/@motivationaldoc",
+    "source": "https://www.youtube.com/watch?v=O-LZpYSYwRQ",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "arm-circles": {
+    "id": "3STTSi_jdHk",
+    "title": "How To Arm Circles | Nuffield Health",
+    "channel": "Nuffield Health",
+    "channelUrl": "https://www.youtube.com/@nuffieldhealth",
+    "source": "https://www.youtube.com/watch?v=3STTSi_jdHk",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "hinge-drill": {
+    "id": "e3bJ56AgCss",
+    "title": "Bodyweight Hip Hinge Demonstration",
+    "channel": "Simon Wallgren",
+    "channelUrl": "https://www.youtube.com/@simonsayssquat",
+    "source": "https://www.youtube.com/watch?v=e3bJ56AgCss",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "chair-stand": {
+    "id": "ITv-_BkcrD0",
+    "title": "Sit to Stand",
+    "channel": "Baptist Health",
+    "channelUrl": "https://www.youtube.com/@baptisthealthsf",
+    "source": "https://www.youtube.com/watch?v=ITv-_BkcrD0",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "seated-knee-extension": {
+    "id": "nwRQAvTTwvQ",
+    "title": "🦵🏻 Seated Knee Extension (Proper Form!) | Beginner Quad Strength",
+    "channel": "RedeemPlay",
+    "channelUrl": "https://www.youtube.com/@RedeemPlay",
+    "source": "https://www.youtube.com/watch?v=nwRQAvTTwvQ",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  }
+},...{
+  "barbell-bench": {
+    "id": "rT7DgCr-3pg",
+    "title": "How To: Barbell Bench Press",
+    "channel": "ScottHermanFitness",
+    "channelUrl": "https://www.youtube.com/@ScottHermanFitness",
+    "source": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "db-floor-press": {
+    "id": "uUGDRwge4F8",
+    "title": "How To: Dumbbell Floor Press",
+    "channel": "ScottHermanFitness",
+    "channelUrl": "https://www.youtube.com/@ScottHermanFitness",
+    "source": "https://www.youtube.com/watch?v=uUGDRwge4F8",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "body-crunch": {
+    "id": "NGRKFMKhF8s",
+    "title": "How To: Floor Crunch",
+    "channel": "ScottHermanFitness",
+    "channelUrl": "https://www.youtube.com/@ScottHermanFitness",
+    "source": "https://www.youtube.com/watch?v=NGRKFMKhF8s",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "barbell-row": {
+    "id": "FWJR5Ve8bnQ",
+    "title": "How to do the BENT-OVER BARBELL ROW! | 2 Minute Tutorial",
+    "channel": "Max Euceda",
+    "channelUrl": "https://www.youtube.com/@MaxEuceda7",
+    "source": "https://www.youtube.com/watch?v=FWJR5Ve8bnQ",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "overhead-triceps": {
+    "id": "a9oPnZReIRE",
+    "title": "Dumbbell Overhead Tricep Extension - OPEX Exercise Library",
+    "channel": "OPEX Fitness",
+    "channelUrl": "https://www.youtube.com/@OPEXFitness",
+    "source": "https://www.youtube.com/watch?v=a9oPnZReIRE",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "standing-db-press": {
+    "id": "XBOODv-Y6dc",
+    "title": "Standing Dumbbell Shoulder Press | Exercise Tutorial for Beginners (Build Muscle & Strength)",
+    "channel": "Tim Bullici",
+    "channelUrl": "https://www.youtube.com/@timbullici",
+    "source": "https://www.youtube.com/watch?v=XBOODv-Y6dc",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "pike-pushup": {
+    "id": "3r3tvRF1tVA",
+    "title": "Pike Push Up Tutorial (Full Beginner Guide)",
+    "channel": "Vitaly Pavlenko",
+    "channelUrl": "https://www.youtube.com/@vitalypavlenko2896",
+    "source": "https://www.youtube.com/watch?v=3r3tvRF1tVA",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "archer-pushup": {
+    "id": "jiA3RnMxFU0",
+    "title": "How To: Archer Push Up",
+    "channel": "Michael Vazquez",
+    "channelUrl": "https://www.youtube.com/@MichaelVazquez1",
+    "source": "https://www.youtube.com/watch?v=jiA3RnMxFU0",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "front-plank": {
+    "id": "s6coxb732BA",
+    "title": "How To Do A Forearm Plank | Exercise Demonstration Video and Guide",
+    "channel": "Live Lean TV Daily Exercises",
+    "channelUrl": "https://www.youtube.com/@LiveLean",
+    "source": "https://www.youtube.com/watch?v=s6coxb732BA",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "band-rdl": {
+    "id": "6jlj3bRgjv8",
+    "title": "Romanian Deadlift (RDL) (Resistance Band)",
+    "channel": "Coach Yash",
+    "channelUrl": "https://www.youtube.com/@coachyashk",
+    "source": "https://www.youtube.com/watch?v=6jlj3bRgjv8",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "band-press": {
+    "id": "9JW83TriIs8",
+    "title": "Resistance Band Overhead Press | Exercise Demo (Form and Technique)",
+    "channel": "JayTaylor",
+    "channelUrl": "https://www.youtube.com/@JayTaylorCoach",
+    "source": "https://www.youtube.com/watch?v=9JW83TriIs8",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "band-curl": {
+    "id": "yDtn6iehV8w",
+    "title": "Resistance Band Bicep Curl | Exercise Demo (Form and Technique)",
+    "channel": "JayTaylor",
+    "channelUrl": "https://www.youtube.com/@JayTaylorCoach",
+    "source": "https://www.youtube.com/watch?v=yDtn6iehV8w",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "kb-goblet": {
+    "id": "QilYZ20kVfM",
+    "title": "How to Goblet Squat (with Kettlebell)",
+    "channel": "Coach Gabe West",
+    "channelUrl": "https://www.youtube.com/@coachgabewest",
+    "source": "https://www.youtube.com/watch?v=QilYZ20kVfM",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "kb-suitcase-carry": {
+    "id": "iq5D5SU2Oq4",
+    "title": "How To Do Kettlebell Suitcase Carry | Exercise Demo",
+    "channel": "OriGym",
+    "channelUrl": "https://www.youtube.com/@OriGymPersonalTrainerCourses",
+    "source": "https://www.youtube.com/watch?v=iq5D5SU2Oq4",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "kb-reverse-lunge": {
+    "id": "gWN9epxFqX8",
+    "title": "Kettlebell Goblet Reverse Lunge Exercise | Onnit Tutorial",
+    "channel": "Onnit",
+    "channelUrl": "https://www.youtube.com/@Onnitofficial",
+    "source": "https://www.youtube.com/watch?v=gWN9epxFqX8",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  },
+  "one-arm-db-row": {
+    "id": "sARk1TGYlPU",
+    "title": "Staggered Stance Single Arm Dumbbell Row",
+    "channel": "TrainFTW",
+    "channelUrl": "https://www.youtube.com/@TrainFTW",
+    "source": "https://www.youtube.com/watch?v=sARk1TGYlPU",
+    "demonstrator": "male",
+    "reviewedAt": "2026-11-04",
+    "reviewScope": "Public YouTube title, channel and publisher thumbnail; movement and equipment matched. Full motion and worldwide playback not certified."
+  }
+},
   "squat": {
     "id": "SW_C1A-rejs",
     "title": "How To: Deep Barbell Back Squat",

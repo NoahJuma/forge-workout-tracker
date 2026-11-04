@@ -1,6 +1,6 @@
 # THE FORGE Workout Tracker
 
-A mobile-first static training app with 195 structured programs, 131 centrally defined exercises, multiple active programs and a combined weekly calendar. It runs directly as HTML/CSS/JavaScript with no packages or build step.
+A mobile-first static training app with 196 structured programs, 131 centrally defined exercises, multiple active programs and a combined weekly calendar. It runs directly as HTML/CSS/JavaScript with no packages or build step.
 
 ## Training features
 
@@ -31,13 +31,17 @@ Profile setup also offers **Choose a program later** on the recommendation step,
 
 ## Exercises and YouTube
 
-All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. There are 42 curated male-demonstrator videos, with all 42 previous slots retained and 24 IDs replaced. The other 89 exercises use written instructions. Sources, review scope and current IDs are documented in VIDEO_SOURCES.md and reviewed-videos.js.
+All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. There are 66 curated male-demonstrator videos. The other exercises provide 29 illustrated position guides, 13 links to animated demonstrations and 23 locally drawn movement diagrams. Every guide includes numbered steps. Sources and review scope are documented in VIDEO_SOURCES.md.
 
 Open Technique & instructions to view the official privacy-enhanced YouTube player and written guidance. Video preference offers the curated demonstration or written steps only. Old custom video IDs remain in backups, but cannot bypass the reviewed library; existing written-only preferences still apply. Playback errors keep the written steps available, and closing the guide destroys the player. Settings lists missing selections and failed checks and exports the current exercise selections.
 
 - [Video-selection CSV](EXERCISE_VIDEO_SELECTION.csv)
 - [Central exercise library](EXERCISE_LIBRARY.md)
 - [Current video source record](VIDEO_SOURCES.md)
+
+The advanced Strength & Cardio program combines four strength sessions with walking and offers a matching option for the advanced fat-loss filters. If no exact matches exist, clearly labeled similar plans retain the selected goal and profile checks; one-tap options can widen a single filter.
+
+The rest timer plays a short sound when it finishes. Sound can be turned off and the preference is stored with other settings. Audio is prepared when the user starts a timer; device volume and browser background restrictions affect whether it is audible. The timer also displays an on-screen message.
 
 ## Storage and privacy
 
@@ -68,9 +72,9 @@ Open http://127.0.0.1:8080. The shipped app requires no compilation or installat
 
 With Node.js available:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs tests/reviewed-videos.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs tests/reviewed-videos.test.cjs tests/timer-catalog.test.cjs
 
-For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 195 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
+For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 196 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
 
 ## Publish
 

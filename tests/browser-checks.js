@@ -23,7 +23,7 @@
   async function load(blocked=false){
     const html=await(await fetch(root+'index.html')).text();
     const pre='<base href="'+root+'"><meta http-equiv="Content-Security-Policy" content="frame-src \'none\'">'+
-      '<script>window.__appErrors=[];addEventListener("error",e=>{if(e.message)window.__appErrors.push(e.message);});window.confirm=()=>true;window.__players=[];window.YT={Player:class{constructor(id,options){this.options=options;window.__players.push(this);setTimeout(()=>options.events.onReady({target:this}),0);}destroy(){this.destroyed=true;}}};'+
+      '<script>window.__appErrors=[];addEventListener("error",e=>{if(e.message)window.__appErrors.push(e.message);});window.confirm=()=>true;window.__players=[];window.__sounds=0;window.AudioContext=class{constructor(){this.state="running";this.currentTime=0;this.destination={};}createOscillator(){return {frequency:{},connect(){},start(){window.__sounds++},stop(){}}}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}}}};window.YT={Player:class{constructor(id,options){this.options=options;window.__players.push(this);setTimeout(()=>options.events.onReady({target:this}),0);}destroy(){this.destroyed=true;}}};'+
       (blocked?'Object.defineProperty(window,"localStorage",{get(){throw new DOMException("Storage unavailable","SecurityError");}});':'Object.defineProperty(window,"localStorage",{value:{getItem:k=>parent.__forgeQAStorage.getItem(k),setItem:(k,v)=>parent.__forgeQAStorage.setItem(k,v),removeItem:k=>parent.__forgeQAStorage.removeItem(k)}});')+'</script>';
     const done=new Promise(resolve=>frame.onload=resolve);
     frame.srcdoc=html.replace('<head>','<head>'+pre);
@@ -33,7 +33,7 @@
   try{
     qaStorage.removeItem(key);qaStorage.removeItem('forge-workout-log-v3');qaStorage.setItem('forge-appearance','dark');
     await load();
-    expect(win.ForgeData.programs.length===195,'195 programs shipped');
+    expect(win.ForgeData.programs.length===196,'196 programs shipped');
     expect(win.ForgeData.exercises.length===131,'131 exercises available');
     expect(doc.querySelector('#modal').open,'Onboarding opens for a new profile');
     action('setup-next');action('setup-next');
@@ -121,9 +121,17 @@
     expect(win.__appErrors.length===0,'Program management has no browser script errors');
     qaStorage.setItem(key,controlSnapshot);await load();
     click('[data-view=plans]');change('#catalogFits',null,false);
-    expect(doc.querySelectorAll('[data-program]').length===195,'Full catalog shows 195 distinct cards');
+    expect(doc.querySelectorAll('[data-program]').length===196,'Full catalog shows 196 distinct cards');
+    change('#catalogGoal','fat-loss');change('#catalogLevel','advanced');
+    expect(!!doc.querySelector('[data-program=advanced-strength-cardio-cut]'),'Advanced fat-loss offers a matching program');
+    change('#catalogDays','2');
+    expect(doc.querySelector('#planGrid').textContent.includes('No exact matches'),'An unavailable schedule is reported accurately');
+    expect(doc.querySelector('[data-action=widen-filter][data-id=days]').textContent.includes('any schedule'),'The app offers an explicitly labeled schedule alternative');
+    click('[data-action=widen-filter][data-id=days]');
+    expect(doc.querySelector('#catalogGoal').value==='fat-loss'&&doc.querySelector('#catalogLevel').value==='advanced'&&!!doc.querySelector('[data-program=advanced-strength-cardio-cut]'),'Widening schedule retains the goal and level');
+    action('reset-catalog');
     expect(win.getComputedStyle(doc.querySelector('.welcome')).display==='none','Catalog uses its own heading without a duplicate welcome banner');
-    expect(doc.querySelectorAll('.plan-photo img').length===195,'Each plan has an equipment cover');
+    expect(doc.querySelectorAll('.plan-photo img').length===196,'Each plan has an equipment cover');
     expect([...doc.querySelectorAll('.browse-chip strong')].every(e=>Number(e.textContent)>=10),'Every goal and muscle section offers at least ten plans');
     click('[data-kind=audience][data-id=pregnancy]');
     expect(doc.querySelectorAll('[data-program]').length===10,'Pregnancy section shows ten choices without stale filters');
@@ -188,18 +196,36 @@
     expect(Object.values(JSON.parse(qaStorage.getItem(key)).sessions).some(s=>s.completedAt&&s.exercises.some(e=>e.sets.some(x=>x.reps==='45'))),'Mobile finish control saves the logged session');
     expect(doc.querySelector('[data-action=finish]').textContent.includes('saved'),'Mobile finish control confirms the saved workout');
     expect(win.getComputedStyle(doc.querySelector('.timer-presets')).display!=='none','Mobile rest timer offers duration presets');
+    expect(win.getComputedStyle(doc.querySelector('[data-action=timer-sound]')).display!=='none','Timer sound control is visible on mobile');
+    const realNow=win.Date.now,startTime=realNow();win.Date.now=()=>startTime;
+    click('[data-action=timer-preset][data-id="60"]');action('timer-toggle');win.Date.now=()=>startTime+61000;await pause(600);
+    expect(win.__sounds===2&&doc.querySelector('#timerValue').textContent==='0:00','Timer completion plays the two-note alert once');
+    await pause(350);expect(win.__sounds===2,'Completed timer does not repeat the alert');
+    action('timer-sound');expect(JSON.parse(qaStorage.getItem(key)).timerSoundEnabled===false,'Sound preference saves on this device');
+    win.Date.now=()=>startTime;action('timer-toggle');win.Date.now=()=>startTime+61000;await pause(600);
+    expect(win.__sounds===2,'Muted timer completes without playing sound');win.Date.now=realNow;
     frame.style.width='1100px';await pause(20);
     expect(win.getComputedStyle(doc.querySelector('.session-progress')).position!=='fixed','Desktop session summary stays in the sidebar');
     expect(doc.documentElement.scrollWidth<=win.innerWidth+1,'Workout fits the desktop viewport');
     frame.style.width='390px';await pause(20);
     click('[data-view=plans]');change('#catalogFits',null,false);
     click('[data-program=shortcut-to-strength] [data-action=preview-plan]');
-    click('#modalContent [data-action=video][data-id=barbell-bench]');
+    click('#modalContent [data-action=video][data-id=deadlift]');
     expect(doc.querySelector('#videoModal').open,'Exercise details open through existing technique flow');
     expect(doc.querySelectorAll('#videoModal ol li').length>=3,'Written instructions available without a video');
     expect(!doc.querySelector('#forgeYT'),'Missing video does not create an invalid player');
+    expect(doc.querySelectorAll('.exercise-poses img').length===2,'A matching illustrated guide shows starting and ending positions');
+    expect(doc.querySelectorAll('.visual-steps li').length===win.ForgeModel.exerciseLibrary.deadlift.instructions.length,'The visual guide presents all instructions in order');
     expect(!doc.querySelector('#exerciseVideoId'),'Unreviewed links cannot be added to the playback selection');
     doc.querySelector('#closeVideo').click();
+    win.document.body.insertAdjacentHTML('beforeend','<button id="qaGraphic" data-action="video" data-id="supported-tandem">Technique</button>');click('#qaGraphic');
+    expect(doc.querySelectorAll('#videoModal .exercise-poses svg').length===2,'Supported balance has a locally rendered two-position movement guide');
+    expect(doc.querySelectorAll('#videoModal .visual-steps li').length===3,'Supported balance keeps all guidance in order');
+    doc.querySelector('#closeVideo').click();doc.querySelector('#qaGraphic').remove();
+    win.document.body.insertAdjacentHTML('beforeend','<button id="qaAnimation" data-action="video" data-id="march">Technique</button>');click('#qaAnimation');
+    expect(doc.querySelector('.external-animation').href==='https://www.trainaiapp.com/exercises/march-in-place/','Matching animation opens the original publisher page');
+    expect(doc.querySelectorAll('#videoModal .visual-steps li').length===4,'Animated guides also retain the ordered written steps');
+    doc.querySelector('#closeVideo').click();doc.querySelector('#qaAnimation').remove();
     win.document.body.insertAdjacentHTML('beforeend','<button id="qaVideo" data-action="video" data-id="goblet">Technique</button>');
     click('#qaVideo');await pause(20);
     expect(Math.abs(doc.querySelector('#videoModal').getBoundingClientRect().height-win.innerHeight)<2,'Technique guide uses the full phone viewport');

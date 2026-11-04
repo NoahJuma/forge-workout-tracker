@@ -1,20 +1,18 @@
-# Exercise video selections
+# Exercise media and sources
 
-Updated 4 November 2026. The app has 42 curated male-demonstrator videos and 89 written-only exercise guides. All 42 existing demonstration slots remain covered; 24 video IDs changed. All other programs and exercises retain their prescriptions and population eligibility.
+Updated 4 November 2026. The app provides 66 selected videos, 29 illustrated position guides, 13 links to animated demonstrations, and 23 locally drawn movement diagrams. Every exercise retains ordered written instructions.
 
-## Review evidence and limits
+## Selection and review
 
-Each selection's live public YouTube oEmbed title, channel and official publisher thumbnail were checked against the exercise and equipment. Additional publisher exercise pages support the barbell hip thrust and dumbbell Bulgarian split squat. Thumbnails were visually inspected for the demonstrator and setup. This is a source, thumbnail and equipment review, not a full-motion assessment, identity certification or guarantee of worldwide playback. No videos or thumbnails are bundled, downloaded for users or rehosted. YouTube can change availability, recommendations, thumbnails, advertisements and playback restrictions.
+Each selected video is an exact-exercise choice in reviewed-videos.js. Public YouTube titles, channels and official thumbnails were checked for the movement, equipment and male demonstrator. This is a metadata and thumbnail review, not a full-motion or worldwide playback certification. Videos remain third-party content; if a creator removes or blocks one, the visual and written steps stay available. Previous device video IDs remain in backups but cannot override the reviewed library.
 
-The exact selections and provenance live in reviewed-videos.js. The original legacyVideo records remain historical metadata in exercises.js and are never playback fallbacks. New canonical exercise IDs stay blank as originally requested; the curated registry is the explicit replacement layer.
+The illustrated guides are matched by exercise name, movement and equipment to the source metadata in the RepDB free-tier dataset. The app links to the publisher’s start/peak or hold images and includes visible attribution. Matching was checked against the publisher’s written instructions; the artwork itself has not been independently inspected for every detail. These images require an internet connection; written steps and local schematic diagrams remain in the offline app.
 
-## Playback and saved preferences
+Exercise data and illustrations by [RepDB (repdb.co)](https://repdb.co); used within the app under the [RepDB free-tier data license](https://github.com/RepDB/exercise-dataset/blob/main/LICENSE-DATA.md). No paid preview animations are used.
 
-Every player and exported current selection resolves through the same exact-exercise registry. A user can choose the demonstration or written steps only. Old custom selections remain in backup data, but unreviewed URLs cannot override the male-demonstrator library. Existing blank overrides still mean written-only. Removing or changing a preference does not touch workouts, onboarding, programs, bookmarks or custom routines. All app storage remains guarded.
+The animated-demonstration links open the source pages on [TrainAI](https://www.trainaiapp.com/exercise-media/). The app links to those pages and does not bundle or redistribute their media. The local movement diagrams are schematic illustrations, not a substitute for the exercise-specific instructions beside them; follow the written setup, range and support cues.
 
-YouTube's privacy-enhanced official embed and IFrame API are retained. The viewer opens only on request, does not autoplay, supports inline mobile playback, destroys the player on close and provides written instructions for unavailable/blocked/unconfirmed playback. Browser tests mock player callbacks; they do not certify actual playback.
-
-## Current selections
+## Video selections
 
 | Exercise | Publisher | Demonstration |
 |---|---|---|
@@ -60,7 +58,75 @@ YouTube's privacy-enhanced official embed and IFrame API are retained. The viewe
 | Reverse Lunge | Peak Functional | [How to Do a Bodyweight Reverse Lunge](https://www.youtube.com/watch?v=0SHCQLa-gms) |
 | Dead Bug | National Academy of Sports Medicine (NASM) | [How to do a Dead Bug — Proper Form & Technique — NASM](https://www.youtube.com/watch?v=bxn9FBrt4-A) |
 | Concentration Curl | ScottHermanFitness | [How To: Dumbbell Concentration Curl](https://www.youtube.com/watch?v=Jvj2wV0vOYU) |
+| Barbell Bench Press | ScottHermanFitness | [How To: Barbell Bench Press](https://www.youtube.com/watch?v=rT7DgCr-3pg) |
+| Bent-Over Barbell Row | Max Euceda | [How to do the BENT-OVER BARBELL ROW! — 2 Minute Tutorial](https://www.youtube.com/watch?v=FWJR5Ve8bnQ) |
+| Dumbbell Overhead Triceps Extension | OPEX Fitness | [Dumbbell Overhead Tricep Extension - OPEX Exercise Library](https://www.youtube.com/watch?v=a9oPnZReIRE) |
+| Dumbbell Weighted Floor Crunch | Fitway - Workout Trainer | [How To Do: Dumbbell Crunch - Floor — Ab Workout Exercise](https://www.youtube.com/watch?v=GnOtkztXWQs) |
+| Standing Dumbbell Shoulder Press | Tim Bullici | [Standing Dumbbell Shoulder Press — Exercise Tutorial for Beginners (Build Muscle & Strength)](https://www.youtube.com/watch?v=XBOODv-Y6dc) |
+| Dumbbell Floor Press | ScottHermanFitness | [How To: Dumbbell Floor Press](https://www.youtube.com/watch?v=uUGDRwge4F8) |
+| Pike Push-up | Vitaly Pavlenko | [Pike Push Up Tutorial (Full Beginner Guide)](https://www.youtube.com/watch?v=3r3tvRF1tVA) |
+| Archer Push-up | Michael Vazquez | [How To: Archer Push Up](https://www.youtube.com/watch?v=jiA3RnMxFU0) |
+| Forearm Plank | Live Lean TV Daily Exercises | [How To Do A Forearm Plank — Exercise Demonstration Video and Guide](https://www.youtube.com/watch?v=s6coxb732BA) |
+| Floor Crunch | ScottHermanFitness | [How To: Floor Crunch](https://www.youtube.com/watch?v=NGRKFMKhF8s) |
+| Resistance Band Squat | Whats Up Dude | [Beginner Resistance Band Squats - How To Do Squats With A Resistance Band](https://www.youtube.com/watch?v=5l8bDoRIyxc) |
+| Resistance Band Romanian Deadlift | Coach Yash | [Romanian Deadlift (RDL) (Resistance Band)](https://www.youtube.com/watch?v=6jlj3bRgjv8) |
+| Resistance Band Overhead Press | JayTaylor | [Resistance Band Overhead Press — Exercise Demo (Form and Technique)](https://www.youtube.com/watch?v=9JW83TriIs8) |
+| Resistance Band Biceps Curl | JayTaylor | [Resistance Band Bicep Curl — Exercise Demo (Form and Technique)](https://www.youtube.com/watch?v=yDtn6iehV8w) |
+| Kettlebell Goblet Squat | Coach Gabe West | [How to Goblet Squat (with Kettlebell)](https://www.youtube.com/watch?v=QilYZ20kVfM) |
+| Kettlebell Suitcase Carry | OriGym | [How To Do Kettlebell Suitcase Carry — Exercise Demo](https://www.youtube.com/watch?v=iq5D5SU2Oq4) |
+| Kettlebell Goblet Reverse Lunge | Onnit | [Kettlebell Goblet Reverse Lunge Exercise — Onnit Tutorial](https://www.youtube.com/watch?v=gWN9epxFqX8) |
+| Gentle Chin Retraction | motivationaldoc | [Instant Neck Pain Relief Using Chin Retraction Exercise - Dr Mandell](https://www.youtube.com/watch?v=O-LZpYSYwRQ) |
+| Controlled Arm Circles | Nuffield Health | [How To Arm Circles — Nuffield Health](https://www.youtube.com/watch?v=3STTSi_jdHk) |
+| Bodyweight Hip Hinge Drill | Simon Wallgren | [Bodyweight Hip Hinge Demonstration](https://www.youtube.com/watch?v=e3bJ56AgCss) |
+| Chair Sit-to-Stand | Baptist Health | [Sit to Stand](https://www.youtube.com/watch?v=ITv-_BkcrD0) |
+| Seated Knee Extension | RedeemPlay | [🦵🏻 Seated Knee Extension (Proper Form!) — Beginner Quad Strength](https://www.youtube.com/watch?v=nwRQAvTTwvQ) |
+| Staggered-Stance One-Arm Dumbbell Row | TrainFTW | [Staggered Stance Single Arm Dumbbell Row](https://www.youtube.com/watch?v=sARk1TGYlPU) |
+| Neutral-Grip Band Curl | Bodylastics | [Standing Biceps Hammer Curl with Resistance Bands](https://www.youtube.com/watch?v=KIqRZEF_Aqg) |
 
-The bodyweight squat demonstration uses a hands-behind-head arm position; the guide explains that arms forward are also an option for balance. Weighted pull-ups retain a weighted demonstration, hip thrusts use a barbell and bench, and Bulgarian split squats use dumbbells and rear-foot support.
+## Illustrated guides
 
-Publisher pages: [Barbell hip thrust](https://www.muscleandstrength.com/exercises/barbell-hip-thrust), [Dumbbell Bulgarian split squat](https://www.muscleandstrength.com/exercises/one-leg-dumbbell-squat-aka-bulgarian-squat.html).
+- Conventional Deadlift — Barbell Deadlift
+- Single-Arm Cable Lateral Raise — Cable Lateral Raise
+- Bent-Over Dumbbell Rear Delt Fly — Rear Delt Fly
+- Cable Pallof Press — Cable Pallof Press
+- Strict Pull-up — Pull-Up
+- Scapular Pull-up — Scapular Pull Ups
+- Unsupported Bent-Over Dumbbell Row — Bent-Over Dumbbell Row
+- Standing Dumbbell Curl — Dumbbell Bicep Curl
+- Dumbbell Split Squat — Dumbbell Split Squat
+- Bodyweight Split Squat — Split Squat
+- Wall Push-up — Wall Push Ups
+- Knee Push-up — Knee Push Ups
+- Close-Grip Push-up — Close Grip Push Ups
+- Side Plank — Side Plank
+- Bird Dog — Bird-Dog
+- Reverse Crunch — Reverse Crunches
+- Hanging Knee Raise — Hanging Knee Raise
+- Bodyweight Calf Raise — Bodyweight Calf Raise
+- Resistance Band Pull-Apart — Band Pull Apart
+- Kettlebell Deadlift — Kettlebell Deadlift
+- Two-Hand Kettlebell Swing — Kettlebell Swing
+- Low Park-Bar Inverted Row — Inverted Row
+- Park Bench Incline Push-up — Incline Push-Up
+- Brisk Walking — Walking
+- Controlled Mountain Climber — Mountain Climbers
+- Countermovement Squat Jump — Jump Squat
+- Half-Kneeling Hip Flexor Stretch — Kneeling Hip Flexor Stretch
+- Gentle Cat-Camel — Cat-Cow
+- Seated Dumbbell Curl — Seated Dumbbell Curl
+
+## External animated demonstrations
+
+- [Prone W Raise](https://www.trainaiapp.com/exercises/prone-w-raise/)
+- [Low Park Step-up](https://www.trainaiapp.com/exercises/low-step-up/)
+- [March in Place](https://www.trainaiapp.com/exercises/march-in-place/)
+- [Easy Run](https://www.trainaiapp.com/exercises/run/)
+- [Controlled Tempo Run](https://www.trainaiapp.com/exercises/run/)
+- [Low-Impact Step Jack](https://www.trainaiapp.com/exercises/step-jack/)
+- [Step-Back Squat Thrust](https://www.trainaiapp.com/exercises/step-back-burpee/)
+- [Side-Lying Open Book Rotation](https://www.trainaiapp.com/exercises/thoracic-open-book/)
+- [Standing Ankle Dorsiflexion Rock](https://www.trainaiapp.com/exercises/knee-to-wall-ankle-mobility/)
+- [Scapular Push-up](https://www.trainaiapp.com/exercises/scapular-push-up/)
+- [Supported Heel Raise](https://www.trainaiapp.com/exercises/wall-supported-calf-raise/)
+- [Seated March](https://www.trainaiapp.com/exercises/seated-march/)
+- [Seated Heel Raise](https://www.trainaiapp.com/exercises/seated-heel-raise/)

@@ -1713,8 +1713,13 @@ globalThis.ForgeData = {
   if(!source)throw Error('Load exercises.js before data.js.');
   globalThis.ForgeData.exercises=source.exercises;
   globalThis.ForgeData.reviewedVideos=globalThis.ForgeReviewedVideos || require('./reviewed-videos.js');
+  globalThis.ForgeData.exerciseIllustrations=globalThis.ForgeExerciseIllustrations || require('./exercise-illustrations.js');
+  globalThis.ForgeData.animationLinks=globalThis.ForgeAnimationLinks || require('./animation-links.js');
+  globalThis.ForgeData.movementPictures=globalThis.ForgeMovementPictures || require('./movement-pictures.js');
   globalThis.ForgeData.programExerciseCoverage=source.programExerciseCoverage;
-  globalThis.ForgeData.programs=globalThis.ForgeExpandedPrograms || require('./programs-expanded.js');
+  const expanded=globalThis.ForgeExpandedPrograms || require('./programs-expanded.js');
+  const additional=globalThis.ForgeAdditionalPrograms || require('./additional-programs.js');
+  globalThis.ForgeData.programs=[...expanded,...additional(expanded)];
   globalThis.ForgeData.catalogInfo=globalThis.ForgeCatalog || require('./catalog.js');
   globalThis.ForgeData.programExerciseCoverage=globalThis.ForgeData.programs.map(p=>({programNumber:p.programNumber,programId:p.id,exerciseIds:[...new Set([...(source.programExerciseCoverage.find(x=>x.programId===p.id)?.exerciseIds||[]),...p.schedule.flatMap(d=>d.exercises.map(e=>e.exerciseId))])],warmupExerciseIds:[...new Set(p.schedule.flatMap(d=>[...d.warmup,...d.rampUpSets].map(e=>e.exerciseId)))]}));
   // One authored library; this view keeps the established logger's labels.
