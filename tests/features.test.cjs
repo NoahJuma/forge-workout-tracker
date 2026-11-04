@@ -9,10 +9,10 @@ function setup(ids,date='2026-11-16'){
 }
 test('runtime catalog equals original and expanded JSON without changing the original 30 plans',()=>{
  const extra=JSON.parse(fs.readFileSync(path.join(__dirname,'../programs-expanded.json'),'utf8'));
- assert.deepEqual(D.programs,[...batches,...extra]);assert.equal(D.programs.length,195);
- assert.deepEqual(D.programs.map(p=>p.programNumber),Array.from({length:195},(_,i)=>i+1));
- assert.equal(new Set(D.programs.map(p=>p.id)).size,195);
- assert.equal(new Set(D.programs.map(p=>JSON.stringify(p.schedule.map(d=>d.exercises)))).size,195);
+ assert.deepEqual(D.programs.slice(0,195),[...batches,...extra]);assert.equal(D.programs.length,196);
+ assert.deepEqual(D.programs.map(p=>p.programNumber),Array.from({length:196},(_,i)=>i+1));
+ assert.equal(new Set(D.programs.map(p=>p.id)).size,196);
+ assert.equal(new Set(D.programs.map(p=>JSON.stringify(p.schedule.map(d=>d.exercises)))).size,196);
  assert.deepEqual(D.programs.slice(20,30).map(p=>p.name),['Push-Up Progression','Kettlebell Conditioning','Core Stability & Back Health','Mobility & Posture Fix','Outdoor Calisthenics','Run + Strength Hybrid','Athletic Power','Stair & Hill Conditioning','Low-Impact Strength','Summer Shred']);
  assert.deepEqual(['gym','home','outdoor','any'].map(location=>batches.filter(p=>p.location===location).length),[15,9,4,2]);
 });
