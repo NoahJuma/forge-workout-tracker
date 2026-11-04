@@ -67,7 +67,7 @@ test('new health-context fields persist through backup validation and old profil
 });
 test('equipment artwork and expansion modules are shipped and cached locally',()=>{
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8');for(const id of Object.keys(C.images)){const file='assets/'+id+'.jpg';assert(fs.statSync(path.join(__dirname,'..',file)).size>10000);assert(sw.includes("'./"+file+"'"));}
- for(const file of ['catalog.js','catalog.css','exercises-expanded.js','programs-expanded.js'])assert(sw.includes("'./"+file+"'"));
+ for(const file of ['catalog.js','catalog.css','program-controls.css','exercises-expanded.js','programs-expanded.js'])assert(sw.includes("'./"+file+"'"));
 });
 test('life-stage plans start loads fresh and only reuse the same plan within the current block',()=>{
  const s=M.empty(),target={exerciseId:'goblet',sets:2,min:8,max:12,unit:'reps'},workout={id:'sample',title:'Sample',exercises:[target]};

@@ -96,6 +96,22 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
     if(enabled&&(!state.programSettings[id]?.startedOn||blockComplete(state,id)))settings.startedOn=monday(M.today());
     state.programSettings[id]=settings;sync(state);
   }
+  /** Remove a user's program selection while retaining recorded workouts and custom templates. */
+  function removeProgram(state,id){
+    if(!exists(state,id))throw Error('Unknown program');
+    bookmark(state,id,false);delete state.programSettings[id];
+    if(state.activePlan===id||state.sessions[state.sessionId]?.planId===id){
+      state.sessionId=null;state.activePlan=state.activePrograms[0]||'';
+      state.activeWorkout=state.activePlan?M.planById(state).workouts[0].id:'';
+    }
+  }
+  /** Replace only the chosen active program; keep its bookmark and all training records. */
+  function replaceProgram(state,previousId,nextId){
+    if(!exists(state,previousId)||!exists(state,nextId))throw Error('Unknown program');
+    setActive(state,nextId,true);
+    if(previousId!==nextId)setActive(state,previousId,false);
+    state.activePlan=nextId;state.activeWorkout=M.planById(state,nextId).workouts[0].id;state.sessionId=null;
+  }
   function calendar(state,date=M.today()){
     const start=monday(date),result=Array.from({length:7},(_,i)=>({date:addDays(start,i),weekday:i+1,sessions:[]}));
     for(const id of state.activePrograms){
@@ -191,6 +207,6 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
     const sides=['db-row','db-curl','lunge','split-squat','reverse-lunge','cable-lateral','pallof-press','side-plank','deadbug','bird-dog','db-split-squat','body-split-squat','park-stepup','kb-reverse-lunge','kb-suitcase-carry','hip-flexor-stretch','open-book','ankle-rock','one-arm-db-row','supported-single-calf','supported-hip-abduction','supported-hip-extension','seated-knee-extension'];
     return {exerciseId:id,sets:3,min:unit==='reps'?8:amount,max:unit==='reps'?12:amount,unit,rir:unit==='reps'?'Leave 2–3 controlled reps in reserve':'Keep controlled effort and follow the technique cues.',perLeg:sides.includes(id),restSeconds:90,hardSet:!['conditioning','mobility','power'].includes(e.pattern),intensityNote:''};
   }
-  return {trainingGoals:['hypertrophy','strength','fat-loss','endurance','mobility','skill'],goalLabels,nativeById,programPlan,resolveDay,adaptPrescription:adapt,defaultTarget,recommendProgram,bookmark,setActive,calendar,overlapWarnings,settingsFor,weekFor,blockComplete,addDays,monday,videoIdFor,parseVideoId,validateProgramState};
+  return {trainingGoals:['hypertrophy','strength','fat-loss','endurance','mobility','skill'],goalLabels,nativeById,programPlan,resolveDay,adaptPrescription:adapt,defaultTarget,recommendProgram,bookmark,setActive,removeProgram,replaceProgram,calendar,overlapWarnings,settingsFor,weekFor,blockComplete,addDays,monday,videoIdFor,parseVideoId,validateProgramState};
 };
 if(typeof module!=='undefined')module.exports=globalThis.ForgeProgramFeatures;
