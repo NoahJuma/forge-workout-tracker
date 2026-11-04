@@ -1714,7 +1714,6 @@ globalThis.ForgeData = {
   globalThis.ForgeData.exercises=source.exercises;
   globalThis.ForgeData.reviewedVideos=globalThis.ForgeReviewedVideos || require('./reviewed-videos.js');
   globalThis.ForgeData.exerciseIllustrations=globalThis.ForgeExerciseIllustrations || require('./exercise-illustrations.js');
-  globalThis.ForgeData.animationLinks=globalThis.ForgeAnimationLinks || require('./animation-links.js');
   globalThis.ForgeData.movementPictures=globalThis.ForgeMovementPictures || require('./movement-pictures.js');
   globalThis.ForgeData.programExerciseCoverage=source.programExerciseCoverage;
   const expanded=globalThis.ForgeExpandedPrograms || require('./programs-expanded.js');

@@ -1,6 +1,6 @@
 "use strict";
-const CACHE_NAME='forge-tracker-v4-20261104-visual-catalog-r1';
-const APP_FILES=['./','./index.html','./theme.js','./styles.css','./catalog.css','./program-controls.css','./program-weeks.css','./mobile.css','./reviewed-videos.js','./exercise-illustrations.js','./animation-links.js','./movement-pictures.js','./data.js','./catalog.js','./exercises.js','./exercises-expanded.js','./programs.js','./programs-expanded.js','./additional-programs.js','./program-model.js','./program-ui.js','./model.js','./app.js','./assets/dumbbells.jpg','./assets/barbell.jpg','./assets/bands.jpg','./assets/kettlebell.jpg','./assets/outdoor.jpg','./assets/mobility.jpg','./manifest.webmanifest','./icon-192.png','./icon-512.png','./EXERCISE_VIDEO_SELECTION.csv'];
+const CACHE_NAME='forge-tracker-v4-20261105-own-motion-r1';
+const APP_FILES=['./','./index.html','./theme.js','./styles.css','./catalog.css','./program-controls.css','./program-weeks.css','./mobile.css','./reviewed-videos.js','./exercise-illustrations.js','./movement-pictures.js','./data.js','./catalog.js','./exercises.js','./exercises-expanded.js','./programs.js','./programs-expanded.js','./additional-programs.js','./program-model.js','./program-ui.js','./model.js','./app.js','./assets/dumbbells.jpg','./assets/barbell.jpg','./assets/bands.jpg','./assets/kettlebell.jpg','./assets/outdoor.jpg','./assets/mobility.jpg','./manifest.webmanifest','./icon-192.png','./icon-512.png','./EXERCISE_VIDEO_SELECTION.csv'];
 const OWN_CACHE_PREFIX='forge-tracker-';
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_FILES)).then(()=>self.skipWaiting()));

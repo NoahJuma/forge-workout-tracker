@@ -1,6 +1,6 @@
 # Exercise media and sources
 
-Updated 4 November 2026. The app provides 66 selected videos, 29 illustrated position guides, 13 links to animated demonstrations, and 23 locally drawn movement diagrams. Every exercise retains ordered written instructions.
+Updated 5 November 2026. The app provides 66 selected videos, 29 illustrated position guides, and 36 original animated movement guides drawn in the app. Every exercise retains ordered written instructions.
 
 ## Selection and review
 
@@ -10,7 +10,7 @@ The illustrated guides are matched by exercise name, movement and equipment to t
 
 Exercise data and illustrations by [RepDB (repdb.co)](https://repdb.co); used within the app under the [RepDB free-tier data license](https://github.com/RepDB/exercise-dataset/blob/main/LICENSE-DATA.md). No paid preview animations are used.
 
-The animated-demonstration links open the source pages on [TrainAI](https://www.trainaiapp.com/exercise-media/). The app links to those pages and does not bundle or redistribute their media. The local movement diagrams are schematic illustrations, not a substitute for the exercise-specific instructions beside them; follow the written setup, range and support cues.
+The animated movement guides are original schematic illustrations that run locally, with no connection to an outside animation app. Follow the written setup, range and support cues alongside each guide.
 
 ## Video selections
 
@@ -114,19 +114,3 @@ The animated-demonstration links open the source pages on [TrainAI](https://www.
 - Half-Kneeling Hip Flexor Stretch — Kneeling Hip Flexor Stretch
 - Gentle Cat-Camel — Cat-Cow
 - Seated Dumbbell Curl — Seated Dumbbell Curl
-
-## External animated demonstrations
-
-- [Prone W Raise](https://www.trainaiapp.com/exercises/prone-w-raise/)
-- [Low Park Step-up](https://www.trainaiapp.com/exercises/low-step-up/)
-- [March in Place](https://www.trainaiapp.com/exercises/march-in-place/)
-- [Easy Run](https://www.trainaiapp.com/exercises/run/)
-- [Controlled Tempo Run](https://www.trainaiapp.com/exercises/run/)
-- [Low-Impact Step Jack](https://www.trainaiapp.com/exercises/step-jack/)
-- [Step-Back Squat Thrust](https://www.trainaiapp.com/exercises/step-back-burpee/)
-- [Side-Lying Open Book Rotation](https://www.trainaiapp.com/exercises/thoracic-open-book/)
-- [Standing Ankle Dorsiflexion Rock](https://www.trainaiapp.com/exercises/knee-to-wall-ankle-mobility/)
-- [Scapular Push-up](https://www.trainaiapp.com/exercises/scapular-push-up/)
-- [Supported Heel Raise](https://www.trainaiapp.com/exercises/wall-supported-calf-raise/)
-- [Seated March](https://www.trainaiapp.com/exercises/seated-march/)
-- [Seated Heel Raise](https://www.trainaiapp.com/exercises/seated-heel-raise/)

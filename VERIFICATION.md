@@ -1,6 +1,6 @@
 # Release verification
 
-Completed locally on 4 November 2026.
+Completed locally on 5 November 2026.
 
 ## Automated checks
 
@@ -8,7 +8,7 @@ Command:
 
     node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs tests/reviewed-videos.test.cjs tests/timer-catalog.test.cjs
 
-Result: **91 tests passed, 0 failed**.
+Result: **92 tests passed, 0 failed**.
 
 Checks include all 196 data records and all block weeks/stages; original data preservation; 10+ choices in every displayed goal, muscle, context and location; meaningful schedule uniqueness; equipment/capability matching; 10–20 primary focus-group sets; maternal screening/readiness; conservative pregnancy and early postpartum prescriptions; supported/floor-transfer options at 65+; fresh starting loads for new life-stage blocks; backup migration; guarded storage; targets in reps/seconds/metres; and all local assets in the offline shell.
 
@@ -18,9 +18,11 @@ The advanced fat-loss program, source-backed activity guidance, ordered exercise
 
 ## Browser checks
 
-Result: **949 checks passed** in a real Chromium browser, including 320px and 390px phone widths, a 560px short viewport and an 1100px desktop width.
+Result: **957 checks passed** in a real Chromium browser, including 320px and 390px phone widths, a 560px short viewport and an 1100px desktop width.
 
-Timer checks simulate expiration with a mocked audio device, check that it sounds once, and confirm the muted preference persists. They do not certify audible playback on every phone, in a background tab or with device audio muted.
+Timer checks cover scheduling, pause, mute, interrupted playback and sound preview. A separate Chromium test uses the real audio engine and measures a nonzero output for the scheduled and preview alerts, and silence after pausing. Device volume and browser or operating-system restrictions can prevent playback, especially when a page is suspended or closed.
+
+Locally generated SVG guides are checked for actual movement, pause and resume, reduced-motion settings, and the absence of external animation links. Ordered written instructions remain available beside the illustrations.
 
 Mobile checks cover fixed session actions, 48px logging/finish targets, unobscured set fields, readable date input, saved workout completion, visible rest presets, desktop sidebar restoration and horizontal fit. The technique guide fills the phone viewport; its close control stays visible while scrolling. It handles fast close/reopen, written-only selection, restoring the reviewed video, player destruction and late callbacks.
 

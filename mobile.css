@@ -19,6 +19,9 @@ dialog{overscroll-behavior:contain;scrollbar-gutter:stable}
 .exercise-poses{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:14px 0 4px}
 .exercise-poses figure{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
 .exercise-poses img,.exercise-poses svg{width:100%;aspect-ratio:1;object-fit:contain;display:block}
+.motion-guide{max-width:360px;margin:16px auto 8px;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:var(--bg)}
+.motion-stage{padding:12px;aspect-ratio:1}.motion-stage svg{width:100%;height:100%;display:block}
+.motion-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 12px 12px;font-size:13px;font-weight:700}.motion-caption .button{min-height:44px;font-size:12px}
 .exercise-poses figcaption{padding:8px 10px;font-size:12px;font-weight:700;color:var(--ink)}
 .image-credit{font-size:11px;margin:6px 0 14px}.image-credit a{color:var(--accent)}
 .exercise-details ol.visual-steps{list-style:none;padding:0;display:grid;gap:10px;counter-reset:none}
@@ -50,7 +53,8 @@ dialog{overscroll-behavior:contain;scrollbar-gutter:stable}
   .workout-aside .rest-card .timer-value{font-size:30px;grid-column:1;grid-row:2/4}
   .rest-card .timer-actions{grid-column:2;grid-row:1/4;align-items:center}
   .rest-card .timer-actions .button{min-width:0;padding:10px;min-height:48px}
-  .workout-aside .rest-card .timer-sound{display:inline-flex;align-items:center;grid-column:1/-1;justify-self:start;font-size:12px}
+  .workout-aside .rest-card .timer-sound-controls{grid-column:1/-1;display:flex;gap:16px;align-items:center}
+  .workout-aside .rest-card .timer-sound,.workout-aside .rest-card .timer-test{display:inline-flex;align-items:center;font-size:12px}
   .workout-aside .timer-presets{display:flex;grid-column:1/-1;flex-wrap:wrap;gap:8px;margin-top:8px}
   .workout-aside .timer-presets button{min-width:40px;min-height:44px;font-size:12px}
   .exercise{padding:16px;border-radius:16px;scroll-margin-top:70px;scroll-margin-bottom:110px}
