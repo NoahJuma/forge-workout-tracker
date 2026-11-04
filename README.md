@@ -4,6 +4,12 @@ A mobile-first static training app with 195 structured programs, 131 centrally d
 
 ## Training features
 
+### Program length and every-week preview
+
+Recommendations show the actual full program length, training days and session time. Expand **Explore all N weeks** to review the recommendation without leaving setup. The Workout screen shows **Week X of N** and a **Preview another week** selector. Plan details offer every numbered week plus previous/next navigation, with introductory and lighter/deload weeks labeled.
+
+Each week resolves the existing plan prescriptions, including sets, repetitions, rest, warm-up and ability-stage adjustments. Repeated weekly splits use the stated progression rule rather than invented exercise changes. Pregnancy/postpartum plans remain symptom- and readiness-led. Browsing is read-only: it does not change the training date, block start, activation, ability stage or logged sets. Custom and archived routines without a specified duration are labeled as having no fixed end date.
+
 ### Change, remove or choose a program later
 
 The Workout screen shows **Change program** and **Remove program** beside the selected program, above the logging fields. Change opens a replacement flow: the current program stays active until another is chosen, and cancelling keeps it. A replacement changes only that active program and retains its saved bookmark and recorded workouts.
@@ -58,7 +64,7 @@ Open http://127.0.0.1:8080. The shipped app requires no compilation or installat
 
 With Node.js available:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs
 
 For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 195 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
 
