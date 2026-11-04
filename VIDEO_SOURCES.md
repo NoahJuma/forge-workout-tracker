@@ -1,3 +1,5 @@
+> Catalog expansion: the current library has 131 exercises. This document describes the original 113 entries; additional supported strength, balance and recovery entries are in exercises-expanded.js. The current video query sheet includes all 131.
+
 # Exercise video sources
 
 The list below is the original 42-demonstration source record. The complete 113-exercise selection sheet is [EXERCISE_VIDEO_SELECTION.csv](EXERCISE_VIDEO_SELECTION.csv). New canonical video IDs are blank. Select an ID in the app's exercise dialog to save it locally; missing or failed videos show written instructions. Historical verification dates below were preserved, not rechecked for every video during this release.

@@ -1,34 +1,25 @@
 # Release verification
 
-Completed locally on 3 November 2026.
+Completed locally on 4 November 2026.
 
-## Automated data and model checks
+## Automated checks
 
 Command:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs
 
-Result: **58 tests passed, 0 failed**.
+Result: **70 tests passed, 0 failed**.
 
-Coverage includes all 30 program records, JSON/runtime agreement, central exercise references, equipment and setup matching, experience/day limits, complete warm-ups, progression and deloads, target volume, session timing, beginner and skill stages, unrestricted bookmarks, multiple active programs, shifted calendars, all three overlap warnings, block completion, snapshot preservation, reps/seconds/metres, migration, backup validation and video ID validation.
+Checks include all 195 data records and all block weeks/stages; original data preservation; 10+ choices in every displayed goal, muscle, context and location; meaningful schedule uniqueness; equipment/capability matching; 10–20 primary focus-group sets; maternal screening/readiness; conservative pregnancy and early postpartum prescriptions; supported/floor-transfer options at 65+; fresh starting loads for new life-stage blocks; backup migration; guarded storage; targets in reps/seconds/metres; and all local assets in the offline shell.
 
 ## Browser checks
 
-Result: **120 checks passed**, using a local Chromium browser at a 390px app viewport.
+Result: **475 checks passed** in a real Chromium browser at a 390px app viewport.
 
-The suite opens all 30 program previews, checks onboarding and home equipment, activates multiple programs, shifts a schedule, saves an ability stage, logs reps and seconds, reloads saved state, creates a timed custom session, tests missing and failed videos, handles blocked storage, recovers a malformed backup, and verifies installed offline-cache entries.
+The suite opens all 195 previews, exercises catalog sections and equipment images, tests new context questions and readiness gates, activates appropriate plans, checks that maternal blocks are not stacked, preserves earlier records, and verifies reloads, backups, blocked storage, video fallback and the installed offline cache. Player events are simulated; remote video availability is not individually certified. The localhost-only test harness uses isolated prefixed storage and cleans its temporary keys.
 
-Player callbacks are simulated using the existing official-player interface. This verifies fallback behavior; it does not claim that every remote YouTube video is currently playable. The canonical video IDs remain blank until selected; the original 42 source IDs are retained.
+Reviewed catalog screenshots at phone and desktop widths. Syntax and whitespace checks are included in the release review.
 
-The browser harness is localhost-only and uses a unique prefixed storage adapter, so existing training keys are not overwritten. Its temporary keys are cleaned up. Production storage remains ordinary guarded localStorage.
+## Evidence limits
 
-## Manual review
-
-- Reviewed the 390px combined calendar layout and workload summary.
-- Syntax checks passed for the application and program modules.
-- Git whitespace checks passed.
-- No browser script errors were reported in normal flows, blocked-storage flows or backup recovery.
-
-## Remaining user selection
-
-The 113-exercise search-query sheet is [EXERCISE_VIDEO_SELECTION.csv](EXERCISE_VIDEO_SELECTION.csv). New video IDs were intentionally not invented. Open an exercise in the app to paste a chosen YouTube ID or link, saved on that device.
+Guideline source links are provided in the app and EXPANDED_CATALOG.md. The app templates are original examples, not clinically validated protocols or an individual medical prescription. Videos retain written fallback, and new canonical YouTube IDs remain blank for user selection. The query sheet contains 131 exercise rows. Equipment cover images are illustrative generated artwork and do not add requirements beyond the equipment list.
