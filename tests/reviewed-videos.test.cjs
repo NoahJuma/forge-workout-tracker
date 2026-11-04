@@ -35,5 +35,5 @@ test('published selection CSV matches the reviewed library and contains all 131 
 });
 test('registry loads before data and the offline shell caches the mobile release atomically',()=>{
  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8');assert(html.indexOf('./reviewed-videos.js')<html.indexOf('./data.js'));
- for(const f of ['reviewed-videos.js','mobile.css','additional-programs.js']){assert(html.includes('./'+f));assert(sw.includes("'./"+f+"'"));}assert(sw.includes('20261104-visual-catalog-r1'));
+ for(const f of ['reviewed-videos.js','mobile.css','additional-programs.js']){assert(html.includes('./'+f));assert(sw.includes("'./"+f+"'"));}assert(sw.includes('20261105-own-motion-r1'));
 });

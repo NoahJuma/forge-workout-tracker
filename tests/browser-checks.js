@@ -23,7 +23,7 @@
   async function load(blocked=false){
     const html=await(await fetch(root+'index.html')).text();
     const pre='<base href="'+root+'"><meta http-equiv="Content-Security-Policy" content="frame-src \'none\'">'+
-      '<script>window.__appErrors=[];addEventListener("error",e=>{if(e.message)window.__appErrors.push(e.message);});window.confirm=()=>true;window.__players=[];window.__sounds=0;window.AudioContext=class{constructor(){this.state="running";this.currentTime=0;this.destination={};}createOscillator(){return {frequency:{},connect(){},start(){window.__sounds++},stop(){}}}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}}}};window.YT={Player:class{constructor(id,options){this.options=options;window.__players.push(this);setTimeout(()=>options.events.onReady({target:this}),0);}destroy(){this.destroyed=true;}}};'+
+      '<script>window.__appErrors=[];addEventListener("error",e=>{if(e.message)window.__appErrors.push(e.message);});window.confirm=()=>true;window.__players=[];window.__tones=[];window.AudioContext=class{constructor(){this.state="running";this.destination={};window.__audioCtx=this}get currentTime(){return Date.now()/1000}resume(){this.state="running";return Promise.resolve()}createOscillator(){return {frequency:{},connect(){},start(t){this.record={at:t,cancelled:false};window.__tones.push(this.record)},stop(t){if(t===undefined&&this.record)this.record.cancelled=true}}}createGain(){return {gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}}}};window.YT={Player:class{constructor(id,options){this.options=options;window.__players.push(this);setTimeout(()=>options.events.onReady({target:this}),0);}destroy(){this.destroyed=true;}}};'+
       (blocked?'Object.defineProperty(window,"localStorage",{get(){throw new DOMException("Storage unavailable","SecurityError");}});':'Object.defineProperty(window,"localStorage",{value:{getItem:k=>parent.__forgeQAStorage.getItem(k),setItem:(k,v)=>parent.__forgeQAStorage.setItem(k,v),removeItem:k=>parent.__forgeQAStorage.removeItem(k)}});')+'</script>';
     const done=new Promise(resolve=>frame.onload=resolve);
     frame.srcdoc=html.replace('<head>','<head>'+pre);
@@ -198,12 +198,18 @@
     expect(win.getComputedStyle(doc.querySelector('.timer-presets')).display!=='none','Mobile rest timer offers duration presets');
     expect(win.getComputedStyle(doc.querySelector('[data-action=timer-sound]')).display!=='none','Timer sound control is visible on mobile');
     const realNow=win.Date.now,startTime=realNow();win.Date.now=()=>startTime;
-    click('[data-action=timer-preset][data-id="60"]');action('timer-toggle');win.Date.now=()=>startTime+61000;await pause(600);
-    expect(win.__sounds===2&&doc.querySelector('#timerValue').textContent==='0:00','Timer completion plays the two-note alert once');
-    await pause(350);expect(win.__sounds===2,'Completed timer does not repeat the alert');
-    action('timer-sound');expect(JSON.parse(qaStorage.getItem(key)).timerSoundEnabled===false,'Sound preference saves on this device');
-    win.Date.now=()=>startTime;action('timer-toggle');win.Date.now=()=>startTime+61000;await pause(600);
-    expect(win.__sounds===2,'Muted timer completes without playing sound');win.Date.now=realNow;
+    click('[data-action=timer-preset][data-id="60"]');action('timer-toggle');
+    expect(win.__tones.length===3&&win.__tones[0].at>=startTime/1000+60,'Timer sound is scheduled at its deadline when started');
+    win.Date.now=()=>startTime+61000;await pause(600);
+    expect(win.__tones.length===3&&doc.querySelector('#timerValue').textContent==='0:00','Timer completion does not schedule a duplicate alert');
+    click('[data-action=timer-preset][data-id="60"]');win.Date.now=()=>startTime;action('timer-toggle');action('timer-toggle');
+    expect(win.__tones.slice(3,6).every(t=>t.cancelled),'Pausing cancels the pending alert');
+    action('timer-toggle');action('timer-sound');expect(win.__tones.slice(6,9).every(t=>t.cancelled),'Muting a running timer cancels its scheduled alert');
+    expect(JSON.parse(qaStorage.getItem(key)).timerSoundEnabled===false,'Sound preference saves on this device');
+    win.Date.now=()=>startTime+61000;await pause(600);expect(win.__tones.length===9,'Muted timer finishes without scheduling a new sound');
+    action('timer-sound');const beforeTest=win.__tones.length;action('timer-test');expect(win.__tones.length===beforeTest+3,'Test sound plays the alert immediately');
+    click('[data-action=timer-preset][data-id="60"]');win.Date.now=()=>startTime;action('timer-toggle');const beforeInterrupted=win.__tones.length;win.__audioCtx.state='interrupted';win.Date.now=()=>startTime+61000;await pause(600);
+    expect(win.__tones.slice(beforeInterrupted-3,beforeInterrupted).every(t=>t.cancelled)&&win.__tones.length===beforeInterrupted+3,'An interrupted audio context retries the alert on completion');win.Date.now=realNow;
     frame.style.width='1100px';await pause(20);
     expect(win.getComputedStyle(doc.querySelector('.session-progress')).position!=='fixed','Desktop session summary stays in the sidebar');
     expect(doc.documentElement.scrollWidth<=win.innerWidth+1,'Workout fits the desktop viewport');
@@ -219,13 +225,20 @@
     expect(!doc.querySelector('#exerciseVideoId'),'Unreviewed links cannot be added to the playback selection');
     doc.querySelector('#closeVideo').click();
     win.document.body.insertAdjacentHTML('beforeend','<button id="qaGraphic" data-action="video" data-id="supported-tandem">Technique</button>');click('#qaGraphic');
-    expect(doc.querySelectorAll('#videoModal .exercise-poses svg').length===2,'Supported balance has a locally rendered two-position movement guide');
+    expect(doc.querySelectorAll('#videoModal .motion-stage svg').length===1&&doc.querySelectorAll('#videoModal .motion-stage animate').length>0,'Supported balance has an animated local movement guide');
+    const moving=doc.querySelector('#videoModal .motion-stage animate[attributeName="x2"]');const beforePosition=moving.parentElement.x2.animVal.value;await pause(350);
+    expect(Math.abs(moving.parentElement.x2.animVal.value-beforePosition)>.01,'Movement animation actually changes position over time');
+    action('motion-toggle');expect(doc.querySelector('[data-action=motion-toggle]').textContent==='Play animation'&&doc.querySelector('.motion-stage svg').animationsPaused(),'Movement animation can be paused');action('motion-toggle');expect(doc.querySelector('[data-action=motion-toggle]').textContent==='Pause animation'&&!doc.querySelector('.motion-stage svg').animationsPaused(),'Movement animation can be resumed');
     expect(doc.querySelectorAll('#videoModal .visual-steps li').length===3,'Supported balance keeps all guidance in order');
     doc.querySelector('#closeVideo').click();doc.querySelector('#qaGraphic').remove();
     win.document.body.insertAdjacentHTML('beforeend','<button id="qaAnimation" data-action="video" data-id="march">Technique</button>');click('#qaAnimation');
-    expect(doc.querySelector('.external-animation').href==='https://www.trainaiapp.com/exercises/march-in-place/','Matching animation opens the original publisher page');
+    expect(doc.querySelectorAll('#videoModal .motion-stage animate').length>0&&!doc.querySelector('.external-animation'),'March animation runs locally without a link to another app');
     expect(doc.querySelectorAll('#videoModal .visual-steps li').length===4,'Animated guides also retain the ordered written steps');
     doc.querySelector('#closeVideo').click();doc.querySelector('#qaAnimation').remove();
+    const originalMatchMedia=win.matchMedia;win.matchMedia=q=>q.includes('prefers-reduced-motion')?{matches:true}:originalMatchMedia.call(win,q);
+    win.document.body.insertAdjacentHTML('beforeend','<button id="qaReduced" data-action="video" data-id="march">Technique</button>');click('#qaReduced');
+    expect(doc.querySelector('.motion-stage svg').animationsPaused()&&doc.querySelector('[data-action=motion-toggle]').textContent==='Play animation','Reduced motion starts the animation paused');
+    doc.querySelector('#closeVideo').click();doc.querySelector('#qaReduced').remove();win.matchMedia=originalMatchMedia;
     win.document.body.insertAdjacentHTML('beforeend','<button id="qaVideo" data-action="video" data-id="goblet">Technique</button>');
     click('#qaVideo');await pause(20);
     expect(Math.abs(doc.querySelector('#videoModal').getBoundingClientRect().height-win.innerHeight)<2,'Technique guide uses the full phone viewport');

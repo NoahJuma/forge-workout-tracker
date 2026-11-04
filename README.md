@@ -31,7 +31,7 @@ Profile setup also offers **Choose a program later** on the recommendation step,
 
 ## Exercises and YouTube
 
-All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. There are 66 curated male-demonstrator videos. The other exercises provide 29 illustrated position guides, 13 links to animated demonstrations and 23 locally drawn movement diagrams. Every guide includes numbered steps. Sources and review scope are documented in VIDEO_SOURCES.md.
+All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. There are 66 curated male-demonstrator videos. The other exercises provide 29 illustrated position guides and 36 original animated movement guides that run locally. Animations can be paused and respect reduced-motion preferences. Every guide includes numbered steps. Sources and review scope are documented in VIDEO_SOURCES.md.
 
 Open Technique & instructions to view the official privacy-enhanced YouTube player and written guidance. Video preference offers the curated demonstration or written steps only. Old custom video IDs remain in backups, but cannot bypass the reviewed library; existing written-only preferences still apply. Playback errors keep the written steps available, and closing the guide destroys the player. Settings lists missing selections and failed checks and exports the current exercise selections.
 
@@ -41,7 +41,7 @@ Open Technique & instructions to view the official privacy-enhanced YouTube play
 
 The advanced Strength & Cardio program combines four strength sessions with walking and offers a matching option for the advanced fat-loss filters. If no exact matches exist, clearly labeled similar plans retain the selected goal and profile checks; one-tap options can widen a single filter.
 
-The rest timer plays a short sound when it finishes. Sound can be turned off and the preference is stored with other settings. Audio is prepared when the user starts a timer; device volume and browser background restrictions affect whether it is audible. The timer also displays an on-screen message.
+The rest timer schedules a short sound when it starts or resumes. Sound can be turned off, its preference is stored with other settings, and a Test sound button previews the alert. Pausing or resetting cancels the pending alert. Device volume and browser or operating-system background restrictions affect whether it is audible. The timer also displays an on-screen message.
 
 ## Storage and privacy
 
