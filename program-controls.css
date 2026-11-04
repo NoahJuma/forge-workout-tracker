@@ -1,0 +1,6 @@
+/* Program management sits above the session so it is reachable on phones. */
+.program-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:4px 0 22px;padding:12px 0;border-bottom:1px solid var(--line)}
+.program-actions .danger{min-height:44px;padding:10px 12px}
+.replacement-banner{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:12px 0 24px}.replacement-banner p{margin:6px 0 0;max-width:650px;font-size:13px;line-height:1.6}.replacement-banner .button{flex-shrink:0}
+.program-removal-footer{flex-wrap:wrap}.program-removal-footer .button{min-height:44px;white-space:normal}.active-row{flex-wrap:wrap}
+@media(max-width:600px){.replacement-banner{align-items:flex-start;flex-direction:column;gap:12px}.program-removal-footer .button{flex:1 1 100%}.program-actions{gap:8px}.program-actions .button,.program-actions .text-button{flex:1;min-width:130px}.active-row>strong{flex-basis:100%}}

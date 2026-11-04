@@ -4,6 +4,14 @@ A mobile-first static training app with 195 structured programs, 131 centrally d
 
 ## Training features
 
+### Change, remove or choose a program later
+
+The Workout screen shows **Change program** and **Remove program** beside the selected program, above the logging fields. Change opens a replacement flow: the current program stays active until another is chosen, and cancelling keeps it. A replacement changes only that active program and retains its saved bookmark and recorded workouts.
+
+Remove offers **Remove for now** or **Remove & choose another**. It removes that selection from active and saved programs, preserving workout records and editable custom routines. If another program is active it becomes the current selection; otherwise the app shows **No active program**. Removal persists after reload.
+
+Profile setup also offers **Choose a program later** on the recommendation step, saving the profile without activating the suggestion. Existing users can keep their current plan instead. My week provides change and removal controls for each active program. All persistent changes use the existing guarded localStorage helpers.
+
 - Four-step onboarding with Gym, Home and Outdoor. Home supports bodyweight, dumbbells, resistance bands, a pull-up bar and a kettlebell; follow-up setup checks distinguish long bands and a low assistance bar.
 - Recommendations match equipment, location, experience and available days. Every program includes warm-ups, complete weekly prescriptions, progression, deloads, rationale and references.
 - Save any number of available programs and activate more than one. My week combines them, supports weekday shifts, and flags consecutive muscle exposure, over-about-25 weekly hard sets and no full rest day.
@@ -50,7 +58,7 @@ Open http://127.0.0.1:8080. The shipped app requires no compilation or installat
 
 With Node.js available:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs
 
 For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 195 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
 

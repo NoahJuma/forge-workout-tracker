@@ -2,6 +2,7 @@
 globalThis.ForgeProgramUI=ctx=>{
   const {M,D,$,esc,pretty,toast,save,openModal,closeModal,modalHead,selectPlan,setView,startSetup,videoModal}=ctx;
   const state=ctx.getState;
+  let replacementId='';
   const C=D.catalogInfo;
   const filters={level:'all',goal:'all',location:'all',days:'all',saved:'all',audience:'all',muscle:'all',fits:true,search:''};
   const label=value=>String(value||'').replaceAll('-',' ').replaceAll('_',' ');
@@ -10,6 +11,11 @@ globalThis.ForgeProgramUI=ctx=>{
   const marked=id=>state().bookmarks.some(b=>b.programId===id);
   const active=id=>state().activePrograms.includes(id);
   const compatible=p=>!!state().profile&&M.eligiblePrograms(state().profile,[p]).length>0;
+  const activationLabel=p=>replacementId?(replacementId===p.id?'Keep current':'Use instead'):active(p.id)?'Deactivate':'Activate';
+  function programActions(p){
+    if(!active(p.id))return '';
+    return '<div class="program-actions"><button class="button small" data-action="change-plan" data-id="'+esc(p.id)+'" aria-label="Change '+esc(p.name)+'">Change program</button><button class="text-button danger" data-action="remove-program" data-id="'+esc(p.id)+'" aria-label="Remove '+esc(p.name)+' from my programs">Remove program</button></div>';
+  }
   function range(e){return e.durationSeconds?e.durationSeconds+' sec':e.distanceMetres?e.distanceMetres+' m':e.min===e.max?String(e.min):e.min+'–'+e.max;}
   function prescription(e){
     const c=M.exerciseLibrary[e.exerciseId];
@@ -27,7 +33,7 @@ globalThis.ForgeProgramUI=ctx=>{
   function card(p){
     const fits=compatible(p);
     const art=C.image(p),aud=C.audiences.find(x=>x.id===C.audience(p));
-    return '<article class="plan-card visual-plan'+(active(p.id)?' selected':'')+'" data-program="'+p.id+'"><div class="plan-photo"><img src="./assets/'+art+'.jpg" alt="'+esc(C.images[art])+'" width="960" height="640" loading="lazy" decoding="async"><span class="photo-label">'+esc(label(p.location))+'</span>'+(active(p.id)?'<span class="photo-active">Active</span>':'')+'</div><div class="plan-card-body"><div class="plan-kicker">'+esc(aud.name)+' · '+esc(goalText(p.goal))+'</div><h3>'+esc(p.name)+'</h3><p class="plan-description">'+esc(p.description)+'</p><div class="plan-metrics"><span><strong>'+p.daysPerWeek+'</strong>days / week</span><span><strong>'+p.sessionLengthMinutes+'</strong>min / session</span><span><strong>'+p.durationWeeks+'</strong>week block</span></div><div class="plan-tags"><span>'+pretty(p.level)+'</span>'+C.focus(p).map(id=>'<span>'+esc(C.muscles.find(x=>x.id===id)?.name||id)+'</span>').join('')+(p.readiness?'<span>'+esc(p.readiness==='recovery'?'Gentle recovery':'Strength rebuild')+'</span>':'')+'</div>'+(!fits&&state().profile?'<small class="mismatch">Review profile, readiness or equipment before activation</small>':'')+'<div class="plan-buttons"><button class="button" data-action="preview-plan" data-id="'+p.id+'">View plan</button><button class="button subtle" data-action="bookmark" data-id="'+p.id+'" aria-pressed="'+marked(p.id)+'" aria-label="'+(marked(p.id)?'Unsave ':'Save ')+esc(p.name)+'">'+(marked(p.id)?'★ Saved':'☆ Save')+'</button><button class="button '+(active(p.id)?'subtle':'primary')+'" data-action="toggle-active" data-id="'+p.id+'">'+(active(p.id)?'Deactivate':'Activate')+'</button></div></div></article>';
+    return '<article class="plan-card visual-plan'+(active(p.id)?' selected':'')+'" data-program="'+p.id+'"><div class="plan-photo"><img src="./assets/'+art+'.jpg" alt="'+esc(C.images[art])+'" width="960" height="640" loading="lazy" decoding="async"><span class="photo-label">'+esc(label(p.location))+'</span>'+(active(p.id)?'<span class="photo-active">Active</span>':'')+'</div><div class="plan-card-body"><div class="plan-kicker">'+esc(aud.name)+' · '+esc(goalText(p.goal))+'</div><h3>'+esc(p.name)+'</h3><p class="plan-description">'+esc(p.description)+'</p><div class="plan-metrics"><span><strong>'+p.daysPerWeek+'</strong>days / week</span><span><strong>'+p.sessionLengthMinutes+'</strong>min / session</span><span><strong>'+p.durationWeeks+'</strong>week block</span></div><div class="plan-tags"><span>'+pretty(p.level)+'</span>'+C.focus(p).map(id=>'<span>'+esc(C.muscles.find(x=>x.id===id)?.name||id)+'</span>').join('')+(p.readiness?'<span>'+esc(p.readiness==='recovery'?'Gentle recovery':'Strength rebuild')+'</span>':'')+'</div>'+(!fits&&state().profile?'<small class="mismatch">Review profile, readiness or equipment before activation</small>':'')+'<div class="plan-buttons"><button class="button" data-action="preview-plan" data-id="'+p.id+'">View plan</button><button class="button subtle" data-action="bookmark" data-id="'+p.id+'" aria-pressed="'+marked(p.id)+'" aria-label="'+(marked(p.id)?'Unsave ':'Save ')+esc(p.name)+'">'+(marked(p.id)?'★ Saved':'☆ Save')+'</button><button class="button '+(active(p.id)?'subtle':'primary')+'" data-action="toggle-active" data-id="'+p.id+'">'+activationLabel(p)+'</button></div></div></article>';
   }
   function guideHTML(id){
     const g=C.guides[id];if(!g)return '';
@@ -51,9 +57,14 @@ globalThis.ForgeProgramUI=ctx=>{
     $('#viewPlans').innerHTML='<section class="catalog-hero"><div><div class="eyebrow">THE FORGE · PROGRAM LIBRARY</div><h1>Your life.<br>Your next strong chapter.</h1><p>Find training that fits your equipment, your focus and where you are today.</p><div class="hero-facts"><span><strong>'+D.programs.length+'</strong> structured plans</span><span><strong>10+</strong> per muscle group</span><span>Guidance with sources</span></div></div><div class="hero-art"><img src="./assets/dumbbells.jpg" alt="'+esc(C.images.dumbbells)+'" width="960" height="640" fetchpriority="high"><div class="hero-art-caption">EQUIPPED FOR YOUR EVERYDAY</div></div></section>'+browseSections()+'<div class="section-top catalog-results-head" id="catalogResults"><div><div class="eyebrow">MAKE IT YOURS</div><h2>Find your next training block.</h2><p>Save favorites, review a plan and activate your next block.</p></div><button class="button" data-action="setup">Update profile</button></div>'+
       (rec?'<div class="recommendation"><span class="pill">SUGGESTED FOR YOU</span><h3>'+esc(rec.plan?.name||'No matching program')+'</h3><p>'+esc(rec.reason)+' '+esc(rec.adjustment)+'</p>'+(rec.plan?'<button class="button primary" data-action="preview-plan" data-id="'+rec.plan.id+'">Review suggestion</button>':'')+'</div>':'')+
       '<div class="catalog-toolbar"><label>Search<input id="catalogSearch" type="search" value="'+esc(filters.search)+'" placeholder="Name or description"></label><label>Level<select id="catalogLevel"><option value="all">All levels</option>'+M.levels.map(x=>'<option value="'+x+'" '+(filters.level===x?'selected':'')+'>'+pretty(x)+'</option>').join('')+'</select></label><label>Goal<select id="catalogGoal"><option value="all">All goals</option>'+M.trainingGoals.map(x=>'<option value="'+x+'" '+(filters.goal===x?'selected':'')+'>'+esc(goalText(x))+'</option>').join('')+'</select></label><label>Location<select id="catalogLocation"><option value="all">All locations</option>'+['gym','home','outdoor','any'].map(x=>'<option value="'+x+'" '+(filters.location===x?'selected':'')+'>'+pretty(x)+'</option>').join('')+'</select></label><label>Training context<select id="catalogAudience"><option value="all">All contexts</option>'+C.audiences.map(a=>'<option value="'+a.id+'" '+(filters.audience===a.id?'selected':'')+'>'+esc(a.name)+'</option>').join('')+'</select></label><label>Muscle focus<select id="catalogMuscle"><option value="all">All muscles</option>'+C.muscles.map(a=>'<option value="'+a.id+'" '+(filters.muscle===a.id?'selected':'')+'>'+esc(a.name)+'</option>').join('')+'</select></label><label>Schedule<select id="catalogDays"><option value="all">Any schedule</option>'+[2,3,4,5,6].map(n=>'<option value="'+n+'" '+(String(filters.days)===String(n)?'selected':'')+'>'+n+' days</option>').join('')+'</select></label><label>Selection<select id="catalogSaved">'+[['all','All programs'],['saved','Saved programs'],['active','Active programs']].map(([v,l])=>'<option value="'+v+'" '+(filters.saved===v?'selected':'')+'>'+l+'</option>').join('')+'</select></label></div>'+
-      '<div class="catalog-filter-footer"><label class="filter-check"><input id="catalogFits" type="checkbox" '+(filters.fits?'checked':'')+'> Match my training context, readiness and equipment</label><button class="text-button" data-action="reset-catalog">Browse all plans</button></div><div id="catalogGuide"></div><p id="catalogCount" role="status"></p><div class="plan-grid" id="planGrid"></div><section class="custom-plans"><h3>Your own programs</h3><button class="button" data-action="builder">Create custom plan</button><div class="plan-grid">'+state().customPlans.map(p=>'<article class="plan-card"><h3>'+esc(p.name)+'</h3><p>'+p.days+' sessions</p><button class="button" data-action="choose-custom" data-id="'+esc(p.id)+'">Open & activate</button><button class="button subtle" data-action="edit-custom" data-id="'+esc(p.id)+'">Edit</button><button class="text-button" data-action="bookmark" data-id="'+esc(p.id)+'">'+(marked(p.id)?'★ Saved':'☆ Save')+'</button>'+(active(p.id)?'<button class="text-button" data-action="toggle-active" data-id="'+esc(p.id)+'">Deactivate</button>':'')+'</article>').join('')+'</div></section>'+
+      '<div class="catalog-filter-footer"><label class="filter-check"><input id="catalogFits" type="checkbox" '+(filters.fits?'checked':'')+'> Match my training context, readiness and equipment</label><button class="text-button" data-action="reset-catalog">Browse all plans</button></div><div id="catalogGuide"></div><p id="catalogCount" role="status"></p><div class="plan-grid" id="planGrid"></div><section class="custom-plans"><h3>Your own programs</h3><button class="button" data-action="builder">Create custom plan</button><div class="plan-grid">'+state().customPlans.map(p=>'<article class="plan-card"><h3>'+esc(p.name)+'</h3><p>'+p.days+' sessions</p><button class="button" data-action="choose-custom" data-id="'+esc(p.id)+'">'+(replacementId?'Use instead':'Open & activate')+'</button><button class="button subtle" data-action="edit-custom" data-id="'+esc(p.id)+'">Edit</button><button class="text-button" data-action="bookmark" data-id="'+esc(p.id)+'">'+(marked(p.id)?'★ Saved':'☆ Save')+'</button>'+(active(p.id)?'<button class="text-button" data-action="toggle-active" data-id="'+esc(p.id)+'">Deactivate</button>':'')+'</article>').join('')+'</div></section>'+
       '<details class="help"><summary>Previous routines and training history</summary><p>Your previously selected routines and logged sessions are preserved.</p>'+[...new Set(state().bookmarks.filter(b=>!M.nativeById[b.programId]&&!b.programId.startsWith('custom-')).map(b=>b.programId))].map(id=>'<button class="button" data-action="choose-plan" data-id="'+esc(id)+'">'+esc(M.planById(state(),id).name)+'</button><button class="text-button" data-action="toggle-active" data-id="'+esc(id)+'">'+(active(id)?'Deactivate':'Activate')+'</button>').join('')+'</details>';
     renderPlanGrid();
+    if(replacementId){
+      const banner=document.createElement('section');banner.className='notice replacement-banner';banner.setAttribute('aria-label','Choose a replacement program');
+      banner.innerHTML='<div><strong>Choose a replacement for '+esc(M.planById(state(),replacementId).name)+'</strong><p>Your current program stays active until you choose its replacement. Earlier workouts and saved programs are kept.</p></div><button class="button subtle" data-action="cancel-program-change">Cancel change</button>';
+      $('#viewPlans').prepend(banner);
+    }
   }
   function renderPlanGrid(){
     const q=filters.search.toLowerCase().trim();
@@ -67,7 +78,7 @@ globalThis.ForgeProgramUI=ctx=>{
     const s=state(),report=M.overlapWarnings(s,s.selectedDate),start=report.week[0].date;
     $('#viewCalendar').innerHTML='<div class="section-top"><div><div class="eyebrow">YOUR COMBINED PLAN</div><h2>My week</h2><p>'+s.activePrograms.length+' active program'+(s.activePrograms.length===1?'':'s')+' · '+report.restDays+' rest day'+(report.restDays===1?'':'s')+'</p></div><div class="calendar-controls"><button class="button subtle" data-action="calendar-prev" aria-label="Previous week">←</button><label>Week of<input id="calendarDate" type="date" value="'+start+'"></label><button class="button subtle" data-action="calendar-next" aria-label="Next week">→</button><button class="text-button" data-action="calendar-today">Today</button></div></div>'+
       (s.activePrograms.some(id=>M.nativeById[id]&&s.profile&&!C.suitability(s.profile,M.nativeById[id]).ok)?'<p class="notice">An active plan does not match your current training context or readiness. Review its suitability before training. Your earlier logs are preserved.</p>':'')+warningsHTML(report)+'<div class="weekly-calendar">'+report.week.map(slot=>'<section class="calendar-day'+(slot.date===M.today()?' today':'')+'"><h3>'+names[slot.weekday-1]+'</h3><time datetime="'+slot.date+'">'+esc(slot.date.slice(5))+'</time>'+(!slot.sessions.length?'<p class="calendar-rest">Rest</p>':slot.sessions.map(x=>'<button class="calendar-session" data-action="calendar-session" data-plan="'+esc(x.programId)+'" data-id="'+esc(x.workoutId)+'" data-date="'+slot.date+'"><strong>'+esc(x.programName)+'</strong><span>'+esc(x.title)+'</span><small>Week '+x.week+'</small></button>').join(''))+'</section>').join('')+'</div>'+
-      '<section class="active-list"><h3>Active programs</h3>'+(!s.activePrograms.length?'<p>Activate a saved program to build your week.</p><button class="button primary" data-view="plans">Find a program</button>':s.activePrograms.map(id=>'<div class="active-row"><strong>'+esc(M.planById(s,id).name)+'</strong><button class="text-button" data-action="preview-plan" data-id="'+esc(id)+'">Plan & schedule</button><button class="text-button" data-action="toggle-active" data-id="'+esc(id)+'">Deactivate</button></div>').join(''))+'</section>'+
+      '<section class="active-list"><h3>Active programs</h3>'+(!s.activePrograms.length?'<p>Activate a saved program to build your week.</p><button class="button primary" data-view="plans">Find a program</button>':s.activePrograms.map(id=>'<div class="active-row"><strong>'+esc(M.planById(s,id).name)+'</strong><button class="text-button" data-action="preview-plan" data-id="'+esc(id)+'">Plan & schedule</button><button class="text-button" data-action="change-plan" data-id="'+esc(id)+'">Change</button><button class="text-button danger" data-action="remove-program" data-id="'+esc(id)+'" aria-label="Remove '+esc(M.planById(s,id).name)+' from my programs">Remove</button></div>').join(''))+'</section>'+
       (s.activePrograms.length?'<details class="help"><summary>Estimated weekly muscle workload</summary><p>Primary sets count once; indirect sets count as half. Warm-ups and conditioning are excluded from the set totals.</p><div class="volume-grid">'+Object.entries(report.weekly).sort(([a],[b])=>a.localeCompare(b)).map(([m,n])=>'<div><span>'+esc(label(m))+'</span><strong>'+n+'</strong></div>').join('')+'</div></details>':'');
   }
   function clearEmptyDraft(id){
@@ -92,12 +103,12 @@ globalThis.ForgeProgramUI=ctx=>{
       '<details><summary>Why this works & references</summary><p>'+esc(p.whyThisWorks)+'</p><ul>'+p.references.map(r=>'<li><a href="'+esc(r.url)+'" target="_blank" rel="noopener noreferrer">'+esc(r.title)+'</a></li>').join('')+'</ul></details>'+
       (p.nutritionGuidance?'<details><summary>Nutrition guidance</summary><ul>'+p.nutritionGuidance.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></details>':'')+
       (p.executionNotes?'<details><summary>Execution notes</summary><ul>'+p.executionNotes.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></details>':'')+
-      '<button class="text-button" data-action="restart-block" data-id="'+id+'">Restart block from this week</button></div><div class="modal-footer"><button class="button" data-action="bookmark" data-id="'+id+'">'+(marked(id)?'★ Saved':'☆ Save program')+'</button><button class="button primary" data-action="toggle-active" data-id="'+id+'">'+(active(id)?'Deactivate':'Activate program')+'</button></div>');
+      '<button class="text-button" data-action="restart-block" data-id="'+id+'">Restart block from this week</button></div><div class="modal-footer"><button class="button" data-action="bookmark" data-id="'+id+'">'+(marked(id)?'★ Saved':'☆ Save program')+'</button><button class="button primary" data-action="toggle-active" data-id="'+id+'">'+(replacementId?(replacementId===id?'Keep this program':'Use this program instead'):active(id)?'Deactivate':'Activate program')+'</button></div>');
   }
   function workoutIntro(p,s){
     return (state().activePrograms.length>1?'<div class="notice">'+state().activePrograms.length+' programs are active. <button class="text-button" data-view="calendar">Review combined week & warnings</button></div>':'')+
       '<div class="workout-program-picker"><label>Program<select id="currentProgram">'+[...new Set([p.id,...state().activePrograms])].map(id=>'<option value="'+esc(id)+'" '+(id===p.id?'selected':'')+'>'+esc(M.planById(state(),id).name)+'</option>').join('')+'</select></label>'+(p.native?'<button class="text-button" data-action="preview-plan" data-id="'+p.id+'">Progression & plan details</button>':'')+'</div>'+
-      (p.native?'<p class="pill">Week '+(s.week||p.week)+(s.stage?' · '+esc(label(s.stage)):'')+'</p>':'')+
+      programActions(p)+(p.native?'<p class="pill">Week '+(s.week||p.week)+(s.stage?' · '+esc(label(s.stage)):'')+'</p>':'')+
       (s.notes?'<p class="notice">'+esc(s.notes)+'</p>':'');
   }
   function setupMismatch(id){
@@ -181,6 +192,21 @@ globalThis.ForgeProgramUI=ctx=>{
   }
   function action(action,b){
     const id=b.dataset.id,s=state();
+    if(action==='change-plan'){
+      replacementId=id||s.activePlan;
+      Object.assign(filters,{level:'all',goal:'all',location:'all',days:'all',saved:'all',audience:'all',muscle:'all',fits:true,search:''});
+      closeModal();setView('plans');window.scrollTo({top:0,behavior:'auto'});return true;
+    }
+    if(action==='cancel-program-change'){replacementId='';closeModal();setView('workout');return true;}
+    if(action==='remove-program'){
+      if(!active(id))return true;
+      const p=M.planById(s,id);
+      openModal(modalHead('Remove this program?',p.name)+'<div class="modal-body"><p>Remove this program from your active and saved programs. Your logged workouts stay saved, and you can choose this program again later.</p><p>You can browse for another program or continue without this one.</p></div><div class="modal-footer program-removal-footer"><button class="button" data-action="confirm-remove-program" data-id="'+esc(id)+'" data-next="workout">Remove for now</button><button class="button primary" data-action="confirm-remove-program" data-id="'+esc(id)+'" data-next="plans">Remove & choose another</button></div>');return true;
+    }
+    if(action==='confirm-remove-program'){
+      M.removeProgram(s,id);replacementId='';s.onboarded=true;save();closeModal();
+      Object.assign(filters,{level:'all',goal:'all',location:'all',days:'all',saved:'all',audience:'all',muscle:'all',fits:true,search:''});setView(b.dataset.next==='plans'?'plans':'workout');toast('Program removed. Your logged workouts are kept.');return true;
+    }
     if(action==='browse-section'||action==='reset-catalog'){
       Object.assign(filters,{level:'all',goal:'all',location:'all',days:'all',saved:'all',audience:'all',muscle:'all',fits:false,search:''});
       if(action==='browse-section'&&['goal','muscle','audience'].includes(b.dataset.kind))filters[b.dataset.kind]=id;
@@ -188,7 +214,9 @@ globalThis.ForgeProgramUI=ctx=>{
     }
     if(action==='bookmark'){M.bookmark(s,id,!marked(id));save();if(videoModal.open)return true;if($('#modal').open)previewPlan(id);else setView(ctx.getView());return true;}
     if(action==='toggle-active'){
-      if(!active(id)){if(setupMismatch(id))return true;selectPlan(M.planById(s,id));}
+      if(replacementId===id){replacementId='';closeModal();setView('workout');return true;}
+      if(replacementId&&replacementId!==id){if(setupMismatch(id))return true;selectPlan(M.planById(s,id));}
+      else if(!active(id)){if(setupMismatch(id))return true;selectPlan(M.planById(s,id));}
       else{M.setActive(s,id,false);if(s.activePlan===id){s.sessionId=null;if(s.activePrograms.length){s.activePlan=s.activePrograms[0];s.activeWorkout=M.planById(s).workouts[0].id;}}save();closeModal();setView(ctx.getView()==='workout'?'calendar':ctx.getView());}
       return true;
     }
@@ -207,5 +235,5 @@ globalThis.ForgeProgramUI=ctx=>{
     if(action==='exercise-rest'){ctx.startRest(Number(b.dataset.seconds));return true;}
     return false;
   }
-  return {renderPlans,renderPlanGrid,renderCalendar,previewPlan,workoutIntro,showVideo,action,change,inputEvent,setupMismatch,warningsHTML,guideHTML,setupContext};
+  return {renderPlans,renderPlanGrid,renderCalendar,previewPlan,workoutIntro,programActions,showVideo,action,change,inputEvent,setupMismatch,warningsHTML,guideHTML,setupContext,replacementFor:()=>replacementId,clearReplacement:()=>{replacementId='';}};
 };
