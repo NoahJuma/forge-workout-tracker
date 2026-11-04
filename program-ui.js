@@ -73,12 +73,10 @@ globalThis.ForgeProgramUI=ctx=>{
       '<button class="text-button" data-action="restart-block" data-id="'+id+'">Restart block from this week</button></div><div class="modal-footer"><button class="button" data-action="bookmark" data-id="'+id+'">'+(marked(id)?'★ Saved':'☆ Save program')+'</button><button class="button primary" data-action="toggle-active" data-id="'+id+'">'+(active(id)?'Deactivate':'Activate program')+'</button></div>');
   }
   function workoutIntro(p,s){
-    const w=p.workouts.find(w=>w.id===s.workoutId)||p.workouts[0],warm=s.warmup||w.warmup||[],ramp=s.rampUpSets||w.rampUpSets||[];
     return (state().activePrograms.length>1?'<div class="notice">'+state().activePrograms.length+' programs are active. <button class="text-button" data-view="calendar">Review combined week & warnings</button></div>':'')+
       '<div class="workout-program-picker"><label>Program<select id="currentProgram">'+[...new Set([p.id,...state().activePrograms])].map(id=>'<option value="'+esc(id)+'" '+(id===p.id?'selected':'')+'>'+esc(M.planById(state(),id).name)+'</option>').join('')+'</select></label>'+(p.native?'<button class="text-button" data-action="preview-plan" data-id="'+p.id+'">Progression & plan details</button>':'')+'</div>'+
       (p.native?'<p class="pill">Week '+(s.week||p.week)+(s.stage?' · '+esc(label(s.stage)):'')+'</p>':'')+
-      (s.notes?'<p class="notice">'+esc(s.notes)+'</p>':'')+
-      (warm.length||ramp.length?'<details class="warmup-card" open><summary>Warm-up before this session</summary>'+warm.map(prescription).join('')+(ramp.length?'<h4>Specific practice / ramp-up</h4>'+ramp.map(prescription).join(''):'')+'</details>':'<p class="notice">Begin with easy movement and light practice sets for the exercises you will train.</p>');
+      (s.notes?'<p class="notice">'+esc(s.notes)+'</p>':'');
   }
   function setupMismatch(id){
     const p=M.nativeById[id];

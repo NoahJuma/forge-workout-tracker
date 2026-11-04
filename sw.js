@@ -1,5 +1,5 @@
 "use strict";
-const CACHE_NAME='forge-tracker-v4-20261103-complete-r1';
+const CACHE_NAME='forge-tracker-v4-20261104-workout-layout-r1';
 const APP_FILES=['./','./index.html','./theme.js','./styles.css','./data.js','./exercises.js','./programs.js','./program-model.js','./program-ui.js','./model.js','./app.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./EXERCISE_VIDEO_SELECTION.csv'];
 const OWN_CACHE_PREFIX='forge-tracker-';
 self.addEventListener('install',event=>{

@@ -52,7 +52,7 @@
     expect(!!doc.querySelector('#exerciseList'),'Recommended program activates');
     const initial=JSON.parse(qaStorage.getItem(key));
     expect(initial.activePrograms.includes('home-bodyweight-basics'),'Activation also saves program');
-    expect(doc.querySelector('.warmup-card')?.textContent.includes('Warm-up'),'Session has an explicit warm-up');
+    expect(!doc.querySelector('#viewWorkout .prescription')&&doc.querySelectorAll('#exerciseList .exercise').length>0,'Exercise list appears only in the workout logging section');
     expect(doc.querySelector('#exerciseList').textContent.includes('2 sets'),'Introductory week set cap applied');
     type('[data-field=reps][data-ex="0"][data-set="0"]','12');
     expect(doc.querySelector('#doneCount').textContent==='1','Rep logging updates progress');
@@ -142,7 +142,7 @@
     const registration=await navigator.serviceWorker.register(root+'sw.js',{scope:root});
     await Promise.race([navigator.serviceWorker.ready,pause(4000).then(()=>{throw Error('Offline worker did not become ready');})]);
     expect(!!registration.active,'Offline worker installs successfully');
-    const cacheNames=await caches.keys(),cache=await caches.open(cacheNames.find(n=>n.startsWith('forge-tracker-v4-20261103')));
+    const cacheNames=await caches.keys(),cache=await caches.open(cacheNames.find(n=>n.startsWith('forge-tracker-v4-')));
     const cachedRequests=await cache.keys(),cachedUrls=new Set(cachedRequests.map(r=>r.url));
     expect(cachedUrls.has(root+'programs.js'),'Full 30-program runtime is cached');
     expect(cachedUrls.has(root+'program-model.js')&&cachedUrls.has(root+'program-ui.js'),'Program logic and UI are cached together');
