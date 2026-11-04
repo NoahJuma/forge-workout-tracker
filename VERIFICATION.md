@@ -6,15 +6,17 @@ Completed locally on 4 November 2026.
 
 Command:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs tests/program-controls.test.cjs tests/program-weeks.test.cjs
 
-Result: **75 tests passed, 0 failed**.
+Result: **80 tests passed, 0 failed**.
 
 Checks include all 195 data records and all block weeks/stages; original data preservation; 10+ choices in every displayed goal, muscle, context and location; meaningful schedule uniqueness; equipment/capability matching; 10–20 primary focus-group sets; maternal screening/readiness; conservative pregnancy and early postpartum prescriptions; supported/floor-transfer options at 65+; fresh starting loads for new life-stage blocks; backup migration; guarded storage; targets in reps/seconds/metres; and all local assets in the offline shell.
 
 ## Browser checks
 
-Result: **500 checks passed** in a real Chromium browser at a 390px app viewport.
+Result: **906 checks passed** in a real Chromium browser at a 390px app viewport.
+
+Week-navigation checks cover the recommendation duration and inline preview; the Workout current/total-week summary; every plan’s complete week range and final week; previous/next boundaries; actual introductory, regular and deload doses; generic 4-, 6- and 12-week lengths; ability/readiness preservation; and unchanged training dates and recorded sets. Reviewed the current-week summary and normal/lighter-week previews at phone size. The week stylesheet is included in the offline cache.
 
 Program management checks cover cancelling a replacement, replacing rather than stacking, removal with both next steps, preserved recorded sets and custom routines, restart persistence, optional program choice in setup, and removal with blocked storage. Controls appear before weight/rep fields and their stylesheet is in the offline cache.
 

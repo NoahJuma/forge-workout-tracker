@@ -60,6 +60,17 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
     const value=unit==='seconds'?e.durationSeconds:unit==='metres'?e.distanceMetres:null;
     return {exerciseId:e.exerciseId,sets:e.sets,min:value??e.min,max:value??e.max,unit,rir:e.rir===null?(e.intensityNote||'Keep controlled effort.'):'Leave '+e.rir+' reps in reserve',perLeg:!!e.perSide,restSeconds:e.restSeconds,hardSet:e.hardSet!==false,intensityNote:(e.intensityNote||'')+(e.eccentricSeconds?' Lower each rep over '+e.eccentricSeconds+' seconds.':'')};
   }
+  /**
+   * Resolve a read-only week without changing dates, program settings or logged sessions.
+   * @param {import('./model.js').Program} program
+   * @param {number|string} requestedWeek
+   * @param {Object} [settings]
+   */
+  function previewWeek(program,requestedWeek,settings={}){
+    const week=integer(Number(requestedWeek),1,program.durationWeeks,1);
+    const phase=program.deloadWeeks.includes(week)?'Lighter / deload week':program.introductoryWeeks?.weeks.includes(week)?'Introductory week':'Training week';
+    return {week,totalWeeks:program.durationWeeks,phase,days:program.schedule.map(day=>resolveDay(program,day,week,settings))};
+  }
   function programPlan(p,state,date=M.today()){
     const settings=settingsFor(state,p.id),week=weekFor(state,p.id,date);
     return {id:p.id,name:p.name,days:p.daysPerWeek,equipment:p.location==='any'?'Any location':p.location[0].toUpperCase()+p.location.slice(1),level:p.level,goal:p.goal,description:p.description,schedule:p.method,native:true,complete:blockComplete(state,p.id,date),program:p,week,stage:stageFor(p,settings)?.id||'',workouts:p.schedule.filter(d=>d.kind==='training').map(original=>{
@@ -207,6 +218,6 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
     const sides=['db-row','db-curl','lunge','split-squat','reverse-lunge','cable-lateral','pallof-press','side-plank','deadbug','bird-dog','db-split-squat','body-split-squat','park-stepup','kb-reverse-lunge','kb-suitcase-carry','hip-flexor-stretch','open-book','ankle-rock','one-arm-db-row','supported-single-calf','supported-hip-abduction','supported-hip-extension','seated-knee-extension'];
     return {exerciseId:id,sets:3,min:unit==='reps'?8:amount,max:unit==='reps'?12:amount,unit,rir:unit==='reps'?'Leave 2–3 controlled reps in reserve':'Keep controlled effort and follow the technique cues.',perLeg:sides.includes(id),restSeconds:90,hardSet:!['conditioning','mobility','power'].includes(e.pattern),intensityNote:''};
   }
-  return {trainingGoals:['hypertrophy','strength','fat-loss','endurance','mobility','skill'],goalLabels,nativeById,programPlan,resolveDay,adaptPrescription:adapt,defaultTarget,recommendProgram,bookmark,setActive,removeProgram,replaceProgram,calendar,overlapWarnings,settingsFor,weekFor,blockComplete,addDays,monday,videoIdFor,parseVideoId,validateProgramState};
+  return {trainingGoals:['hypertrophy','strength','fat-loss','endurance','mobility','skill'],goalLabels,nativeById,programPlan,resolveDay,previewWeek,adaptPrescription:adapt,defaultTarget,recommendProgram,bookmark,setActive,removeProgram,replaceProgram,calendar,overlapWarnings,settingsFor,weekFor,blockComplete,addDays,monday,videoIdFor,parseVideoId,validateProgramState};
 };
 if(typeof module!=='undefined')module.exports=globalThis.ForgeProgramFeatures;
