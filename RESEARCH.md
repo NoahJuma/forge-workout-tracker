@@ -43,3 +43,8 @@ Videos are demonstrations rather than evidence that a routine produces a particu
 
 - [Official YouTube IFrame API events](https://developers.google.com/youtube/iframe_api_reference#Events)
 - [Official embedded player parameters](https://developers.google.com/youtube/player_parameters)
+
+
+## Pregnancy, postpartum and 65+ expansion — 4 November 2026
+
+See [EXPANDED_CATALOG.md](EXPANDED_CATALOG.md) for the reviewed primary-source links, interpretation and limits. Population targets guide gradual activity accumulation; they are not a mandatory starting dose. Medical restrictions and stop symptoms are shown where they affect plan choice. Exact app routines have not been tested as clinical interventions.

@@ -4,7 +4,7 @@
  * @typedef {'strength'|'hypertrophy'|'fat-loss'|'endurance'|'mobility'|'skill'} TrainingGoal
  * @typedef {'beginner'|'intermediate'|'advanced'} TrainingLevel
  * @typedef {'gym'|'home'|'outdoor'|'any'} TrainingLocation
- * @typedef {'bodyweight'|'barbell'|'dumbbells'|'free-weights'|'resistance-bands'|'pull-up-bar'|'kettlebell'|'cable-machine'|'plate-loaded-machine'|'selectorized-machine'|'bench'|'rack'|'gym-equipment'|'park-equipment'|'running'|'dip-bars'|'ab-wheel'} EquipmentId
+ * @typedef {'bodyweight'|'barbell'|'dumbbells'|'free-weights'|'resistance-bands'|'pull-up-bar'|'kettlebell'|'cable-machine'|'plate-loaded-machine'|'selectorized-machine'|'bench'|'rack'|'gym-equipment'|'park-equipment'|'running'|'dip-bars'|'ab-wheel'|'chair'} EquipmentId
  *
  * @typedef {Object} Exercise
  * @property {string} id
@@ -100,6 +100,10 @@
  * @property {string[]} [setupRequirements]
  * @property {SkillStage[]} [skillStages]
  * @property {string[]} [requiredCapabilities] Equipment setup checks.
+ * @property {'general'|'pregnancy'|'postpartum'|'older-adult'} [audience]
+ * @property {string[]} [muscleFocus] Catalog muscle-section identifiers.
+ * @property {'recovery'|'rebuild'|null} [readiness] Postpartum ability gate.
+ * @property {string} [entryCriteria] Symptoms and ability, not a fixed recovery date.
  *
  * @typedef {Object} UserProfile
  * @property {string} gender
@@ -111,6 +115,11 @@
  * @property {EquipmentId[]} [homeEquipment]
  * @property {boolean} [longBands]
  * @property {boolean} [barSupportsFootAssistance]
+ * @property {'general'|'pregnancy'|'postpartum'|'older-adult'} [lifeStage]
+ * @property {boolean} [activityReady] Reviewed screening and followed applicable clinical advice.
+ * @property {'recovery'|'rebuild'} [postpartumStage]
+ * @property {'first'|'second'|'third'} [pregnancyStage]
+ * @property {boolean} [floorTransfers] Comfortable floor transfers for older-adult options.
  * @property {string} [equipment] Legacy profile field retained for existing plans.
  *
  * @typedef {Object} Bookmark
@@ -133,8 +142,8 @@
   const levels=['beginner','intermediate','advanced'];
   const goals=['muscle','strength','fitness','fat-loss'];
   const locations=['gym','home','outdoor'];
-  const homeEquipmentIds=['dumbbells','resistance-bands','pull-up-bar','kettlebell'];
-  const gymEquipmentIds=['bodyweight','gym-equipment','barbell','dumbbells','free-weights','kettlebell','resistance-bands','cable-machine','plate-loaded-machine','selectorized-machine','bench','rack','pull-up-bar','dip-bars','ab-wheel','running'];
+  const homeEquipmentIds=['dumbbells','resistance-bands','pull-up-bar','kettlebell','chair'];
+  const gymEquipmentIds=['bodyweight','gym-equipment','barbell','dumbbells','free-weights','kettlebell','resistance-bands','cable-machine','plate-loaded-machine','selectorized-machine','bench','rack','pull-up-bar','dip-bars','ab-wheel','running','chair'];
   const profileOf=p=>({
     gender:oneOf(p?.gender,['woman','man','nonbinary','prefer-not'],'prefer-not'),
     weight:p?.weight===''||p?.weight==null?'':validNumber(p.weight,20,500),
@@ -143,7 +152,10 @@
     equipment:oneOf(p?.equipment,['Gym','Dumbbells'],'Gym'),
     location:oneOf(p?.location,locations,p?.equipment==='Dumbbells'?'home':'gym'),
     homeEquipment:Array.isArray(p?.homeEquipment)?[...new Set(p.homeEquipment.filter(x=>homeEquipmentIds.includes(x)))]:p?.equipment==='Dumbbells'?['dumbbells']:[],
-    longBands:p?.longBands===true,barSupportsFootAssistance:p?.barSupportsFootAssistance===true
+    longBands:p?.longBands===true,barSupportsFootAssistance:p?.barSupportsFootAssistance===true,
+    lifeStage:oneOf(p?.lifeStage,['general','pregnancy','postpartum','older-adult'],'general'),
+    activityReady:p?.activityReady===true,postpartumStage:oneOf(p?.postpartumStage,['recovery','rebuild'],'recovery'),
+    pregnancyStage:oneOf(p?.pregnancyStage,['first','second','third'],'first'),floorTransfers:p?.floorTransfers===true
   });
   function validNumber(value,min,max,integer=false){const n=Number(value);if(!Number.isFinite(n)||n<min||n>max||(integer&&!Number.isInteger(n)))throw Error('Invalid number');return n;}
   function setOf(s){if(!s||typeof s!=='object')throw Error('Invalid set');return {kg:s.kg===''||s.kg==null?'':String(validNumber(s.kg,0,2000)),reps:s.reps===''||s.reps==null?'':String(validNumber(s.reps,0,100000,true)),done:!!s.done&&Number(s.reps)>0};}
@@ -186,14 +198,17 @@
     return programs.filter(program=>{
       const locationOK=program.location==='any'||program.location===p.location;
       const capabilitiesOK=(program.requiredCapabilities||[]).every(cap=>cap==='long-bands'?p.longBands:cap==='low-pull-up-bar'?p.barSupportsFootAssistance:false);
-      return locationOK&&capabilitiesOK&&Array.isArray(program.requiredEquipment)&&program.requiredEquipment.every(item=>available.has(item));
+      const populationOK=!program.id||D.catalogInfo.suitability(p,program).ok;
+      return locationOK&&capabilitiesOK&&populationOK&&Array.isArray(program.requiredEquipment)&&program.requiredEquipment.every(item=>available.has(item));
     });
   }
   function recommend(p){return api.recommendProgram(p);}
   function planById(state,id=state.activePlan){const native=D.programs?.find(p=>p.id===id);if(native)return api.programPlan(native,state,state.selectedDate);if(id==='forge5')return makePlan(id);const custom=state.customPlans.find(p=>p.id===id);if(custom)return custom;for(const base of D.base.filter(p=>!p.legacy))for(const level of levels)for(const goal of goals){if(`${base.id}-${level}-${goal}`===id)return makePlan(base.id,level,goal);}return makePlan('forge5');}
   const sessionKey=(plan,workout,date)=>plan.id==='forge5'?`${date}::D${workout.n}`:`${date}::${plan.id}::${workout.id}`;
   function previousExercise(state,exerciseId,date,exclude='',unit=null){
-    const sessions=Object.values(state.sessions).filter(s=>s.id!==exclude&&s.completedAt&&s.date<date).sort((a,b)=>b.date.localeCompare(a.date)||String(b.completedAt).localeCompare(String(a.completedAt)));
+    const planId=state.sessions[exclude]?.planId||state.activePlan,program=D.programs?.find(p=>p.id===planId);
+    const scoped=program?.audience&&program.audience!=='general',startedOn=state.programSettings?.[planId]?.startedOn||today();
+    const sessions=Object.values(state.sessions).filter(s=>s.id!==exclude&&s.completedAt&&s.date<date&&(!scoped||(s.planId===planId&&s.date>=startedOn))).sort((a,b)=>b.date.localeCompare(a.date)||String(b.completedAt).localeCompare(String(a.completedAt)));
     for(const s of sessions){const e=s.exercises.find(e=>e.exerciseId===exerciseId&&e.name===catalog[exerciseId].name&&(!unit||(e.unit||'reps')===unit)&&e.sets.some(s=>s.done&&Number(s.reps)>0));if(e)return e;}return null;
   }
   function newEntry(state,target,date,exclude=''){

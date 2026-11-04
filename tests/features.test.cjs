@@ -7,13 +7,14 @@ function setup(ids,date='2026-11-16'){
  for(const id of ids){M.setActive(s,id,true);s.programSettings[id].startedOn='2026-11-02';}
  return s;
 }
-test('runtime catalog equals all three JSON batches and contains the requested 30 unique programs',()=>{
- assert.deepEqual(D.programs,batches);assert.equal(D.programs.length,30);
- assert.deepEqual(D.programs.map(p=>p.programNumber),Array.from({length:30},(_,i)=>i+1));
- assert.equal(new Set(D.programs.map(p=>p.id)).size,30);
- assert.equal(new Set(D.programs.map(p=>JSON.stringify(p.schedule.map(d=>d.exercises)))).size,30);
- assert.deepEqual(D.programs.filter(p=>p.programNumber>=21).map(p=>p.name),['Push-Up Progression','Kettlebell Conditioning','Core Stability & Back Health','Mobility & Posture Fix','Outdoor Calisthenics','Run + Strength Hybrid','Athletic Power','Stair & Hill Conditioning','Low-Impact Strength','Summer Shred']);
- assert.deepEqual(['gym','home','outdoor','any'].map(location=>D.programs.filter(p=>p.location===location).length),[15,9,4,2]);
+test('runtime catalog equals original and expanded JSON without changing the original 30 plans',()=>{
+ const extra=JSON.parse(fs.readFileSync(path.join(__dirname,'../programs-expanded.json'),'utf8'));
+ assert.deepEqual(D.programs,[...batches,...extra]);assert.equal(D.programs.length,195);
+ assert.deepEqual(D.programs.map(p=>p.programNumber),Array.from({length:195},(_,i)=>i+1));
+ assert.equal(new Set(D.programs.map(p=>p.id)).size,195);
+ assert.equal(new Set(D.programs.map(p=>JSON.stringify(p.schedule.map(d=>d.exercises)))).size,195);
+ assert.deepEqual(D.programs.slice(20,30).map(p=>p.name),['Push-Up Progression','Kettlebell Conditioning','Core Stability & Back Health','Mobility & Posture Fix','Outdoor Calisthenics','Run + Strength Hybrid','Athletic Power','Stair & Hill Conditioning','Low-Impact Strength','Summer Shred']);
+ assert.deepEqual(['gym','home','outdoor','any'].map(location=>batches.filter(p=>p.location===location).length),[15,9,4,2]);
 });
 test('every native program resolves to trackable sessions for every block week and stage',()=>{
  for(const p of D.programs)for(let week=1;week<=p.durationWeeks;week++)for(const stage of p.skillStages||[{id:''}]){
@@ -50,11 +51,11 @@ test('setup capabilities prevent a short band or high doorway bar from being ass
 });
 test('all available programs can be bookmarked without activation and activation has no single-program limit',()=>{
  const s=M.empty();for(const p of D.programs)M.bookmark(s,p.id);
- assert.equal(s.bookmarks.length,30);assert.equal(s.activePrograms.length,0);
+ assert.equal(s.bookmarks.length,D.programs.length);assert.equal(s.activePrograms.length,0);
  for(const p of D.programs)M.setActive(s,p.id,true);
- assert.equal(s.activePrograms.length,30);assert(s.bookmarks.every(b=>b.active));
- M.setActive(s,D.programs[0].id,false);assert.equal(s.activePrograms.length,29);assert.equal(s.bookmarks.length,30);
- M.bookmark(s,D.programs[1].id,false);assert.equal(s.activePrograms.length,28);assert.equal(s.bookmarks.length,29);
+ assert.equal(s.activePrograms.length,D.programs.length);assert(s.bookmarks.every(b=>b.active));
+ M.setActive(s,D.programs[0].id,false);assert.equal(s.activePrograms.length,D.programs.length-1);assert.equal(s.bookmarks.length,D.programs.length);
+ M.bookmark(s,D.programs[1].id,false);assert.equal(s.activePrograms.length,D.programs.length-2);assert.equal(s.bookmarks.length,D.programs.length-1);
  assert.throws(()=>M.bookmark(s,'missing-program'));
 });
 test('saving an inactive program does not start its block clock',()=>{
@@ -169,12 +170,12 @@ test('video ID parsing accepts actual existing selections and rejects arbitrary 
 });
 test('offline shell includes every shipped runtime file and the video-selection list',()=>{
  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8');
- for(const file of ['exercises.js','programs.js','data.js','program-model.js','model.js','program-ui.js','app.js']){
+ for(const file of ['exercises.js','exercises-expanded.js','programs.js','programs-expanded.js','catalog.js','data.js','program-model.js','model.js','program-ui.js','app.js']){
   assert(html.includes('src="./'+file+'"'));assert(sw.includes("'./"+file+"'"));assert(fs.existsSync(path.join(__dirname,'..',file)));
  }
  assert(html.indexOf('src="./programs.js"')<html.indexOf('src="./data.js"'));
  assert(html.indexOf('src="./program-model.js"')<html.indexOf('src="./model.js"'));
  const csv=fs.readFileSync(path.join(__dirname,'../EXERCISE_VIDEO_SELECTION.csv'),'utf8').trim().split(/\r?\n/);
- assert.equal(csv.length,114);assert(sw.includes("'./EXERCISE_VIDEO_SELECTION.csv'"));
+ assert.equal(csv.length,D.exercises.length+1);assert(sw.includes("'./EXERCISE_VIDEO_SELECTION.csv'"));
  for(const line of csv.slice(1))assert(line.includes('tutorial'));
 });

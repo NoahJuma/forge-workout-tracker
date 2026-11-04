@@ -69,11 +69,13 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
   }
   function recommendProgram(profile){
     const p=M.profileOf(profile),equipment=M.eligiblePrograms(p);
+    if(['pregnancy','postpartum'].includes(p.lifeStage)&&!p.activityReady)return {plan:null,program:null,reason:'Review the suitability guidance and screening link, then acknowledge readiness in your training profile. Seek clinical guidance for symptoms or restrictions.',adjustment:''};
     const candidates=equipment.filter(program=>M.levels.indexOf(program.level)<=M.levels.indexOf(p.level)&&program.daysPerWeek<=p.days);
     if(!candidates.length)return {plan:null,program:null,reason:'No complete program matches your equipment, experience and available days. Update your profile or create a custom plan.',adjustment:''};
     const general=new Set([1,2,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]);
-    const pool=candidates.some(x=>general.has(x.programNumber)&&x.goal===p.goal)?candidates.filter(x=>general.has(x.programNumber)):candidates;
-    const score=program=>(program.goal===p.goal?55:0)+(program.level===p.level?20:0)+(program.location===p.location?3:0)-Math.abs(program.daysPerWeek-p.days)*10-(M.levels.indexOf(p.level)-M.levels.indexOf(program.level))*25;
+    const broadlyUseful=x=>general.has(x.programNumber)||(x.programNumber>30&&!(x.muscleFocus||[]).length);
+    const pool=candidates.some(x=>broadlyUseful(x)&&x.goal===p.goal)?candidates.filter(broadlyUseful):candidates;
+    const score=program=>(program.goal===p.goal?55:0)+(program.level===p.level?20:0)+(program.location===p.location?3:0)+(p.lifeStage==='postpartum'&&program.readiness===p.postpartumStage?15:0)-Math.abs(program.daysPerWeek-p.days)*10-(M.levels.indexOf(p.level)-M.levels.indexOf(program.level))*25;
     const best=[...pool].sort((a,b)=>score(b)-score(a)||a.programNumber-b.programNumber)[0];
     const adjustment=(best.goal===p.goal?'':"This is the closest compatible starting point for your setup; its main goal is "+goalLabels[best.goal].toLowerCase()+'. ')+(best.level===p.level?'':'A simpler difficulty level is shown; use the listed progression options.');
     return {program:best,plan:programPlan(best,{programSettings:{}},M.today()),reason:'Fits your '+p.location+' equipment and weekly availability: a '+best.level+' plan with '+best.daysPerWeek+' training days per week.',adjustment:adjustment.trim()};
@@ -186,7 +188,7 @@ globalThis.ForgeProgramFeatures=(M,D)=>{
   function defaultTarget(id){
     const e=M.exerciseLibrary[id];if(!e)throw Error('Unknown exercise');
     const unit=e.trackingUnit||'reps',amount=unit==='seconds'?30:20;
-    const sides=['db-row','db-curl','lunge','split-squat','reverse-lunge','cable-lateral','pallof-press','side-plank','deadbug','bird-dog','db-split-squat','body-split-squat','park-stepup','kb-reverse-lunge','kb-suitcase-carry','hip-flexor-stretch','open-book','ankle-rock'];
+    const sides=['db-row','db-curl','lunge','split-squat','reverse-lunge','cable-lateral','pallof-press','side-plank','deadbug','bird-dog','db-split-squat','body-split-squat','park-stepup','kb-reverse-lunge','kb-suitcase-carry','hip-flexor-stretch','open-book','ankle-rock','one-arm-db-row','supported-single-calf','supported-hip-abduction','supported-hip-extension','seated-knee-extension'];
     return {exerciseId:id,sets:3,min:unit==='reps'?8:amount,max:unit==='reps'?12:amount,unit,rir:unit==='reps'?'Leave 2–3 controlled reps in reserve':'Keep controlled effort and follow the technique cues.',perLeg:sides.includes(id),restSeconds:90,hardSet:!['conditioning','mobility','power'].includes(e.pattern),intensityNote:''};
   }
   return {trainingGoals:['hypertrophy','strength','fat-loss','endurance','mobility','skill'],goalLabels,nativeById,programPlan,resolveDay,adaptPrescription:adapt,defaultTarget,recommendProgram,bookmark,setActive,calendar,overlapWarnings,settingsFor,weekFor,blockComplete,addDays,monday,videoIdFor,parseVideoId,validateProgramState};

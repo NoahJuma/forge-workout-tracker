@@ -1,3 +1,5 @@
+> Catalog expansion: the current library has 131 exercises. This document describes the original 113 entries; additional supported strength, balance and recovery entries are in exercises-expanded.js. The current video query sheet includes all 131.
+
 # Central exercise library
 
 The app defines **113 exercises** in [exercises.js](exercises.js), including the original 42 exercise IDs and 71 additions.

@@ -1,6 +1,6 @@
 # THE FORGE Workout Tracker
 
-A mobile-first static training app with 30 original programs, 113 centrally defined exercises, multiple active programs and a combined weekly calendar. It runs directly as HTML/CSS/JavaScript with no packages or build step.
+A mobile-first static training app with 195 structured programs, 131 centrally defined exercises, multiple active programs and a combined weekly calendar. It runs directly as HTML/CSS/JavaScript with no packages or build step.
 
 ## Training features
 
@@ -13,7 +13,7 @@ A mobile-first static training app with 30 original programs, 113 centrally defi
 
 ## Exercises and YouTube
 
-All 113 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. New video IDs are blank. The original 42 demonstration IDs are retained as historical selections.
+All 131 exercises include muscles, equipment, difficulty, instructions, common mistakes, search queries and existing alternatives. New video IDs are blank. The original 42 demonstration IDs are retained as historical selections.
 
 Open Technique & instructions to see written guidance, search YouTube and paste a chosen ID or link. The official player reports failures and the app keeps the written steps visible. Settings lists missing selections and failed checks, and can download all exercises and search queries. Videos are checked when opened, not through an unverified background availability claim.
 
@@ -50,10 +50,18 @@ Open http://127.0.0.1:8080. The shipped app requires no compilation or installat
 
 With Node.js available:
 
-    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs
+    node --test tests/model.test.cjs tests/programs.test.cjs tests/features.test.cjs tests/expanded.test.cjs
 
-For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 30 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
+For browser checks, use the local server and open tests/browser.html. This isolated harness tests the mobile UI, all 195 previews, persistent selections, logs, recovery and simulated official-player error events; it uses isolated prefixed test storage, cleans it up, and refuses non-local hosts. Player events are mocked so the suite does not claim to verify every remote video.
 
 ## Publish
 
 Serve the repository root on static HTTPS hosting, including all referenced runtime files and icons. GitHub Pages can use main / root when configured. The service worker caches the complete app shell and only this app’s files; each release uses a new CACHE_NAME so assets update together. Reload an installed app after a release to pick up the current shell.
+
+## Expanded catalog and life-stage guidance
+
+The [expanded catalog](EXPANDED_CATALOG.md) lists every section count, added plan and primary source. Browse equipment photography, goals, ten muscle sections, pregnancy, postpartum recovery and 65+ strength/balance. Section chips reset stale browse filters. Profile matching includes optional life stage, readiness, floor transfers and a sturdy-chair equipment choice.
+
+Pregnancy and postpartum activation uses one primary active plan. Changing context preserves earlier bookmarks and training history. New health-context fields and exercise-video selections stay in guarded localStorage, including when storage is unavailable. These are guideline-informed examples, not individualized clinical treatment.
+
+Additional sources are programs-expanded.json, programs-expanded.js, exercises-expanded.js and catalog.js. The static page loads them directly. See [asset provenance](ASSET_SOURCES.md) for the equipment imagery.

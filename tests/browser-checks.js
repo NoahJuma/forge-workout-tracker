@@ -33,8 +33,8 @@
   try{
     qaStorage.removeItem(key);qaStorage.removeItem('forge-workout-log-v3');qaStorage.setItem('forge-appearance','dark');
     await load();
-    expect(win.ForgeData.programs.length===30,'Exactly 30 programs shipped');
-    expect(win.ForgeData.exercises.length===113,'113 exercises available');
+    expect(win.ForgeData.programs.length===195,'195 programs shipped');
+    expect(win.ForgeData.exercises.length===131,'131 exercises available');
     expect(doc.querySelector('#modal').open,'Onboarding opens for a new profile');
     action('setup-next');action('setup-next');
     expect(doc.querySelectorAll('[name=profileLocation]').length===3,'Gym, Home and Outdoor choices');
@@ -57,7 +57,14 @@
     type('[data-field=reps][data-ex="0"][data-set="0"]','12');
     expect(doc.querySelector('#doneCount').textContent==='1','Rep logging updates progress');
     click('[data-view=plans]');change('#catalogFits',null,false);
-    expect(doc.querySelectorAll('[data-program]').length===30,'Full catalog shows 30 distinct cards');
+    expect(doc.querySelectorAll('[data-program]').length===195,'Full catalog shows 195 distinct cards');
+    expect(win.getComputedStyle(doc.querySelector('.welcome')).display==='none','Catalog uses its own heading without a duplicate welcome banner');
+    expect(doc.querySelectorAll('.plan-photo img').length===195,'Each plan has an equipment cover');
+    expect([...doc.querySelectorAll('.browse-chip strong')].every(e=>Number(e.textContent)>=10),'Every goal and muscle section offers at least ten plans');
+    click('[data-kind=audience][data-id=pregnancy]');
+    expect(doc.querySelectorAll('[data-program]').length===10,'Pregnancy section shows ten choices without stale filters');
+    expect(doc.querySelector('#catalogGuide').textContent.includes('maternity team'),'Pregnancy section includes suitability guidance');
+    action('reset-catalog');
     for(const p of win.ForgeData.programs){
       click('[data-program="'+p.id+'"] [data-action=preview-plan]');
       expect(doc.querySelector('#modalTitle').textContent===p.name,'Preview '+p.programNumber+' resolves');
@@ -77,7 +84,7 @@
     expect(doc.querySelector('.overlap-warning')?.textContent.includes('Back-to-back'),'Shifted schedules show muscle overlap warning');
     click('[data-view=plans]');action('builder');
     change('#libraryFits',null,false);
-    expect(doc.querySelectorAll('#libraryList .library-item').length===113,'Expanded picker exposes the full central library');
+    expect(doc.querySelectorAll('#libraryList .library-item').length===131,'Expanded picker exposes the full central library');
     type('#librarySearch','March in Place');
     click('[data-action=pick-exercise][data-id=march]');
     expect(doc.querySelector('.builder-row').textContent.includes('seconds'),'Timed custom target uses seconds');
@@ -122,6 +129,49 @@
     doc.querySelector('#closeVideo').click();action('close-modal');
     expect(win.__appErrors.length===0,'No browser script errors in normal flows');
     const recovery=qaStorage.getItem(key);
+    async function setContext(stage,ready=true,readiness='recovery'){
+      action('setup');action('setup-next');action('setup-next');
+      change('#profileLifeStage',stage);
+      change('#profileGoal','strength');change('#profileDays','4');
+      if(stage==='postpartum')change('#postpartumStage',readiness);
+      if(['pregnancy','postpartum'].includes(stage))change('#activityReady',null,ready);
+      action('setup-next');action('setup-next');
+    }
+    await setContext('pregnancy',false);
+    expect(!JSON.parse(qaStorage.getItem(key)).profile.activityReady,'Maternal readiness starts unacknowledged');
+    expect(doc.querySelector('#viewPlans').textContent.includes('No matching program'),'Screening acknowledgement is required for a recommendation');
+    await setContext('pregnancy',true);
+    let contextState=JSON.parse(qaStorage.getItem(key));
+    expect(contextState.activePrograms.length===1&&win.ForgeModel.nativeById[contextState.activePlan].audience==='pregnancy','Pregnancy activation uses a single appropriate plan');
+    expect(contextState.bookmarks.length>3&&Object.keys(contextState.sessions).length>=Object.keys(JSON.parse(recovery).sessions).length,'Changing training context preserves bookmarks and earlier sessions');
+    click('[data-view=plans]');click('[data-kind=audience][data-id=postpartum]');
+    expect(doc.querySelectorAll('[data-program]').length===10,'Postpartum section contains ten plans');
+    const rebuild=win.ForgeData.programs.find(p=>p.readiness==='rebuild'&&p.location==='any');
+    click('[data-program="'+rebuild.id+'"] [data-action=toggle-active]');
+    expect(doc.querySelector('#modalContent').textContent.includes('training context'),'Cross-context activation asks for the appropriate profile');
+    action('close-modal');await setContext('postpartum',true,'recovery');
+    contextState=JSON.parse(qaStorage.getItem(key));
+    expect(win.ForgeModel.nativeById[contextState.activePlan].readiness==='recovery','Early postpartum profile gets gentle recovery');
+    click('[data-view=plans]');action('reset-catalog');click('[data-program="'+rebuild.id+'"] [data-action=toggle-active]');
+    expect(doc.querySelector('#modalContent').textContent.includes('rebuilds strength'),'Strength rebuilding is gated by recovery readiness');
+    action('close-modal');await setContext('postpartum',true,'rebuild');
+    contextState=JSON.parse(qaStorage.getItem(key));
+    expect(win.ForgeModel.nativeById[contextState.activePlan].readiness==='rebuild','Rebuild readiness changes the recommendation without a week-since-birth rule');
+    expect(contextState.activePrograms.length===1,'Postpartum activation does not stack recovery blocks');
+    await setContext('older-adult');
+    contextState=JSON.parse(qaStorage.getItem(key));
+    expect(win.ForgeModel.nativeById[contextState.activePlan].audience==='older-adult','65+ profile receives an older-adult plan');
+    expect(!contextState.profile.floorTransfers,'Floor transfers are not assumed');
+    await load();
+    expect(JSON.parse(qaStorage.getItem(key)).profile.lifeStage==='older-adult','Health context survives reload');
+    click('[data-view=plans]');click('[data-kind=audience][data-id=older-adult]');
+    expect(doc.querySelectorAll('[data-program]').length===10,'65+ section contains ten plans');
+    click('[data-kind=muscle][data-id=chest]');
+    expect(doc.querySelectorAll('[data-program]').length>=10&&doc.querySelector('#catalogAudience').value==='all','Choosing a muscle clears the previous life-stage browse filter');
+    await Promise.all([...doc.querySelectorAll('.plan-photo img')].slice(0,2).map(img=>img.decode()));
+    expect(doc.querySelector('.plan-photo img').naturalWidth>0,'Equipment pictures load from local app assets');
+    expect(doc.documentElement.scrollWidth<=win.innerWidth+1,'Visual catalog fits a 390px viewport');
+    expect(win.__appErrors.length===0,'No script errors in life-stage and catalog flows');
     await load(true);
     expect(!doc.querySelector('#storageAlert').hidden,'Unavailable storage shows an honest status');
     action('setup');action('setup-next');action('setup-next');
@@ -144,7 +194,8 @@
     expect(!!registration.active,'Offline worker installs successfully');
     const cacheNames=await caches.keys(),cache=await caches.open(cacheNames.find(n=>n.startsWith('forge-tracker-v4-')));
     const cachedRequests=await cache.keys(),cachedUrls=new Set(cachedRequests.map(r=>r.url));
-    expect(cachedUrls.has(root+'programs.js'),'Full 30-program runtime is cached');
+    expect(cachedUrls.has(root+'programs.js')&&cachedUrls.has(root+'programs-expanded.js'),'Full expanded runtime is cached');
+    expect(cachedUrls.has(root+'catalog.js')&&cachedUrls.has(root+'assets/dumbbells.jpg'),'Catalog guidance and equipment artwork are cached');
     expect(cachedUrls.has(root+'program-model.js')&&cachedUrls.has(root+'program-ui.js'),'Program logic and UI are cached together');
     expect(cachedUrls.has(root+'EXERCISE_VIDEO_SELECTION.csv'),'Video selection list is available offline');
     expect(cachedRequests.every(r=>r.url.startsWith(root)),'Offline cache contains only app-origin files');
